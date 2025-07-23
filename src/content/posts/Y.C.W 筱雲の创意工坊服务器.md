@@ -15,7 +15,8 @@ lang: ''
 1. **服务器的QQ群**
   ▶[点我加群](https://qm.qq.com/cgi-bin/qm/qr?authKey=WSl0wAzbz2EjQYZJYlx29Me9kPI6NWRijRcmxnEeHqcxwS1Agw3msZx0FjLoqm6b&k=rBo24VVT5QAA2OoYTY3XknVi7LNboVdN&noverify=0)
 2. **服务器的网站**
-  ▶[点我访问](https://help.sakura.ink)
+  ▶[帮助页](https://help.sakura.ink)
+  ▶[通用文档](https://docs.sakura.ink)
 ## 📦 必备资源
 1. **整合包下载**  
    ▶ 下载地址：[下载站](http://upload.sakura.ink/file/index.html)  
