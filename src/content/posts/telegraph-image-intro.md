@@ -1,9 +1,12 @@
 ---
 title: Telegraph-Image
-categories:
-  - 图床
-tags:
-  - 教程
+published: 2025-07-23
+description: ''
+image: ''
+tags: []
+category: '教程'
+draft: false 
+lang: ''
 ---
 # Telegraph-Image：免费、快速、优雅的图床方案
 
