@@ -17,7 +17,7 @@ export const siteConfig: SiteConfig = {
 	},
 	banner: {
 		enable: true,
-		src: "https://fuwari.vercel.app/_astro/demo-banner.DFyx781H_Z1SsDuN.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+		src: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMcaIEFMdCsMBuyvL8EounntEOzo9QAApbGMRt2UwhUz_cAAdgr7Tv9AQADAgADdwADNgQ.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
 			enable: false, // Display the credit text of the banner image
