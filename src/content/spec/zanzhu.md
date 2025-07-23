@@ -50,7 +50,7 @@
 <table style="border-collapse:separate; border-spacing:0 10px;">
   <tr>
     <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.hongxiovo.cn/" target="_blank" class="friend-card">
+      <a href="https://blog.sakura.ink/" target="_blank" class="friend-card">
         <img src="https://avatars.githubusercontent.com/u/91101909?v=4" width="32" height="32" alt="友人A头像"/>
         <div>
           <b>我自己</b><br/>
