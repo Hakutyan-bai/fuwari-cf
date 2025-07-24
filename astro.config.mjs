@@ -25,6 +25,7 @@ import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { remarkModifiedTime } from './src/plugins/remark-modified-time.mjs'
 
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://fuwari.vercel.app/",
