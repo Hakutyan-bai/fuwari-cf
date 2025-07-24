@@ -37,6 +37,7 @@
     "astro": "5.10.2",
     "astro-expressive-code": "^0.41.2",
     "astro-icon": "^1.1.5",
+    "dayjs": "^1.11.13",
     "hastscript": "^9.0.1",
     "katex": "^0.16.22",
     "markdown-it": "^14.1.0",

@@ -8,6 +8,7 @@ category: 'Mod'
 draft: false 
 lang: ''
 priority: 10
+series: "Mod"
 ---
 # 🎲 LuckyDiceMod - 掷出你的幸运！
 

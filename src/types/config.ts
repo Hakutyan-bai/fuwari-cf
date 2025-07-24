@@ -73,6 +73,7 @@ export type LIGHT_DARK_MODE =
 	| typeof AUTO_MODE;
 
 export type BlogPostData = {
+	series?: string
 	body: string;
 	title: string;
 	published: Date;

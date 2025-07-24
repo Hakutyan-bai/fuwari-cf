@@ -5,6 +5,7 @@ import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import Comments from '@components/widget/Comments.svelte'
 
 const friendsPost = await getEntry("spec", "friends");
 
@@ -22,4 +23,5 @@ const { Content } = await render(friendsPost);
             </Markdown>
         </div>
     </div>
+<Comments client:only="svelte"></Comments>
 </MainGridLayout>
