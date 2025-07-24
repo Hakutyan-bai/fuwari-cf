@@ -1,7 +1,7 @@
 # About
 本博客使用框架 `astro` 以及 `Fuwari` 主题
 
-::github{repo="withastro/astro}
+::github{repo="withastro/astro"}
 ::github{repo="saicaca/fuwari"}
 
 使用图床
