@@ -7,6 +7,7 @@ tags: []
 category: '教程'
 draft: false 
 lang: ''
+updated: 2025-07-18 20:00:00
 ---
 # NAT1 Traversal 教程
 ## 本文章为最基础教程

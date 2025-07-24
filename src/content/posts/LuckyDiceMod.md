@@ -9,8 +9,9 @@ draft: false
 lang: ''
 priority: 10
 series: "Mod"
+updated: 2025-07-24 23:00:00
 ---
-# 🎲 LuckyDiceMod - 掷出你的幸运！
+# 🎲 LuckyDiceMod - 项目地址
 
 ::github{repo="Hakutyan-bai/LuckyDiceMod"}
 
@@ -35,11 +36,6 @@ series: "Mod"
 <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMOaHyLovuyHjHXz7chQ8ooMuC7G70AAgTDMRtzLuFXvvODzHYdijwBAAMCAAN5AAM2BA.png" width="600">
 
 > 💡 因为我们的服务器通货膨胀了，所以合成配方较为昂贵，允许自行更改配方
-
-## 📦 下载地址
-
-[🔗 GitHub 仓库 - LuckyDiceMod](https://github.com/Hakutyan-bai/LuckyDiceMod)
-
 
 
 
