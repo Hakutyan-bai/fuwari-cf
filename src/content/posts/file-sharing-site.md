@@ -1,6 +1,6 @@
 ---
 title: file-sharing-site
-published: 2025-07-23
+published: 2025-07-18
 description: ''
 image: ''
 tags: []
@@ -55,10 +55,8 @@ lang: ''
 ### 📦 安装依赖
 
 ```bash
-npm install express express-session body-parser ejs
-```
-```bash
-npm install axios
+npm install express express-session body-parser ejs axios
+
 ```
 
 ### ▶️ 启动服务器
@@ -71,7 +69,8 @@ node app.js
 
 ## 📚 项目地址
 
-- GitHub 项目主页：[https://github.com/beilunyang/moepush](https://github.com/beilunyang/moepush)
+
+::github{repo="Hakutyan-bai/file-sharing-site"}
 
 如果你也觉得这个项目有趣又实用，不妨 Star 一下支持作者！
 

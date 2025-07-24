@@ -39,17 +39,17 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://github.com/user2" target="_blank" class="friend-card">
-        <img src="https://avatars.githubusercontent.com/u/2?v=4" width="32" height="32" alt="友人B头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://www.imxizhen.asia" target="_blank" class="friend-card">
+        <img src="https://q1.qlogo.cn/g?b=qq&nk=89525295&s=640" width="32" height="32" alt="友人B头像"/>
         <div>
-          <b>友人B</b><br/>
-          <span style="font-size:12px;">前端开发爱好者，喜欢新技术。</span>
+          <b>imxizhen</b><br/>
+          <span style="font-size:12px;">永远相信美好的事情即将发生.</span>
         </div>
       </a>
     </td>
   </tr>
-  <tr>
+  <!-- <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://github.com/user3" target="_blank" class="friend-card">
         <img src="https://avatars.githubusercontent.com/u/3?v=4" width="32" height="32" alt="友人C头像"/>

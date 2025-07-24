@@ -1,14 +1,17 @@
 ---
 title: AutoFeedMod
-published: 2025-07-23
+published: 2025-07-10
 description: ''
 image: ''
-tags: []
+tags: [MC]
 category: 'Mod'
 draft: false 
 lang: ''
+pinned: true 
 ---
 这是一个可以自动喂食周围牛、羊和猪，以及自动补种农作物的Mod
+
+::github{repo="Hakutyan-bai/AutoFeedMod"}
 
 ## 特性
 - 自动检测并喂养附近的牛、羊、猪
@@ -20,11 +23,14 @@ lang: ''
 ## 安装方法
 1. 安装  [Fabric API](https://modrinth.com/mod/fabric-api)（版本需与游戏一致）。
 2. 下载本模组 jar 文件，放入 `.minecraft/mods/` 文件夹。
-3. 启动游戏，进入世界即可自动体验。
+3. 启动游戏，进入世界即可自动体验（可在服务器中使用）。
 
 ## 使用说明
-- 默认自动喂养功能关闭。
-- 默认农作物补种功能开启。
+:::note
+默认自动喂养功能关闭。
+默认农作物补种功能开启。
+:::
+
 - 默认为关闭状态，按下 F6 可随时开关自动喂养，屏幕左下角会有“自动喂养已开启/关闭”提示。
 - 只需将小麦（牛、羊）或胡萝卜（猪）放在快捷栏，靠近动物即可自动喂养。
 - 只需对成熟的农作物右键即可完成收获与补种，支持小麦、胡萝卜、土豆、地狱疣。

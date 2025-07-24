@@ -25,20 +25,20 @@
 
 <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: nowrap; justify-content: center;">
     <!-- 支付宝 -->
-    <div style="flex: 1; min-width: 230px; max-width: 340px; min-height: 300px; max-height: 400px; border: 1px solid #333; background: transparent; border-radius: 10px; padding: 16px; text-align: center; color: #fff;">
+    <div style="flex: 1; min-width: 230px; max-width: 300px; min-height: 300px; max-height: 400px; border: 1px solid #333; background: transparent; border-radius: 10px; padding: 16px; text-align: center; color: #fff;">
       <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
         <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMaaIDzlK_rdaJ83DsobArdY4jWsQ0AAi7NMRt2UwABVBeeK5QoToL-AQADAgADeAADNgQ.png" width="36" height="36" style="margin:10px 0;display:block;">
         <span style="font-size: 18px; color: #fff;">支付宝</span>
       </div>
-      <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMZaIDyWX8x69BKPl8j9BHkNRgEo6MAAirNMRt2UwABVMCsI6TN6cQOAQADAgADeAADNgQ.png" width="300" style="width: 100%; border-radius: 8px;">
+      <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMZaIDyWX8x69BKPl8j9BHkNRgEo6MAAirNMRt2UwABVMCsI6TN6cQOAQADAgADeAADNgQ.png" width="280" style="width: 100%; border-radius: 8px;">
     </div>
     <!-- 微信支付 -->
-    <div style="flex: 1; min-width: 230px; max-width: 340px; min-height: 300px; max-height: 400px; border: 1px solid #333; background: transparent; border-radius: 10px; padding: 16px; text-align: center; color: #fff;">
+    <div style="flex: 1; min-width: 230px; max-width: 300px; min-height: 300px; max-height: 400px; border: 1px solid #333; background: transparent; border-radius: 10px; padding: 16px; text-align: center; color: #fff;">
       <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
         <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMbaIDzpAPuYmNBkhQ18V57WdvyDXwAAi_NMRt2UwABVM2BcGAB39BuAQADAgADeAADNgQ.png" width="36" height="36" style="margin:10px 0;display:block;">
         <span style="font-size: 18px; color: #fff;">微信支付</span>
       </div>
-      <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMYaIDyLPGbRJR7dPMD63jXXIs31IQAAinNMRt2UwABVD6Ge7nlM7qsAQADAgADeAADNgQ.png" width="300" style="width: 100%; border-radius: 8px;">
+      <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMYaIDyLPGbRJR7dPMD63jXXIs31IQAAinNMRt2UwABVD6Ge7nlM7qsAQADAgADeAADNgQ.png" width="280" style="width: 100%; border-radius: 8px;">
     </div>
     <!-- 加密货币 -->
     <!-- <div style="flex: 1; min-width: 230px; max-width: 340px; min-height: 300px; max-height: 400px; border: 1px solid #333; background: transparent; border-radius: 10px; padding: 16px; text-align: center; color: #fff;">

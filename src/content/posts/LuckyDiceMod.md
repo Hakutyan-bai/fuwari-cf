@@ -1,14 +1,17 @@
 ---
 title: LuckyDiceMod
-published: 2025-07-23
+published: 2025-07-12
 description: ''
 image: ''
 tags: []
 category: 'Mod'
 draft: false 
 lang: ''
+priority: 10
 ---
 # 🎲 LuckyDiceMod - 掷出你的幸运！
+
+::github{repo="Hakutyan-bai/LuckyDiceMod"}
 
 **LuckyDiceMod** 是一个轻量又有趣的 Minecraft 模组，让你在游戏中通过投掷骰子体验随机事件的刺激乐趣！
 
@@ -35,6 +38,9 @@ lang: ''
 ## 📦 下载地址
 
 [🔗 GitHub 仓库 - LuckyDiceMod](https://github.com/Hakutyan-bai/LuckyDiceMod)
+
+
+
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title:  NAT1 Traversal 教程
-published: 2025-07-23
+published: 2025-07-14
 description: ''
 image: ''
 tags: []
@@ -14,10 +14,14 @@ lang: ''
 
 ### 🔽 下载发行版
 
-[GitHub Releases 页面](https://github.com/Guation/nat1_traversal/releases)
+::github{repo="Guation/nat1_traversal"}
 
 - **NAT1_Traversal_nt.zip**：自带 Python 运行环境，仅限 Windows 平台使用。  
 - **NAT1_Traversal.tgz / NAT1_Traversal.zip**：需自备 Python 3.8+ 运行环境，支持全平台。
+
+:::note
+需要设备与光猫之间是同一网段
+:::
 
 ### 📁 解压与运行
 
