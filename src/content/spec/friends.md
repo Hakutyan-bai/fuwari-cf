@@ -71,7 +71,7 @@
   </tr>
 </table>
 
-添加完我的友链后请通过[邮件](mail:yukikohk@163.com)以下面的格式联系我添加你的友链
+添加完我的友链后请通过[yukikohk@163.com](mail:yukikohk@163.com)以下面的格式联系我添加你的友链
 
 ```
 title: "鈴奈咲桜",  
