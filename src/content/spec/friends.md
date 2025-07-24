@@ -71,9 +71,9 @@
   </tr>
 </table>
 
-添加完我的友链后请通过[邮件](mail:yukikohk@163.com)联系我添加你的友链
+添加完我的友链后请通过[邮件](mail:yukikohk@163.com)以下面的格式联系我添加你的友链
 
-```友链格式
+```
 title: "鈴奈咲桜",  
 imgurl: "https://avatars.githubusercontent.com/u/91101909?v=4",  
 desc: "愛することを忘れないで",  
