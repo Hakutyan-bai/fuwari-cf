@@ -70,3 +70,10 @@
     </td> -->
   </tr>
 </table>
+
+```友链格式
+title: "鈴奈咲桜",  
+imgurl: "https://avatars.githubusercontent.com/u/91101909?v=4",  
+desc: "愛することを忘れないで",  
+siteurl: "https://blog.sakura.ink",  
+```
