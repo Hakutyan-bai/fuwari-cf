@@ -49,17 +49,17 @@
       </a>
     </td>
   </tr>
-  <!-- <tr>
+  <tr>
     <td style="padding:8px 8px; width:320px;">
-      <a href="https://github.com/user3" target="_blank" class="friend-card">
-        <img src="https://avatars.githubusercontent.com/u/3?v=4" width="32" height="32" alt="友人C头像"/>
+      <a href="https://www.afo.im/" target="_blank" class="friend-card">
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=5" width="32" height="32" alt="友人C头像"/>
         <div>
-          <b>友人C</b><br/>
-          <span style="font-size:12px;">记录生活与技术的个人博客。</span>
+          <b>AcoFork</b><br/>
+          <span style="font-size:12px;">Protect What You Love!</span>
         </div>
       </a>
     </td>
-    <td style="padding:8px 8px; width:320px;">
+    <!-- <td style="padding:8px 8px; width:320px;">
       <a href="https://github.com/user4" target="_blank" class="friend-card">
         <img src="https://avatars.githubusercontent.com/u/4?v=4" width="32" height="32" alt="友人D头像"/>
         <div>
