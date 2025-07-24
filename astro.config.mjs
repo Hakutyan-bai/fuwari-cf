@@ -172,4 +172,9 @@ export default defineConfig({
 			},
 		},
 	},
+	alias: {
+		'@components': './src/components',
+		'@layouts': './src/layouts',
+		'@i18n': './src/i18n',
+	}
 });

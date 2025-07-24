@@ -43,8 +43,8 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		LinkPreset.Series,
 		LinkPreset.About,
+		LinkPreset.Series, // Custom link for series
 		{
 			name: "友链",
 			url: "friends/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
