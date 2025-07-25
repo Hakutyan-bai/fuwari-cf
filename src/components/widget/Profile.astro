@@ -42,7 +42,12 @@ const config = profileConfig;
         </div>
         <script is:inline>
           const fetchUmamiStats = async () => {
-            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3ZWJzaXRlSWQiOiJmN2IxMzI0Yi05YjUxLTRiMDAtYmM4ZC03MjZjYmVkNTE2OGQiLCJpYXQiOjE3NTM0MTY4MTV9._kVWpg-F_H6CyAy7x3UQjszZMUFfnu4k7ZV_4IQFkNw';
+
+            const shareRes = await fetch('https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr');
+            const shareData = await shareRes.json();
+            const token = shareData.token;
+
+            
             const url = 'https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?' +
               new URLSearchParams({
                 startAt: '1753333200000',
