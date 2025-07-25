@@ -81,6 +81,7 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/Hakutyan-bai",
 		},
 	],
+
 };
 
 export const licenseConfig: LicenseConfig = {

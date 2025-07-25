@@ -34,6 +34,48 @@ const config = profileConfig;
                 {config.links[0].name}
             </a>}
         </div>
+        <!-- 浏览量和访问次数显示区域，插入在社交链接下方 -->
+        <div class="text-sm text-gray-500 mt-2 text-center">
+          <Icon name="fa6-solid:eye" class="inline-block mr-1 text-gray-400 text-sm align-middle" />
+          浏览量：<span id="umami-pageviews">-</span>，
+          访问次数：<span id="umami-visits">-</span>
+        </div>
+        <script is:inline>
+          const fetchUmamiStats = async () => {
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3ZWJzaXRlSWQiOiJmN2IxMzI0Yi05YjUxLTRiMDAtYmM4ZC03MjZjYmVkNTE2OGQiLCJpYXQiOjE3NTM0MTY4MTV9._kVWpg-F_H6CyAy7x3UQjszZMUFfnu4k7ZV_4IQFkNw';
+            const url = 'https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?' +
+              new URLSearchParams({
+                startAt: '1753333200000',
+                endAt: '1753419599999',
+                unit: 'hour',
+                timezone: 'Asia/Shanghai',
+                url: '/',
+                compare: 'false',
+              });
+            try {
+              const res = await fetch(url, {
+                method: 'GET',
+                headers: {
+                  'x-umami-share-token': token,
+                },
+              });
+              const data = await res.json();
+              if (res.ok) {
+                const pageviews = data?.pageviews?.value ?? 'N/A';
+                const visits = data?.visits?.value ?? 'N/A';
+                document.getElementById('umami-pageviews').textContent = pageviews;
+                document.getElementById('umami-visits').textContent = visits;
+              } else {
+                document.getElementById('umami-pageviews').textContent = 'N/A';
+                document.getElementById('umami-visits').textContent = 'N/A';
+              }
+            } catch (err) {
+              document.getElementById('umami-pageviews').textContent = 'N/A';
+              document.getElementById('umami-visits').textContent = 'N/A';
+            }
+          };
+          fetchUmamiStats();
+        </script>
     </div>
 </div>
 

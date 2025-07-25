@@ -22,5 +22,40 @@ const len = page.data.length;
 <MainGridLayout>
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
-<Comments client:only="svelte"></Comments>
+    
+    <!-- 浏览量和访问次数显示区域 -->
+    <div class="text-sm text-gray-500 mt-4">
+      浏览量：<span id="umami-pageviews">-</span>，
+      访问次数：<span id="umami-visits">-</span>
+    </div>
+    
+    <!-- 请求并显示统计数据的脚本 -->
+    <script is:inline>
+
+      // 第二步：获取统计数据
+      async function fetchUmamiStats() {
+        try {
+          const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3ZWJzaXRlSWQiOiJmN2IxMzI0Yi05YjUxLTRiMDAtYmM4ZC03MjZjYmVkNTE2OGQiLCJpYXQiOjE3NTM0MTY4MTV9._kVWpg-F_H6CyAy7x3UQjszZMUFfnu4k7ZV_4IQFkNw';
+          // 当前页面路径（主页用 "/"，文章页用 window.location.pathname）
+          const pageUrl = "/";
+          // 当前时间戳
+          const endAt = Math.floor(Date.now() / 1000);
+          const statsUrl = `https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?startAt=1753333200000&endAt=1753419599999&unit=hour&timezone=Asia%2FShanghai&url=%2F&compare=false`;
+          const res = await fetch(statsUrl, {
+            headers: {
+              "x-umami-share-token": token
+            }
+          });
+          const data = await res.json();
+          document.getElementById('umami-pageviews').textContent = data.pageviews.value ?? 'N/A';
+          document.getElementById('umami-visits').textContent = data.visits.value ?? 'N/A';
+        } catch (e) {
+          document.getElementById('umami-pageviews').textContent = 'N/A';
+          document.getElementById('umami-visits').textContent = 'N/A';
+        }
+      }
+      fetchUmamiStats();
+    </script>
+
+    <Comments client:only="svelte"></Comments>
 </MainGridLayout>
