@@ -2,10 +2,30 @@
     @apply mb-4;
 }
 
+.link-card,
+.link-card *,
+.link-card:focus,
+.link-card:hover,
+.link-card:focus-visible {
+  outline: none !important;
+  text-decoration: none !important;
+  border-style: none !important;
+}
+
 .link-card {
-    @apply flex min-h-32 overflow-hidden rounded-xl transition-colors !no-underline !m-0 !p-0
+    @apply flex min-h-32 overflow-hidden rounded-xl transition-colors
+    !no-underline !m-0 !p-0
     bg-[var(--card-bg)] hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
-    ring-1 ring-[var(--btn-plain-bg-hover)] active:ring-[var(--btn-plain-bg-active)];
+    ring-inset ring-1 ring-transparent hover:ring-[var(--btn-plain-bg-hover)] active:ring-[var(--btn-plain-bg-active)]
+    outline-none focus:outline-none focus-visible:outline-none;
+
+    /* 防止所有子元素产生 text-decoration（防虚线） */
+    text-decoration: none !important;
+}
+
+.link-card * {
+    @apply no-underline;
+    text-decoration: none !important;
 }
 
 .link-card__info {
@@ -13,8 +33,8 @@
 }
 
 .link-card__title {
-    @apply text-black/90 dark:text-white/90
-    text-base font-semibold leading-6 line-clamp-2;
+    @apply text-black/90 dark:text-white/90 text-base font-semibold leading-6 line-clamp-2;
+    text-decoration: none !important;
 }
 
 .link-card__title::before {

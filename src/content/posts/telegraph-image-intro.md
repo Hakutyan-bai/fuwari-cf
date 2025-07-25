@@ -15,6 +15,8 @@ updated: 2025-07-19 20:00:00
 
 这个项目基于 [telegra.ph](https://telegra.ph/) 的图像上传服务，结合 Cloudflare Pages 实现了无需服务器、免费托管、部署便捷的图床方案。简单、高效、开箱即用！
 
+https://telegra.ph/
+
 ## 📚 项目地址
 
 ::github{repo="cf-pages/Telegraph-Image"}
@@ -36,7 +38,8 @@ updated: 2025-07-19 20:00:00
 
 你可以通过作者提供的示例站点直接体验该图床的功能：
 
-👉 [https://telegraph-image.pages.dev/](https://telegraph-image.pages.dev/)
+
+https://telegraph-image.pages.dev/
 
 
 
