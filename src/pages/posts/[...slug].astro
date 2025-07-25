@@ -35,6 +35,7 @@ const { remarkPluginFrontmatter } = await entry.render();
  const lastModified = dayjs(entry.data.updated)
   .utc()
   .format('YYYY-MM-DDTHH:mm:ss')
+  
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -92,25 +93,37 @@ const jsonLd = {
                 </div>
             </div>
 
+
+
             <!-- metadata -->
             <div class="onload-animation">
+
                 <PostMetadata
                         class="mb-5"
                         published={entry.data.published}
                         updated={entry.data.updated}
                         tags={entry.data.tags}
                         category={entry.data.category}
+
                 ></PostMetadata>
+
+                    <!-- ✅ 浏览量展示插入此处 -->
+                    <div class="text-sm text-gray-500 ml-1 mb-4 flex items-center gap-1">
+                    <Icon name="fa6-solid:eye" class="text-gray-400 text-sm" />
+                    <span>浏览量：<span id="post-umami-pageviews">-</span></span>，
+                    <span>访问次数：<span id="post-umami-visits">-</span></span>
+                    </div>
+
                 {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
             </div>
 
             <!-- always show cover as long as it has one -->
-
+            
             {entry.data.image &&
                 <ImageWrapper id="post-cover" src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
             }
 
-
+            
             <Markdown class="mb-6 markdown-content onload-animation">
                 <Content />
             </Markdown>
@@ -121,6 +134,7 @@ const jsonLd = {
     </div>
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
+    
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextSlug}]}>
             {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
@@ -130,7 +144,7 @@ const jsonLd = {
                 </div>
             </div>}
         </a>
-
+        
         <a href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.prevSlug}]}>
             {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
@@ -144,6 +158,48 @@ const jsonLd = {
 
     <!-- 添加隐藏元素存储日期 -->
     <div id="last-modified" data-last-modified={lastModified} style="display: none;"></div>
+
+
+
+    <script is:inline>
+      const fetchUmamiStatss = async () => {
+        // 获取当前文章路径
+        const pathname = window.location.pathname;
+        // 获取 websiteId 和 token
+        const shareRes = await fetch('https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr');
+        const shareData = await shareRes.json();
+        
+        const token = shareData.token;
+        
+
+        const statsUrl = `https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
+          new URLSearchParams({
+            startAt: '1753333200000',
+            endAt: Date.now(),
+            unit: 'hour',
+            timezone: 'Asia/Hong_Kong',
+            url: pathname,
+            compare: 'false',
+          });
+        const res = await fetch(statsUrl, {
+          method: 'GET',
+          headers: {
+            'x-umami-share-token': token,
+          },
+        });
+        if (!res.ok) {
+          document.getElementById('post-umami-pageviews').textContent = 'N/A';
+          document.getElementById('post-umami-visits').textContent = 'N/A';
+          return;
+        }
+        const data = await res.json();
+        document.getElementById('post-umami-pageviews').textContent = data.pageviews?.value ?? 'N/A';
+        document.getElementById('post-umami-visits').textContent = data.visits?.value ?? 'N/A';
+      };
+      fetchUmamiStatss();
+      setInterval(fetchUmamiStatss, 5000);
+    </script>
+
 
     <div class="card-base p-6 mb-4">
         <script is:inline>
