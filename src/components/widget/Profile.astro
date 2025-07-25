@@ -46,7 +46,7 @@ const config = profileConfig;
             const url = 'https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?' +
               new URLSearchParams({
                 startAt: '1753333200000',
-                endAt: '1753419599999',
+                endAt: Date.now(),
                 unit: 'hour',
                 timezone: 'Asia/Shanghai',
                 url: '/',
