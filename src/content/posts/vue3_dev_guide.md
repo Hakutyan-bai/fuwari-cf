@@ -7,7 +7,7 @@ tags: []
 category: ''
 draft: false 
 lang: ''
-series: "Vue"
+series: Vue
 updated: 2025-07-26 10:00:00
 ---
 # Vue 3 项目开发实用文档

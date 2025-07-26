@@ -7,7 +7,7 @@ tags: []
 category: 'Mod'
 draft: false 
 lang: ''
-series: "Mod"
+series: Mod
 updated: 2025-07-24 23:00:00
 ---
 # 🎲 LuckyDiceMod - 项目地址

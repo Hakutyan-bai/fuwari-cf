@@ -9,7 +9,7 @@ draft: false
 lang: ''
 pinned: true 
 updated: 2025-07-24 20:00:00
-series: "Mod"
+series: Mod
 ---
 这是一个可以自动喂食周围牛、羊和猪，以及自动补种农作物的Mod
 

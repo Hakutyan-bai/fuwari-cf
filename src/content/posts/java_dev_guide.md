@@ -7,7 +7,7 @@ tags: []
 category: ''
 draft: false 
 lang: ''
-series: "Java"
+series: Java
 updated: 2025-07-26 10:00:00
 ---
 # Java 开发实用文档
