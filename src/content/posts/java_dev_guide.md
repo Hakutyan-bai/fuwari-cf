@@ -1,5 +1,5 @@
 ---
-title: "Java开发实用文档"
+title: Java开发实用文档
 published: 2025-07-12
 description: ''
 image: ''

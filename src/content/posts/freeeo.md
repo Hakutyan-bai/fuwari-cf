@@ -1,5 +1,5 @@
 ---
-title: "测速白嫖两个EdgeOne免费计划"
+title: 测速白嫖两个EdgeOne免费计划
 published: 2025-07-25
 description: ''
 image: ''
@@ -7,7 +7,6 @@ tags: []
 category: ''
 draft: false 
 lang: ''
-series: ""
 updated: 2025-07-25 20:00:00
 ---
 ## EdgeOne免费计划

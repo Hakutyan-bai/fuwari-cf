@@ -1,5 +1,5 @@
 ---
-title: "Vue 3 项目开发实用文档"
+title: Vue3项目开发实用文档
 published: 2025-07-20
 description: ''
 image: ''
