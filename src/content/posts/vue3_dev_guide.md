@@ -1,4 +1,15 @@
-
+---
+title: "Vue 3 项目开发实用文档"
+published: 2025-07-20
+description: ''
+image: ''
+tags: []
+category: ''
+draft: false 
+lang: ''
+series: "Vue"
+updated: 2025-07-26 10:00:00
+---
 # Vue 3 项目开发实用文档
 
 本实用文档总结了 Vue 3 项目开发中的常用实践与代码模板，包括项目结构建议、组件开发、路由与状态管理、请求封装等，适合中小型前端项目使用。
