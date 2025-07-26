@@ -3,13 +3,14 @@ title: 查询低价域名后缀
 published: 2025-07-26
 description: ''
 image: ''
-tags: []
-category: ''
+tags: [域名]
+category: '域名'
 draft: false 
 lang: ''
 series: ""
 updated: 2025-07-26 11:00:00
 ---
+
 ## 前言
 注册域名的时候大家肯定会到各个服务商比价，追求性价比，但是一个一个查也太麻烦了！
 所以我找到了个网站，可以一键查询低价域名，它就是**哪煮米**

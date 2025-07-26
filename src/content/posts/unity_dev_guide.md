@@ -3,13 +3,14 @@ title: Unity&Csharp开发实用文档
 published: 2025-07-10
 description: ''
 image: ''
-tags: []
-category: ''
+tags: [Unity,Csharp]
+category: '文档'
 draft: false 
 lang: ''
 series: Csharp
 updated: 2025-07-26 10:00:00
 ---
+
 # Unity 项目开发实用文档（C#）
 
 本实用文档总结了在 Unity 使用 C# 开发时常见功能的基本实现，包括画布与 UI 设置、关卡切换、实体碰撞、音效播放、数据存储、角色控制等内容，适合快速参考与项目模板搭建。

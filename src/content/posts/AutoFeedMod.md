@@ -1,7 +1,7 @@
 ---
 title: AutoFeedMod
 published: 2025-07-10
-description: ''
+description: '一个可以方便农牧业的Mod'
 image: ''
 tags: [MC]
 category: 'Mod'

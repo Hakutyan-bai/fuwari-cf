@@ -1,15 +1,16 @@
 ---
 title: Java开发实用文档
-published: 2025-07-12
+published: 2025-07-10
 description: ''
 image: ''
-tags: []
-category: ''
+tags: [Java]
+category: '文档'
 draft: false 
 lang: ''
+updated: 2025-07-24 20:00:00
 series: Java
-updated: 2025-07-26 10:00:00
 ---
+
 # Java 开发实用文档
 
 本实用文档总结了 Java 开发中的常见功能实现与代码模板，适用于桌面应用、控制台程序或基础服务端逻辑开发。适合初学者与日常开发参考使用。
