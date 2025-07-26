@@ -7,7 +7,6 @@ tags: []
 category: ''
 draft: false 
 lang: ''
-priority: 10
 series: ""
 updated: 2025-07-25 20:00:00
 ---
@@ -41,3 +40,7 @@ https://edgeone.ai/get-free-plan
 回到控制台就可以发现多了两个免费计划了
 <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMhaIOURyVuJZGSWLH0GJsgffMrJqEAAknOMRviCCFUcpdO1f2TFxYBAAMCAAN3AAM2BA.png">
 好了恭喜你又多了两个EdgeOne的免费计划
+
+---
+
+文章编辑：`@鈴奈咲桜`
