@@ -300,7 +300,7 @@ Destroy(obj, 2f);    // 延迟 2 秒销毁
 
 - Unity 官方文档：
 
-https://docs.unity3d.com/cn/
+https://docs.unity.com/
 
 - Unity Learn 教程：
 

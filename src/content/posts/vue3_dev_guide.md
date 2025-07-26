@@ -223,18 +223,23 @@ const baseURL = import.meta.env.VITE_API_BASE_URL
 ## 附录资源
 
 - Vue 官方文档：
+
 https://cn.vuejs.org/
 
 - Vue Router 文档：
+
 https://router.vuejs.org/zh/
 
 - Pinia 状态管理：
+
 https://pinia.vuejs.org/
 
 - Axios 文档：
+
 https://axios-http.com/zh/
 
 - Vite 文档：
+
 https://vitejs.dev/
 
 ---
