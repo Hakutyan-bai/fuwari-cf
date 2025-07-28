@@ -20,7 +20,7 @@ updated: 2025-07-26 20:00:00
 修改第八行的your_admin_password_here为你自己的密码
 :::
 
-```js title="my-test-file.js"  {8}
+```js title="Workers.js"  {8}
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
