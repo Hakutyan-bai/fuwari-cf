@@ -67,9 +67,9 @@ exit
 
 ## 推荐使用场景
 
-Minecraft Server
-Frp内网穿透
-后台下载
+### Minecraft Server
+### Frp内网穿透
+### 后台下载
 
 ---
 
