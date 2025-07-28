@@ -222,10 +222,12 @@ https://ubuntu.com/tutorials
 
 - Linux 命令大全：
 
-https://man.linuxde.net/
+https://man.linuxde.net
 
 - VTLearn Linux 教程：
 
-https://vtlearn.linuxcool.com/
+https://vtlearn.linuxcool.com
 
 ---
+
+文章编辑：`@鈴奈咲桜`
