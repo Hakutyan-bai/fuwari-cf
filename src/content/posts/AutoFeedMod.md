@@ -15,6 +15,14 @@ series: Mod
 
 ::github{repo="Hakutyan-bai/AutoFeedMod"}
 
+https://modrinth.com/mod/autofeedfabric/
+
+## 效果展示
+
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1qk8izsEdH" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
 ## 特性
 - 自动检测并喂养附近的牛、羊、猪和鸡
 - 支持 F6 键一键开关自动喂养功能
@@ -36,6 +44,9 @@ series: Mod
 - 默认为关闭状态，按下 F6 可随时开关自动喂养，屏幕左下角会有“自动喂养已开启/关闭”提示。
 - 只需将小麦（牛、羊）或胡萝卜（猪）放在快捷栏，靠近动物即可自动喂养。
 - 只需对成熟的农作物右键即可完成收获与补种，支持小麦、胡萝卜、土豆、地狱疣。
+:::note
+可以拿着骨粉一直对着农作物右键
+:::
 
 ## 注意事项
 - 本模组为客户端模组，无需安装在服务器端。
