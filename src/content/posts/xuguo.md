@@ -74,7 +74,8 @@ https://github.com/zaunist/xugou/wiki
 ## 视频教程
 
 原作者本来有在B站发视频的，但是不知道什么原因下架了，所以这里提供YouTube视频
-<iframe width="100%" height="468" src="https://www.youtube.com/watch?v=w2by-7jDCM0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<iframe width="100%" height="468" src="https://www.youtube.com/embed/w2by-7jDCM0?si=N1WTorLKL0uwLsU_" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
 
 ---
 
