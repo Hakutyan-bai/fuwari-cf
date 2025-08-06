@@ -3,7 +3,7 @@ title:  NAT1 Traversal 教程
 published: 2025-07-14
 description: ''
 image: ''
-tags: []
+tags: [NAT1,端口映射]
 category: '教程'
 draft: false 
 lang: ''

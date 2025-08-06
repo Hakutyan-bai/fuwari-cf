@@ -3,7 +3,7 @@ title: CloudMail
 published: 2025-07-11
 description: ''
 image: ''
-tags: []
+tags: [邮箱]
 category: 'Mail'
 draft: false 
 lang: ''

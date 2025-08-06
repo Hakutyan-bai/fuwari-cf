@@ -3,7 +3,7 @@ title: Telegraph-Image
 published: 2025-07-13
 description: ''
 image: ''
-tags: []
+tags: [图床,白嫖]
 category: '教程'
 draft: false 
 lang: ''

@@ -3,7 +3,7 @@ title: LuckyDiceMod
 published: 2025-07-12
 description: ''
 image: ''
-tags: []
+tags: [Mod,MC]
 category: 'Mod'
 draft: false 
 lang: ''
