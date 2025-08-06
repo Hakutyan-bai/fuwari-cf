@@ -17,12 +17,12 @@ export const siteConfig: SiteConfig = {
 	},
 	banner: {
 		enable: true,
-		src: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMcaIEFMdCsMBuyvL8EounntEOzo9QAApbGMRt2UwhUz_cAAdgr7Tv9AQADAgADdwADNgQ.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+		src: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMtaJM8e7A4OgUw5-hCnRDVI_mepDwAAgbDMRuumphUVY30OvaB8AUBAAMCAAN5AAM2BA.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
 			enable: false, // Display the credit text of the banner image
-			text: "", // Credit text to be displayed
-			url: "", // (Optional) URL link to the original artwork or artist's page
+			text: "", // 要显示的信用文本
+			url: "https://www.pixiv.net/artworks/128919932", // （可选）URL链接到原始艺术品或艺术家页面
 		},
 	},
 	toc: {
