@@ -1,6 +1,6 @@
 ---
 title: XUGOU-基于CloudFlare的轻量化监控平台
-published: 2025-8-5
+published: 2025-08-04
 description: ''
 image: ''
 tags: [网站监控,客户端监控,CloudFlare]
@@ -68,6 +68,7 @@ https://xugou.mdzz.uk/
 该项目可以部署到赛博活佛CloudFlare，原作者提供了部署文档和视频教程
 
 ## 部署文档
+
 https://github.com/zaunist/xugou/wiki
 
 ## 视频教程
