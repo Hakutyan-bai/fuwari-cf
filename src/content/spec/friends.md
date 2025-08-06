@@ -59,15 +59,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://github.com/user4" target="_blank" class="friend-card">
-        <img src="https://avatars.githubusercontent.com/u/4?v=4" width="32" height="32" alt="友人D头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.tsd.my" target="_blank" class="friend-card">
+        <img src="https://q1.qlogo.cn/g?b=qq&nk=2987304764&s=640" width="32" height="32" alt="友人D头像"/>
         <div>
-          <b>友人D</b><br/>
-          <span style="font-size:12px;">热衷于开源项目的开发者。</span>
+          <b>Tavre Blog</b><br/>
+          <span style="font-size:12px;">茫茫大海 我与你相遇。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 
