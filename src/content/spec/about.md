@@ -86,16 +86,8 @@ a, a:focus, a:active, a:focus-visible {
   </a>
 </div>
 
-<div class="language-container show-en">
-  <div id="en-section" class="language-section active">
+<div class="language-container show-zh">
 
-<br/> 
-
-404
----
-
-
-  </div>
   
   <div id="zh-section" class="language-section">
 
