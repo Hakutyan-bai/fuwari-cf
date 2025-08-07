@@ -7,7 +7,6 @@ tags: [Mod,MC]
 category: 'Mod'
 draft: false 
 lang: ''
-pinned: true 
 updated: 2025-07-24 20:00:00
 series: Mod
 ---

@@ -122,17 +122,17 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://github.com/user2" target="_blank" class="friend-card">
-        <img src="https://avatars.githubusercontent.com/u/2?v=4" width="32" height="32" alt="友人B头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="" target="_blank" class="friend-card">
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=3368760156&spec=100&t=1754536226983" width="32" height="32" alt=""/>
         <div>
-          <b>友人B</b><br/>
-          <span style="font-size:12px;">前端开发爱好者，喜欢新技术。</span>
+          <b>筱云</b><br/>
+          <span style="font-size:12px;">为维护服务器 每个月100CNY</span>
         </div>
       </a>
     </td>
   </tr>
-  <tr>
+  <!-- <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://github.com/user3" target="_blank" class="friend-card">
         <img src="https://avatars.githubusercontent.com/u/3?v=4" width="32" height="32" alt="友人C头像"/>
