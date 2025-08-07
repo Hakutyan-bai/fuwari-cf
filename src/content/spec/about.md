@@ -89,7 +89,7 @@ a, a:focus, a:active, a:focus-visible {
 <div class="language-container show-zh">
 
   
-  <div id="zh-section" class="language-section">
+  <div id="zh-section" class="language-section active">
 
 <br/> 
 
