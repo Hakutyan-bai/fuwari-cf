@@ -2,14 +2,14 @@
 
 title: 如何向学校申请Edu邮箱
 published: 2025-08-08
-description: 'Edu邮箱'
+description: '怎么申请Edu邮箱呢？很简单！'
 image: ''
 tags: [Edu邮箱,学生认证,教育优惠]
-category: ''
+category: 'Edu邮箱'
 draft: false 
 lang: ''
 updated: 2025-08-08 10:00:00
-series: 分享
+series: 教育认证
 
 ---
 
@@ -17,7 +17,7 @@ series: 分享
 
 本次教程以申请**深圳信息职业技术大学**的Edu邮箱为例
 
-确保是你学校的**在校大学生**（大一新生可以登录学校的信息门户就行）
+确保你是学校的**在校大学生**（大一新生可以登录学校的信息门户就行）
 
 ## 第一步：登录学校的信息门户
 
