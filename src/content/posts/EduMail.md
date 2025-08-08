@@ -2,7 +2,7 @@
 
 title: 如何向学校申请Edu邮箱
 published: 2025-08-08
-description: ''
+description: 'Edu邮箱'
 image: ''
 tags: [Edu邮箱,学生认证,教育优惠]
 category: ''
