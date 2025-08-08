@@ -69,6 +69,26 @@
       </a>
     </td>
   </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.strarry.top" target="_blank" class="friend-card">
+        <img src="https://blog.strarry.top/avatar.jpg" width="32" height="32" alt="友人C头像"/>
+        <div>
+          <b>星辰の笔记</b><br/>
+          <span style="font-size:12px;">代码 |想想|分享 |重复</span>
+        </div>
+      </a>
+    </td>
+    <!-- <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.tsd.my" target="_blank" class="friend-card">
+        <img src="https://q1.qlogo.cn/g?b=qq&nk=2987304764&s=640" width="32" height="32" alt="友人D头像"/>
+        <div>
+          <b>Tavre Blog</b><br/>
+          <span style="font-size:12px;">茫茫大海 我与你相遇。</span>
+        </div>
+      </a>
+    </td> -->
+  </tr>
 </table>
 
 添加完我的友链后请通过[yukikohk@163.com](mail:yukikohk@163.com)以下面的格式联系我添加你的友链
