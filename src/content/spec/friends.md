@@ -75,7 +75,7 @@
         <img src="https://blog.strarry.top/avatar.jpg" width="32" height="32" alt="友人C头像"/>
         <div>
           <b>星辰の笔记</b><br/>
-          <span style="font-size:12px;">代码 |想想|分享 |重复</span>
+          <span style="font-size:12px;">Code | Think | Share | Repeat</span>
         </div>
       </a>
     </td>
