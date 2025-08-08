@@ -8,6 +8,7 @@ category: 'Mail'
 draft: false 
 lang: ''
 updated: 2025-07-23 20:00:00
+series: CloudFlare
 ---
 # 📬 Cloud Mail：轻量级开源 Web 邮箱客户端
 

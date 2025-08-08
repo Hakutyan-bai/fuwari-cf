@@ -8,6 +8,7 @@ category: '教程'
 draft: false 
 lang: ''
 updated: 2025-07-26 20:00:00
+series: CloudFlare
 ---
 
 这是一个生成短链接的项目

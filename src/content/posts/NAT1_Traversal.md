@@ -8,6 +8,7 @@ category: '教程'
 draft: false 
 lang: ''
 updated: 2025-07-18 20:00:00
+series: 分享
 ---
 # NAT1 Traversal 教程
 ## 本文章为最基础教程，结尾附[原作者视频](/posts/nat1_traversal/#%E8%BF%98%E5%8F%AF%E4%BB%A5%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E6%8E%A8%E8%8D%90%E8%A7%82%E7%9C%8B%E5%8E%9F%E4%BD%9C%E8%80%85%E8%A7%86%E9%A2%91)
