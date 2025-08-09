@@ -51,7 +51,7 @@
   </tr>
   <tr>
     <td style="padding:8px 8px; width:320px;">
-      <a href="https://www.afo.im/" target="_blank" class="friend-card">
+      <a href="https://2x.nz/" target="_blank" class="friend-card">
         <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=5" width="32" height="32" alt="友人C头像"/>
         <div>
           <b>AcoFork</b><br/>

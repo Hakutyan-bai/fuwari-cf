@@ -108,11 +108,11 @@ const jsonLd = {
                 ></PostMetadata>
 
                     <!-- ✅ 浏览量展示插入此处 -->
-                    <div class="text-sm text-gray-500 ml-1 mb-4 flex items-center gap-1">
+                    <!-- <div class="text-sm text-gray-500 ml-1 mb-4 flex items-center gap-1">
                     <Icon name="fa6-solid:eye" class="text-gray-400 text-sm" />
                     <span>浏览量：<span id="post-umami-pageviews">-</span></span>，
                     <span>访问次数：<span id="post-umami-visits">-</span></span>
-                    </div>
+                    </div> -->
 
                 {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
             </div>
@@ -161,7 +161,7 @@ const jsonLd = {
 
 
 
-    <script is:inline>
+    <!-- <script is:inline>
       const fetchUmamiStatss = async () => {
         // 获取当前文章路径
         const pathname = window.location.pathname;
@@ -198,7 +198,7 @@ const jsonLd = {
       };
       fetchUmamiStatss();
       setInterval(fetchUmamiStatss, 5000);
-    </script>
+    </script> -->
 
 
     <div class="card-base p-6 mb-4">
