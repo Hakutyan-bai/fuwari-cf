@@ -89,6 +89,45 @@
       </a>
     </td>
   </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.alexma.top/" target="_blank" class="friend-card">
+        <img src="https://blog-backend.alexma.top/api/v2/objects/avatar/112zjnt1f3c2cf3prp.webp" width="32" height="32" alt="友人C头像"/>
+        <div>
+          <b> AlexMa's Blog</b><br/>
+          <span style="font-size:12px;"> Create things with love</span>
+        </div>
+      </a>
+    </td>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.yeqing.net/" target="_blank" class="friend-card">
+        <img src="https://image.yeqing.net/i/2025/05/15/62868e67dff91285992985db0cce57d5.webp" width="32" height="32" alt="友人D头像"/>
+        <div>
+          <b>夜轻Blog</b><br/>
+          <span style="font-size:12px;">一个人。</span>
+        </div>
+      </a>
+    </td>
+  </tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://497995.xyz/" target="_blank" class="friend-card">
+        <img src="https://q1.qlogo.cn/g?b=qq&nk=2042177831&s=640" width="32" height="32" alt="友人C头像"/>
+        <div>
+          <b> 或许是一只龙的博客</b><br/>
+          <span style="font-size:12px;"> Create things with love</span>
+        </div>
+      </a>
+    </td>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.my0811.cn/" target="_blank" class="friend-card">
+        <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="友人D头像"/>
+        <div>
+          <b>百里博客</b><br/>
+          <span style="font-size:12px;">一个高中生的博客。</span>
+        </div>
+      </a>
+    </td>
+  </tr>
 </table>
 
 添加完我的友链后请通过[yukikohk@163.com](mail:yukikohk@163.com)以下面的格式联系我添加你的友链
