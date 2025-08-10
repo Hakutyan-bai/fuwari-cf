@@ -79,15 +79,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.tsd.my" target="_blank" class="friend-card">
-        <img src="https://q1.qlogo.cn/g?b=qq&nk=2987304764&s=640" width="32" height="32" alt="友人D头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.fis.ink" target="_blank" class="friend-card">
+        <img src="https://www.fis.ink/img/logo.png" width="32" height="32" alt="友人D头像"/>
         <div>
-          <b>Tavre Blog</b><br/>
-          <span style="font-size:12px;">茫茫大海 我与你相遇。</span>
+          <b>fishcpy的小破站</b><br/>
+          <span style="font-size:12px;">非淡泊无以明志，非宁静无以致远。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 

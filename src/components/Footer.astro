@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear();
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
-        <a href="https://icp.gov.moe/?keyword=20250488" target="_blank">萌ICP备20250488号</a><br>
+        <a class="transition link text-[var(--primary)] font-medium" href="https://icp.gov.moe/?keyword=20250488" target="_blank">萌ICP备20250488号</a><br>
         <div class="flex justify-center gap-4 mt-2">
             <a href="https://hopedomain.com/zh/age/sakura.ink" target="_blank">
                 <img src="https://hopedomain.com/api/badge/domain-age/sakura.ink?theme=purple&lang=zh" alt="域名年龄" />
@@ -32,5 +32,16 @@ const currentYear = new Date().getFullYear();
         Server by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://www.cloudflare.com/">Cloudflare</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://edgeone.ai/">EdgeOne</a><br>
+        <!-- 运行时间 -->
+        <span>⭐ 本站已运行</span>
+        <span id="uptime" class="text-[var(--primary)] font-medium">
+            <script>
+                const uptime = document.getElementById('uptime');
+                const startTime = new Date('2025-06-07T00:00:00Z'); // 替换为实际的站点启动时间
+                const now = new Date();
+                const diff = now - startTime;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                uptime.textContent = `${days} 天`;
+            </script>
     </div>
 </div>
