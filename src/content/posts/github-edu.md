@@ -95,7 +95,7 @@ series: 教育认证
 
 
 
-https://blog.sakura.ink/posts/edumail/
+[/posts/edumail/](/posts/edumail/)
 
 
 
