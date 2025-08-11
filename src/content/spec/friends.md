@@ -109,7 +109,7 @@
       </a>
     </td>
   </tr>
-    <td style="padding:8px 8px; width:320px;">
+    <!-- <td style="padding:8px 8px; width:320px;">
       <a href="https://497995.xyz/" target="_blank" class="friend-card">
         <img src="https://q1.qlogo.cn/g?b=qq&nk=2042177831&s=640" width="32" height="32" alt="友人C头像"/>
         <div>
@@ -117,7 +117,7 @@
           <span style="font-size:12px;"> Create things with love</span>
         </div>
       </a>
-    </td>
+    </td> -->
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.my0811.cn/" target="_blank" class="friend-card">
         <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="友人D头像"/>
