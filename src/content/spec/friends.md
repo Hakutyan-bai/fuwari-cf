@@ -1,6 +1,5 @@
 ## 友链列表
 
-<!-- 建议将以下 <style> 放在页面头部或 markdown 支持的地方 -->
 <style>
 .friend-card {
   display: flex;
@@ -32,7 +31,7 @@
   <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.hongxiovo.cn/" target="_blank" class="friend-card">
-        <img src="https://avatars.githubusercontent.com/u/177866244?v=4" width="32" height="32" alt="友人A头像"/>
+        <img src="https://avatars.githubusercontent.com/u/177866244?v=4" width="32" height="32" alt="HongXiovo头像"/>
         <div>
           <b>HongXiovo</b><br/>
           <span style="font-size:12px;">热爱编程与分享的博主。</span>
@@ -41,7 +40,7 @@
     </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://www.imxizhen.asia" target="_blank" class="friend-card">
-        <img src="https://q1.qlogo.cn/g?b=qq&nk=89525295&s=640" width="32" height="32" alt="友人B头像"/>
+        <img src="https://q1.qlogo.cn/g?b=qq&nk=89525295&s=640" width="32" height="32" alt="imxizhen头像"/>
         <div>
           <b>imxizhen</b><br/>
           <span style="font-size:12px;">永远相信美好的事情即将发生.</span>
@@ -52,7 +51,7 @@
   <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://2x.nz/" target="_blank" class="friend-card">
-        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=5" width="32" height="32" alt="友人C头像"/>
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=5" width="32" height="32" alt="AcoFork头像"/>
         <div>
           <b>AcoFork</b><br/>
           <span style="font-size:12px;">Protect What You Love!</span>
@@ -61,7 +60,7 @@
     </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.tsd.my" target="_blank" class="friend-card">
-        <img src="https://q1.qlogo.cn/g?b=qq&nk=2987304764&s=640" width="32" height="32" alt="友人D头像"/>
+        <img src="https://q1.qlogo.cn/g?b=qq&nk=2987304764&s=640" width="32" height="32" alt="Tavre Blog头像"/>
         <div>
           <b>Tavre Blog</b><br/>
           <span style="font-size:12px;">茫茫大海 我与你相遇。</span>
@@ -72,7 +71,7 @@
   <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.strarry.top" target="_blank" class="friend-card">
-        <img src="https://blog.strarry.top/avatar.jpg" width="32" height="32" alt="友人C头像"/>
+        <img src="https://blog.strarry.top/avatar.jpg" width="32" height="32" alt="星辰の笔记头像"/>
         <div>
           <b>星辰の笔记</b><br/>
           <span style="font-size:12px;">Code | Think | Share | Repeat</span>
@@ -81,7 +80,7 @@
     </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.fis.ink" target="_blank" class="friend-card">
-        <img src="https://www.fis.ink/img/logo.png" width="32" height="32" alt="友人D头像"/>
+        <img src="https://www.fis.ink/img/logo.png" width="32" height="32" alt="fishcpy的小破站头像"/>
         <div>
           <b>fishcpy的小破站</b><br/>
           <span style="font-size:12px;">非淡泊无以明志，非宁静无以致远。</span>
@@ -92,16 +91,16 @@
   <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.alexma.top/" target="_blank" class="friend-card">
-        <img src="https://blog-backend.alexma.top/api/v2/objects/avatar/112zjnt1f3c2cf3prp.webp" width="32" height="32" alt="友人C头像"/>
+        <img src="https://blog-backend.alexma.top/api/v2/objects/avatar/112zjnt1f3c2cf3prp.webp" width="32" height="32" alt="AlexMa's Blog头像"/>
         <div>
-          <b> AlexMa's Blog</b><br/>
-          <span style="font-size:12px;"> Create things with love</span>
+          <b>AlexMa's Blog</b><br/>
+          <span style="font-size:12px;">Create things with love</span>
         </div>
       </a>
     </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.yeqing.net/" target="_blank" class="friend-card">
-        <img src="https://image.yeqing.net/i/2025/05/15/62868e67dff91285992985db0cce57d5.webp" width="32" height="32" alt="友人D头像"/>
+        <img src="https://image.yeqing.net/i/2025/05/15/62868e67dff91285992985db0cce57d5.webp" width="32" height="32" alt="夜轻Blog头像"/>
         <div>
           <b>夜轻Blog</b><br/>
           <span style="font-size:12px;">一个人。</span>
@@ -109,18 +108,19 @@
       </a>
     </td>
   </tr>
+  <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blogs.rukaax.top" target="_blank" class="friend-card">
-        <img src="https://blogs.rukaax.top/pic/icon.png" width="32" height="32" alt="友人C头像"/>
+        <img src="https://blogs.rukaax.top/pic/icon.png" width="32" height="32" alt="RukaaX Blog头像"/>
         <div>
-          <b> RukaaX Blog</b><br/>
-          <span style="font-size:12px;"> RukaaX 一名高中牲的博客</span>
+          <b>RukaaX Blog</b><br/>
+          <span style="font-size:12px;">RukaaX 一名高中牲的博客</span>
         </div>
       </a>
     </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.my0811.cn/" target="_blank" class="friend-card">
-        <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="友人D头像"/>
+        <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="百里博客头像"/>
         <div>
           <b>百里博客</b><br/>
           <span style="font-size:12px;">一个高中生的博客。</span>
@@ -130,7 +130,7 @@
   </tr>
 </table>
 
-添加完我的友链后请通过[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式联系我添加你的友链
+添加完我的友链后请通过评论或[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
 
 ```
 title: "鈴奈咲桜のBlog",  
