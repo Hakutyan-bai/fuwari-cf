@@ -109,15 +109,15 @@
       </a>
     </td>
   </tr>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://497995.xyz/" target="_blank" class="friend-card">
-        <img src="https://q1.qlogo.cn/g?b=qq&nk=2042177831&s=640" width="32" height="32" alt="友人C头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blogs.rukaax.top" target="_blank" class="friend-card">
+        <img src="https://blogs.rukaax.top/pic/icon.png" width="32" height="32" alt="友人C头像"/>
         <div>
-          <b> 或许是一只龙的博客</b><br/>
-          <span style="font-size:12px;"> Create things with love</span>
+          <b> RukaaX Blog</b><br/>
+          <span style="font-size:12px;"> RukaaX 一名高中牲的博客</span>
         </div>
       </a>
-    </td> -->
+    </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.my0811.cn/" target="_blank" class="friend-card">
         <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="友人D头像"/>
