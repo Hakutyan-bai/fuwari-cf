@@ -138,15 +138,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.my0811.cn/" target="_blank" class="friend-card">
-        <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="百里博客头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.imbee.top/" target="_blank" class="friend-card">
+        <img src="https://blog.imbee.top/images/logo/logo.webp" width="32" height="32" alt="百里博客头像"/>
         <div>
-          <b>百里博客</b><br/>
-          <span style="font-size:12px;">一个高中生的博客。</span>
+          <b>MIFENG BLOG</b><br/>
+          <span style="font-size:12px;">一个菜鸟的博客。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 
