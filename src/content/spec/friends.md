@@ -128,6 +128,26 @@
       </a>
     </td>
   </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.isyyo.com/" target="_blank" class="friend-card">
+        <img src="https://blog.isyyo.com/favicon/logo.png" width="32" height="32" alt="RukaaX Blog头像"/>
+        <div>
+          <b>Wer Blog</b><br/>
+          <span style="font-size:12px;">The only way to do great is to love what you do</span>
+        </div>
+      </a>
+    </td>
+    <!-- <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.my0811.cn/" target="_blank" class="friend-card">
+        <img src="https://blog.my0811.cn/favicon.ico" width="32" height="32" alt="百里博客头像"/>
+        <div>
+          <b>百里博客</b><br/>
+          <span style="font-size:12px;">一个高中生的博客。</span>
+        </div>
+      </a>
+    </td> -->
+  </tr>
 </table>
 
 添加完我的友链后请通过评论或[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
