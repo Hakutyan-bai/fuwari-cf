@@ -43,8 +43,8 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
+		LinkPreset.Series,
 		LinkPreset.About,
-		LinkPreset.Series, // Custom link for series
 		{
 			name: "友链",
 			url: "friends/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
@@ -62,8 +62,19 @@ export const navBarConfig: NavBarConfig = {
 		// },
 		{
 			name: "状态",
-			url: "https://jk.fwari.in/", // Internal links should not include the base path, as it is automatically added
-			external: true, // Show an external link icon and will open in a new tab
+			url: "/", // not used when children exist
+			children: [
+				{
+					name: "uptimekuma",
+					url: "https://jk.skura.me/", // uptimekuma
+					external: true,
+				},
+				{
+					name: "xuguo",
+					url: "https://jk.sakura.ink/status/", // xuguo
+					external: true,
+				},
+			],
 		},
 	],
 };

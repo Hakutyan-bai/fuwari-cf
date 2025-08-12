@@ -34,15 +34,31 @@ const currentYear = new Date().getFullYear();
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://www.cloudflare.com/">Cloudflare</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://edgeone.ai/">EdgeOne</a><br>
         <!-- 运行时间 -->
-        <span>⭐ 本站已运行</span>
-        <span id="uptime" class="text-[var(--primary)] font-medium">
-            <script>
-                const uptime = document.getElementById('uptime');
-                const startTime = new Date('2025-06-07T00:00:00Z'); // 替换为实际的站点启动时间
-                const now = new Date();
-                const diff = now - startTime;
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                uptime.textContent = `${days} 天`;
-            </script>
+        <div class="mt-2">
+            <span>⭐ 本站已运行 </span>
+            <span id="uptime" class="text-[var(--primary)] font-medium">计算中…</span>
+        </div>
+        <script is:inline>
+            (function () {
+                const startTs = new Date('2025-06-07T00:00:00Z').getTime(); // 2025-06-07 08:00:00 +08:00
+                const el = document.getElementById('uptime');
+                const pad = (n) => String(n).padStart(2, '0');
+                function render() {
+                    const now = Date.now();
+                    let diff = Math.max(0, now - startTs);
+                    const dayMs = 24 * 60 * 60 * 1000;
+                    const hourMs = 60 * 60 * 1000;
+                    const minMs = 60 * 1000;
+                    const secMs = 1000;
+                    const days = Math.floor(diff / dayMs); diff -= days * dayMs;
+                    const hours = Math.floor(diff / hourMs); diff -= hours * hourMs;
+                    const minutes = Math.floor(diff / minMs); diff -= minutes * minMs;
+                    const seconds = Math.floor(diff / secMs);
+                    if (el) el.textContent = `${days} 天 ${pad(hours)} 小时 ${pad(minutes)} 分 ${pad(seconds)} 秒`;
+                }
+                render();
+                setInterval(render, 1000);
+            })();
+        </script>
     </div>
 </div>

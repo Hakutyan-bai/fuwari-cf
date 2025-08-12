@@ -45,6 +45,8 @@ export type NavBarLink = {
 	name: string;
 	url: string;
 	external?: boolean;
+	// Optional submenu links. When provided, this item will render as a dropdown/accordion.
+	children?: NavBarLink[];
 };
 
 export type NavBarConfig = {
@@ -74,7 +76,7 @@ export type LIGHT_DARK_MODE =
 	| typeof AUTO_MODE;
 
 export type BlogPostData = {
-	series?: string
+	series?: string;
 	body: string;
 	title: string;
 	published: Date;
