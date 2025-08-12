@@ -1,0 +1,11 @@
+---
+import WidgetLayout from "./WidgetLayout.astro";
+import { siteConfig } from "../../config";
+---
+{siteConfig.announcement?.enable && siteConfig.announcement?.content && (
+	<WidgetLayout id="announcement" name="公告">
+		<div class="text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+			{siteConfig.announcement.content}
+		</div>
+	</WidgetLayout>
+)}

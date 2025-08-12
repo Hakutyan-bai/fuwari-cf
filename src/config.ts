@@ -13,15 +13,15 @@ export const siteConfig: SiteConfig = {
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
 		hue: 360, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: false, // Hide the theme color picker for visitors
+		fixed: true, // 调色盘
 	},
 	banner: {
 		enable: true,
 		src: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMtaJM8e7A4OgUw5-hCnRDVI_mepDwAAgbDMRuumphUVY30OvaB8AUBAAMCAAN5AAM2BA.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
-			enable: false, // Display the credit text of the banner image
-			text: "", // 要显示的信用文本
+			enable: true, // Display the credit text of the banner image
+			text: "空色天絵/釧路の空", // 要显示的信用文本
 			url: "https://www.pixiv.net/artworks/128919932", // （可选）URL链接到原始艺术品或艺术家页面
 		},
 	},
@@ -37,6 +37,10 @@ export const siteConfig: SiteConfig = {
 		//    sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
 		//  }
 	],
+	announcement: {
+		enable: true,
+		content: "欢迎来到我的博客～ 本站内容仅供学习交流，一切风险皆由用户承担。",
+	},
 };
 
 export const navBarConfig: NavBarConfig = {

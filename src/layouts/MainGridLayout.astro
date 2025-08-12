@@ -21,7 +21,7 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
-    series?: string
+	series?: string;
 	headings?: MarkdownHeading[];
 }
 
@@ -31,7 +31,7 @@ const {
 	description,
 	lang,
 	setOGTypeArticle,
-    series,
+	series,
 	headings = [],
 } = Astro.props;
 const hasBannerCredit =
@@ -59,6 +59,17 @@ const mainPanelTop = siteConfig.banner.enable
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
     </ImageWrapper>
+    <!-- Banner overlay text -->
+    <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center px-4 select-none">
+            <div class="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] text-3xl md:text-5xl font-extrabold tracking-wide">
+                愛することを忘れないで
+            </div>
+            <div class="mt-3 text-white/85 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)] text-sm md:text-base">
+                Welcome to my blog
+            </div>
+        </div>
+    </div>
 </div>}
 
 <!-- Main content -->

@@ -26,6 +26,10 @@ export type SiteConfig = {
 	};
 
 	favicon: Favicon[];
+	announcement?: {
+		enable: boolean;
+		content: string;
+	};
 };
 
 export type Favicon = {
