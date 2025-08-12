@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
 		hue: 360, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: true, // 调色盘
+		fixed: false, // 调色盘
 	},
 	banner: {
 		enable: true,
@@ -39,7 +39,11 @@ export const siteConfig: SiteConfig = {
 	],
 	announcement: {
 		enable: true,
-		content: "欢迎来到我的博客～ 本站内容仅供学习交流，一切风险皆由用户承担。",
+		content: [
+			"欢迎来到我的博客～ 站点持续优化中，欢迎反馈建议！",
+			"本站内容仅供学习交流，一切风险皆由用户承担。",
+		],
+		intervalSeconds: 5,
 	},
 };
 

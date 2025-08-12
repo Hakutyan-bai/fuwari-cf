@@ -4,8 +4,36 @@ import { siteConfig } from "../../config";
 ---
 {siteConfig.announcement?.enable && siteConfig.announcement?.content && (
 	<WidgetLayout id="announcement" name="公告">
-		<div class="text-sm leading-6 text-neutral-700 dark:text-neutral-300">
-			{siteConfig.announcement.content}
+		<div class="text-sm leading-6 text-neutral-700 dark:text-neutral-300 min-h-[1.5rem]">
+		<span id="announcement-content" class="inline-block transition-opacity duration-300">
+				{Array.isArray(siteConfig.announcement.content)
+					? siteConfig.announcement.content[0]
+					: siteConfig.announcement.content}
+			</span>
 		</div>
+		{Array.isArray(siteConfig.announcement.content) && siteConfig.announcement.content.length > 1 && (
+			<script is:inline define:vars={{
+				items: siteConfig.announcement.content,
+				intervalMs: (siteConfig.announcement.intervalSeconds ?? 5) * 1000,
+			}}>
+					(function () {
+				const el = document.getElementById('announcement-content');
+				if (!el) return;
+				let i = 0;
+						// 初始确保可见
+						el.style.opacity = '1';
+						setInterval(() => {
+							// 淡出
+							el.style.opacity = '0';
+							// 在淡出结束后替换文本并淡入
+							setTimeout(() => {
+								i = (i + 1) % items.length;
+								el.textContent = items[i];
+								el.style.opacity = '1';
+							}, 250); // 与 duration-300 接近，留下少许缓冲
+						}, intervalMs);
+			})();
+			</script>
+		)}
 	</WidgetLayout>
 )}

@@ -28,7 +28,8 @@ export type SiteConfig = {
 	favicon: Favicon[];
 	announcement?: {
 		enable: boolean;
-		content: string;
+		content: string | string[];
+		intervalSeconds?: number; // auto-switch interval for multiple announcements
 	};
 };
 
