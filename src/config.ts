@@ -58,11 +58,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "friends/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 			external: false, // Show an external link icon and will open in a new tab
 		},
-		// {
-		// 	name: "赞助",
-		// 	url: "zanzhu/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-		// 	external: false, // Show an external link icon and will open in a new tab
-		// },
+		{
+			name: "赞助",
+			url: "zanzhu/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+			external: false, // Show an external link icon and will open in a new tab
+		},
 		// {
 		// 	name: "GitHub",
 		// 	url: "https://github.com/Hakutyan-bai", // Internal links should not include the base path, as it is automatically added
