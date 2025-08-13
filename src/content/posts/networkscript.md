@@ -1,10 +1,10 @@
 ---
 pinned: true
-title: '[置顶]大学生必备技能，自动网课脚本！'
+title: '大学生必备技能，自动刷网课！'
 published: 2025-08-10
 description: '彻底解放双手的自动网课脚本！'
 image: ''
-tags: [脚本,网课]
+tags: [刷网课]
 category: '网课脚本'
 draft: false 
 lang: ''
