@@ -173,8 +173,8 @@
 添加完我的友链后请通过评论或[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
 
 ```
-title: "鈴奈咲桜のBlog",  
-imgurl: "https://avatars.githubusercontent.com/u/91101909?v=4",  
-desc: "愛することを忘れないで",  
-siteurl: "https://blog.sakura.ink",  
+名称: "鈴奈咲桜のBlog",
+头像: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
+介绍: "愛することを忘れないで",
+地址: "https://blog.sakura.ink",
 ```
