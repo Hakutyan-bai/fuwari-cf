@@ -148,6 +148,26 @@
       </a>
     </td>
   </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://www.yunsen2025.top/" target="_blank" class="friend-card">
+        <img src="https://img.alicdn.com/bao/uploaded/i4/O1CN01TWOpM42DSyY5nC0hM_!!0-mtopupload.jpg" width="32" height="32" alt="RukaaX Blog头像"/>
+        <div>
+          <b>yunsen2025 的小窝</b><br/>
+          <span style="font-size:12px;">计算机爱好者</span>
+        </div>
+      </a>
+    </td>
+    <!-- <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.imbee.top/" target="_blank" class="friend-card">
+        <img src="https://blog.imbee.top/images/logo/logo.webp" width="32" height="32" alt="百里博客头像"/>
+        <div>
+          <b>MIFENG BLOG</b><br/>
+          <span style="font-size:12px;">一个菜鸟的博客。</span>
+        </div>
+      </a>
+    </td> -->
+  </tr>
 </table>
 
 添加完我的友链后请通过评论或[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
