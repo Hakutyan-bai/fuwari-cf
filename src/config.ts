@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
 		src: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMtaJM8e7A4OgUw5-hCnRDVI_mepDwAAgbDMRuumphUVY30OvaB8AUBAAMCAAN5AAM2BA.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
-			enable: true, // Display the credit text of the banner image
+			enable: false, // Display the credit text of the banner image
 			text: "空色天絵/釧路の空", // 要显示的信用文本
 			url: "https://www.pixiv.net/artworks/128919932", // （可选）URL链接到原始艺术品或艺术家页面
 		},
