@@ -83,7 +83,7 @@ https://github.com/zaunist/xugou/wiki
 
 ## 📚 项目地址
 
-::github{repo="eoao/zaunist/xugou"}
+::github{repo="zaunist/xugou"}
 
 如果你也喜欢 XUGOU，别忘了给它一个 ⭐️ Star！
 
