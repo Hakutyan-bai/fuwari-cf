@@ -159,11 +159,11 @@
       </a>
     </td>
     <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.imbee.top/" target="_blank" class="friend-card">
-        <img src="https://blog.imbee.top/images/logo/logo.webp" width="32" height="32" alt="百里博客头像"/>
+      <a href="https://blog.tnto.fun/" target="_blank" class="friend-card">
+        <img src="https://cdn.fis.ink/cdn/2025/08/15/689ed0ef4b2a3.webp" width="32" height="32" alt="百里博客头像"/>
         <div>
-          <b>MIFENG BLOG</b><br/>
-          <span style="font-size:12px;">一个菜鸟的博客。</span>
+          <b>TNTの小破站</b><br/>
+          <span style="font-size:12px;">萝卜青菜，各有所爱。</span>
         </div>
       </a>
     </td> -->
