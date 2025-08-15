@@ -158,7 +158,7 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
+    <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.tnto.fun/" target="_blank" class="friend-card">
         <img src="https://cdn.fis.ink/cdn/2025/08/15/689ed0ef4b2a3.webp" width="32" height="32" alt="百里博客头像"/>
         <div>
@@ -166,7 +166,7 @@
           <span style="font-size:12px;">萝卜青菜，各有所爱。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 
