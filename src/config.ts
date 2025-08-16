@@ -73,7 +73,7 @@ export const navBarConfig: NavBarConfig = {
 			url: "/", // not used when children exist
 			children: [
 				{
-					name: "uptimekuma",
+					name: "UpTimekuma",
 					url: "https://jk.skura.me/", // uptimekuma
 					external: true,
 				},
