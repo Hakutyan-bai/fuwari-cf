@@ -171,7 +171,7 @@
   <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.qmiao.top" target="_blank" class="friend-card">
-        <img src="" width="32" height="32" alt="RukaaX Blog头像"/>
+        <img src="" width="32" height="32" alt="暂无头像"/>
         <div>
           <b>青杪的博客</b><br/>
           <span style="font-size:12px;">一个分享日常博客和懒懒的站长。</span>
