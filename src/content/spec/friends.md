@@ -168,6 +168,26 @@
       </a>
     </td>
   </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.qmiao.top" target="_blank" class="friend-card">
+        <img src="" width="32" height="32" alt="RukaaX Blog头像"/>
+        <div>
+          <b>青杪的博客</b><br/>
+          <span style="font-size:12px;">一个分享日常博客和懒懒的站长。</span>
+        </div>
+      </a>
+    </td>
+    <!-- <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.tnto.fun/" target="_blank" class="friend-card">
+        <img src="https://cdn.fis.ink/cdn/2025/08/15/689ed0ef4b2a3.webp" width="32" height="32" alt="百里博客头像"/>
+        <div>
+          <b>青杪的博客</b><br/>
+          <span style="font-size:12px;">一个分享日常博客和懒懒的站长。</span>
+        </div>
+      </a>
+    </td> -->
+  </tr>
 </table>
 
 添加完我的友链后请通过评论或[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
