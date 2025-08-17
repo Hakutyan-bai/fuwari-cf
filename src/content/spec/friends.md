@@ -180,10 +180,10 @@
     </td>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://blog.mysqil.com/" target="_blank" class="friend-card">
-        <img src="https://blog.mysqil.com/_astro/avatar.DslDo0tY_Z2tXD58.webp" width="32" height="32" alt="头像"/>
+        <img src="http://q.qlogo.cn/headimg_dl?dst_uin=3231515355&spec=640&img_type=jpg" width="32" height="32" alt="头像"/>
         <div>
           <b>松板日记</b><br/>
-          <span style="font-size:12px;">这个世界很大❤。</span>
+          <span style="font-size:12px;">一个基于内容分享,创作与灵感结合折腾的笔记博客。</span>
         </div>
       </a>
     </td>
