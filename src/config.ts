@@ -41,6 +41,7 @@ export const siteConfig: SiteConfig = {
 		enable: true,
 		content: [
 			"欢迎来到我的博客～ 站点持续优化中，欢迎反馈建议！",
+			"学业繁忙，本站随缘打理，欢迎理解与支持。",
 			"本站内容仅供学习交流，一切风险皆由用户承担。",
 		],
 		intervalSeconds: 5,
