@@ -158,7 +158,7 @@ const bannerOffset =
 				})();
 				</script>
 
-				<!-- 若 blog.sakura.ink 页面加载超过 3 秒，自动跳转到 sakura.ink（仅首屏硬加载生效） -->
+				<!-- 若 blog.sakura.ink 页面加载超过 7 秒，自动跳转到 sakura.ink（仅首屏硬加载生效） -->
 				<script is:inline>
 				(function setupLoadTimeoutRedirect() {
 					try {
@@ -172,12 +172,12 @@ const bannerOffset =
 						var didRedirect = false;
 						var timer = window.setTimeout(function () {
 							didRedirect = true;
-							var target = 'https://sakura.ink' + window.location.pathname + window.location.search + window.location.hash;
+							var target = 'https://www.sakura.ink' + window.location.pathname + window.location.search + window.location.hash;
 							// 使用 replace 避免回退到慢站点造成循环
 							window.location.replace(target);
-						}, 3000);
+						}, 7000);
 
-						// 页面在 3 秒内完成加载则取消跳转
+						// 页面在 7 秒内完成加载则取消跳转
 						window.addEventListener('load', function () {
 							if (!didRedirect) window.clearTimeout(timer);
 						}, { once: true });
