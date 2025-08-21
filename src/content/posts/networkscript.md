@@ -9,7 +9,7 @@ category: '网课脚本'
 draft: false 
 lang: ''
 updated: 2025-08-10 10:00:00
-series: 大学生必备技能
+series: 脚本
 ---
 
 # 免责声明

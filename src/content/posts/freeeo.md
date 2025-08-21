@@ -7,7 +7,7 @@ tags: [CDN,EdgeOne]
 category: '教程'
 draft: false 
 lang: ''
-series: 白嫖
+series: 分享
 updated: 2025-07-25 20:00:00
 ---
 ## EdgeOne免费计划

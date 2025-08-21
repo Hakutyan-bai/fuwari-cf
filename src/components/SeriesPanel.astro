@@ -20,38 +20,30 @@ interface Series {
   posts: typeof posts
 }
 
-const groups: { category: string; series: Series[] }[] = (() => {
-  const groupedSeries = posts.reduce(
-    (grouped: { [category: string]: {[seriesName: string]: Series} }, post) => {
-      const category = post.data.category || UNCATEGORIZED
-      const series = post.data.series || UNCATEGORIZED
-      if (category == UNCATEGORIZED || series === UNCATEGORIZED) {
-        return grouped
-      }
-      if (!grouped[category]) {
-        grouped[category] = {}
-      }
-      if (!grouped[category][series]) {
-        grouped[category][series] = {
-          count: 0,
-          name: series,
-          posts: [],
-        }
-      }
-      grouped[category][series].count++
-      grouped[category][series].posts.push(post)
-      return grouped
-    },
-    {},
-  )
+// 直接按系列分组，每个系列作为一个"分类"，该系列下的文章作为"系列"
+const groups: { category: string; series: { count: number; name: string; posts: typeof posts; slug: string }[] }[] = (() => {
+  const seriesMap: { [seriesName: string]: typeof posts } = {}
+  
+  posts.forEach(post => {
+    const series = post.data.series || UNCATEGORIZED
+    if (series === UNCATEGORIZED) return
+    
+    if (!seriesMap[series]) {
+      seriesMap[series] = []
+    }
+    seriesMap[series].push(post)
+  })
 
-  // convert the object to an array
-  const groupedSeriesArray = Object.keys(groupedSeries).map(key => ({
-    category: key,
-    series: Object.values(groupedSeries[key]),
+  // 将每个系列转换为符合原UI结构的格式
+  return Object.keys(seriesMap).map(seriesName => ({
+    category: seriesName, // 系列名作为分类显示
+    series: seriesMap[seriesName].map(post => ({
+      count: 1,
+      name: post.data.title,
+      posts: [post],
+      slug: post.slug
+    }))
   }))
-
-  return groupedSeriesArray
 })()
 ---
 
