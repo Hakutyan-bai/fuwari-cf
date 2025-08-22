@@ -188,6 +188,27 @@
       </a>
     </td>
   </tr>
+  </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://vtdd.vip" target="_blank" class="friend-card">
+        <img src="https://vtdd.vip/_astro/lx.U15Ju0Ce_1mLhMp.webp" width="32" height="32" alt="zero头像"/>
+        <div>
+          <b>zero</b><br/>
+          <span style="font-size:12px;">生命是一座迂回的迷宫,除了记忆,我们一无所有。</span>
+        </div>
+      </a>
+    </td>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://www.almango.cn/" target="_blank" class="friend-card">
+        <img src="https://www.almango.cn/img/favicon.png" width="32" height="32" alt="Almango头像"/>
+        <div>
+          <b>Almango</b><br/>
+          <span style="font-size:12px;">天真永不消逝，浪漫至死不渝。</span>
+        </div>
+      </a>
+    </td>
+  </tr>
 </table>
 
 添加完我的友链后请通过评论或[yukikohk@163.com](mailto:yukikohk@163.com)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
