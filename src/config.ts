@@ -50,7 +50,7 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
 	links: [
-		//LinkPreset.Home,
+		LinkPreset.Home,
 		LinkPreset.Archive,
 		LinkPreset.Series,
 		LinkPreset.About,
@@ -63,6 +63,11 @@ export const navBarConfig: NavBarConfig = {
 			name: "赞助",
 			url: "zanzhu/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 			external: false, // Show an external link icon and will open in a new tab
+		},
+		{
+			name: "开往",
+			url: "https://www.travellings.cn/go.html",
+			external: true,
 		},
 		// {
 		// 	name: "GitHub",
