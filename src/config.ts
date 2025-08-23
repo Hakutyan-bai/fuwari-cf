@@ -4,7 +4,6 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
-    UmamiConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -89,13 +88,6 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/ShiMahiru",
 		},
 	],
-};
-
-export const umamiConfig: UmamiConfig = {
-	enable: true,
-	baseUrl: "https://cloud.umami.is",
-	shareId: "bAxGW70cXeAAWHqA",
-	timezone: "Asia/Shanghai",
 };
 
 export const licenseConfig: LicenseConfig = {
