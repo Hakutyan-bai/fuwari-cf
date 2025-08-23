@@ -80,6 +80,13 @@ export type ProfileConfig = {
 	}[];
 };
 
+export type UmamiConfig = {
+	enable: boolean;
+	baseUrl: string;
+	shareId: string;
+	timezone: string;
+};
+
 export type LicenseConfig = {
 	enable: boolean;
 	name: string;
