@@ -47,7 +47,7 @@ background: {
 	favicon: Favicon[];
 };
 
-export 输入 Favicon = {
+export type Favicon = {
 	src: string;
 	theme?: "light" | "dark";
 	sizes?: string;
