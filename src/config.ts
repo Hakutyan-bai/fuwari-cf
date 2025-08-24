@@ -50,9 +50,22 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
 	links: [
-		// LinkPreset.Home,
-		LinkPreset.Archive,
-		LinkPreset.Series,
+		{
+			name: "文章",
+			url: "/", // not used when children exist
+			children: [
+				{
+					name: "归档",
+					url: "archive/",
+					external: false,
+				},
+				{
+					name: "系列",
+					url: "series/",
+					external: false,
+				},
+			],
+		},
 		LinkPreset.About,
 		{
 			name: "友链",
