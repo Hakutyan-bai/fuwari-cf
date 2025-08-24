@@ -66,7 +66,7 @@ export const navBarConfig: NavBarConfig = {
 		},
 		{
 			name: "统计",
-			url: "https://cloud.umami.is/share/bAxGW70cXeAAWHqA", // Internal links should not include the base path, as it is automatically added
+			url: "https://cloud.umami.is/share/UkL9T8i5y8H8kRyq/www.yuln.fun", // Internal links should not include the base path, as it is automatically added
 			external: true, // Show an external link icon and will open in a new tab
 		},
 	],
