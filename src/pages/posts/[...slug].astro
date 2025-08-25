@@ -1,4 +1,6 @@
 ---
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import path from "node:path";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
@@ -13,6 +15,7 @@ import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+
 
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
