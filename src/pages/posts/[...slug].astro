@@ -13,10 +13,6 @@ import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
-import Comments from '@components/widget/Comments.svelte'
-import Comments from '@components/widget/Comments.svelte'
-
-dayjs.extend(utc)
 
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
@@ -31,9 +27,6 @@ const { Content, headings } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
 
-const lastModified = dayjs(entry.data.updated)
-  .utc()
-  .format('YYYY-MM-DDTHH:mm:ss')
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -102,13 +95,6 @@ const jsonLd = {
                 ></PostMetadata>
                 {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
             </div>
-
-
-                    <!-- ✅ 浏览量展示插入此处 -->
-                    <!-- <div class="text-sm text-gray-500 ml-1 mb-4 flex items-center gap-1">
-                    <Icon name="fa6-solid:eye" class="text-gray-400 text-sm" />
-                    <span>浏览量：<span id="post-umami-pageviews">-</span></span>，
-                    <span>访问次数：<span id="post-umami-visits">-</span></span>
                     </div> -->
             <!-- always show cover as long as it has one -->
 
@@ -165,121 +151,4 @@ const jsonLd = {
             </div>}
         </a>
     </div>
-    <!-- 添加隐藏元素存储日期 -->
-    <div id="last-modified" data-last-modified={lastModified} style="display: none;"></div>
-
-
-
-    <!-- <script is:inline>
-      const fetchUmamiStatss = async () => {
-        // 获取当前文章路径
-        const pathname = window.location.pathname;
-        // 获取 websiteId 和 token
-        const shareRes = await fetch('https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr');
-        const shareData = await shareRes.json();
-        
-        const token = shareData.token;
-        
-
-        const statsUrl = `https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
-          new URLSearchParams({
-            startAt: '1753333200000',
-            endAt: Date.now(),
-            unit: 'hour',
-            timezone: 'Asia/Hong_Kong',
-            url: pathname,
-            compare: 'false',
-          });
-        const res = await fetch(statsUrl, {
-          method: 'GET',
-          headers: {
-            'x-umami-share-token': token,
-          },
-        });
-        if (!res.ok) {
-          document.getElementById('post-umami-pageviews').textContent = 'N/A';
-          document.getElementById('post-umami-visits').textContent = 'N/A';
-          return;
-        }
-        const data = await res.json();
-        document.getElementById('post-umami-pageviews').textContent = data.pageviews?.value ?? 'N/A';
-        document.getElementById('post-umami-visits').textContent = data.visits?.value ?? 'N/A';
-      };
-      fetchUmamiStatss();
-      setInterval(fetchUmamiStatss, 5000);
-    </script> -->
-
-
-    <div class="card-base p-6 mb-4">
-        <script is:inline>
-            function runtime() {
-                // 从隐藏元素获取日期
-                const lastModifiedElement = document.getElementById('last-modified');
-                const startDate = new Date(lastModifiedElement.dataset.lastModified);
-                const currentDate = new Date();
-                const diff = currentDate - startDate;
-
-                const seconds = Math.floor(diff / 1000);
-                const days = Math.floor(seconds / 86400);
-                const hours = Math.floor((seconds % 86400) / 3600);
-                const minutes = Math.floor((seconds % 3600) / 60);
-                const secs = seconds % 60;
-
-                const years = Math.floor(days / 365);
-                const months = Math.floor((days % 365) / 30);
-                const remainingDays = days % 30;
-
-                let runtimeString = '距离上次编辑: ';
-                if (years > 0) {
-                    runtimeString += `${years}年`;
-                }
-                if (months > 0) {
-                    runtimeString += `${months}月`;
-                }
-                if (remainingDays > 0) {
-                    runtimeString += `${remainingDays}天`;
-                }
-                if (hours > -1) {
-                    runtimeString += `${hours}小时`;
-                }
-                if (minutes > -1 && minutes < 10) {
-                    runtimeString += `0${minutes}分`;
-                }
-                if (minutes > 9) {
-                    runtimeString += `${minutes}分`;
-                }
-                if (secs > -1 && secs < 10) {
-                    runtimeString += `0${secs}秒`;
-                }
-                if (secs > 9) {
-                    runtimeString += `${secs}秒`;
-                }
-
-                document.getElementById("modifiedtime").innerHTML = runtimeString;
-            }
-            setInterval(runtime, 1000);
-        </script>
-        <div class="card-base p-1 mb-0.1">
-            <script is:inline></script>
-            <div class="flex items-center gap-2">
-
-                <div class="transition h-9 w-9 rounded-lg overflow-hidden
-            relative
-           flex items-center justify-center mr-0">
-  <Icon
-                  name="material-symbols:history-rounded"
-                  class="text-4xl text-[var(--primary)] transition-transform group-hover:translate-x-0.5 bg-[var(--enter-btn-bg)] p-2 rounded-md"
-                />
-</div>
-
-                <!-- 文字容器保持不变 -->
-                <div class="flex flex-col gap-0.1">
-                    <div id="modifiedtime" class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75"></div>
-                    <p class="text-[0.8rem] leading-tight text-black/75 dark:text-white/75">部分信息可能已经过时</p>
-                </div>
-            </div>
-        </div>
-        <!--  <p>{lastModified}</p>   -->
-    </div>
-<Comments client:only="svelte"></Comments>
 </MainGridLayout>
