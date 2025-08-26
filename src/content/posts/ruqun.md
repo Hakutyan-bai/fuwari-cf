@@ -10,4 +10,4 @@ draft: false
 lang: ''
 updated: 2025-08-26 17:00:00
 ---
-点击链接加入群聊：https://qm.qq.com/q/yoIjbfia1q
+点击链接加入QQ群聊：https://qm.qq.com/q/yoIjbfia1q
