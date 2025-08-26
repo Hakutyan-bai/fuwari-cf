@@ -28,10 +28,10 @@ series: Fumomo个人主页
 本地预览与修改 -> 推送更改到远程Github仓库 -> Vercel检测到仓库更新自动构建新的网站静态文件 -> 网站成功更改
 
 # 本地部署教程
-1. 克隆源代码
-```
-git clone https://github.com/Hakutyan-bai/Fumomo-nuxt.git
-```
+1. 下载源代码！
+
+https://github.com/Hakutyan-bai/Fumomo-nuxt
+
 2. 进入目录并且安装依赖
 ```
 cd Fumomo-nuxt
