@@ -20,7 +20,7 @@ series: Fumomo个人主页
 
 5. 一个[Vercel](https://vercel.com)账号：用于托管
 
-6. 一个编辑器，比如VS Code
+6. 一个编辑器，比如VSCode
 
 
 # 流程图
