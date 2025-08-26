@@ -3,7 +3,7 @@ title: "Fumomo 部署教程！！！"
 description: "Fumomo是一款可爱的个人主页模板！使用Nuxt架构，本篇博客会将Fumomo托管到Vercel。"
 published: 2025-08-26
 updated: 2025-08-26 12:00:00
-tags: [个人主页,可爱]
+tags: [个人主页,教程]
 category: "个人主页"
 image: ""
 series: Fumomo个人主页
