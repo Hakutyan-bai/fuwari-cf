@@ -133,7 +133,7 @@ a, a:focus, a:active, a:focus-visible {
 
 ### ✉️ 联系我
 - 点击页面 ◀️左侧 或 🔽下方 的 **Email**按钮
-- [yukikohk@163.com](mailto:yukikohk@163.com)
+- [i@sakura.ink](mailto:i@sakura.ink)
 
 
 ---
@@ -185,7 +185,7 @@ a, a:focus, a:active, a:focus-visible {
 ---  
 ### ✉️ 連絡先  
 - ページの◀️左側 または 🔽下部 の **メールボタン** をクリック  
-- [yukikohk@163.com](mailto:yukikohk@163.com)
+- [i@sakura.ink](mailto:i@sakura.ink)
   </div>
 </div>
 
