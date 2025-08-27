@@ -45,7 +45,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
                                 {l.children.map((c) => (
                                     <a aria-label={c.name} href={c.external ? c.url : url(c.url)} target={c.external ? "_blank" : null}
                                        class="group flex items-center justify-between rounded-md px-3 py-2 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
-                                        <span class="transition text-black/75 dark:text-white/75 group-hover:text-[var(--primary)] group-active:text-[var(--primary)] font-medium">{c.name}</span>
+                                        <span class="transition group-hover:text-black dark:group-hover:text-white group-active:text-[var(--primary)] font-medium">{c.name}</span>
                                         {c.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.75rem] ml-2 text-black/30 dark:text-white/30 group-hover:text-[var(--primary)] group-active:text-[var(--primary)]"></Icon>}
                                     </a>
                                 ))}
@@ -57,7 +57,6 @@ let links: NavBarLink[] = navBarConfig.links.map(
                     <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
                        class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95">
                         <div class="flex items-center">
-                            {l.name === "开往" && <Icon name="fa6-solid:train" class="text-[0.875rem] mr-2 text-[var(--primary)]"></Icon>}
                             {l.name}
                             {l.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]"></Icon>}
                         </div>
