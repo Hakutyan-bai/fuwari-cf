@@ -5,6 +5,7 @@ published: 2025-08-23
 updated: 2025-08-23 17:00:00
 tags: [个人主页,可爱]
 category: "个人主页"
+series: Fumomo个人主页
 image: ""
 ---
 Fumomo是一款可爱的个人主页模板！使用Nuxt架构，目前项目还在开发中，完善项目后会开源并且发布部署教程。
