@@ -7,11 +7,15 @@ tags: [JS,CloudFlare Workers]
 category: '教程'
 draft: false 
 lang: ''
-updated: 2025-07-26 20:00:00
+updated: 2025-08-31 20:00:00
 series: CloudFlare
 ---
 
-这是一个生成短链接的项目
+这是一个生成短链接的项目，本来有视频教程的，b站发不了，可恶啊
+
+# 事前准备
+
+你需要将域名托管至Cloudflare，用于绑定Workers
 
 # 第一步 新建CloudFlare Workers
 
@@ -381,24 +385,24 @@ function getHomePage() {
 </head>
 <body>
     <div class="container">
-        <h1>🔗 短网址服务</h1>
+        <h1> 短网址服务</h1>
         <p class="subtitle">快速、安全、可靠的短链接服务</p>
         
         <div class="features">
             <div class="feature">
-                <h3>⚡ 快速访问</h3>
+                <h3> 快速访问</h3>
                 <p>基于 Cloudflare Workers，全球边缘节点加速</p>
             </div>
             <div class="feature">
-                <h3>📊 数据统计</h3>
+                <h3> 数据统计</h3>
                 <p>实时统计点击量和访问数据</p>
             </div>
             <div class="feature">
-                <h3>🛡️ 安全可靠</h3>
+                <h3> 安全可靠</h3>
                 <p>支持自定义短码，安全的管理后台</p>
             </div>
             <div class="feature">
-                <h3>🎨 在线管理</h3>
+                <h3> 在线管理</h3>
                 <p>可视化后台，轻松管理所有短链接</p>
             </div>
         </div>
@@ -598,7 +602,7 @@ function getAdminPage() {
 <body>
     <div class="header">
         <div class="container">
-            <h1>🔗 短网址管理后台</h1>
+            <h1> 短网址管理后台</h1>
         </div>
     </div>
 

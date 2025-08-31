@@ -143,20 +143,20 @@ const bannerOffset =
 		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 
-				<slot name="head"></slot>
-				<script is:inline>
-				// 域名安全提醒
-				(function checkDomain() {
-					  var allowed = ["www.sakura.ink", "blog.sakura.ink", "sakura.ink", "localhost"];
-					if (!allowed.includes(window.location.hostname)) {
-						if (window.confirm("您正在访问的不是本站官方域名，是否跳转到安全域名 blog.sakura.ink？")) {
-							window.location.href = "https://blog.sakura.ink";
-						} else {
-							setTimeout(checkDomain, 100);
-						}
-					}
-				})();
-				</script>
+		<slot name="head"></slot>
+		<script is:inline>
+		// 域名安全提醒
+		(function checkDomain() {
+			  var allowed = ["www.sakura.ink", "blog.sakura.ink", "sakura.ink", "localhost"];
+			if (!allowed.includes(window.location.hostname)) {
+				if (window.confirm("您正在访问的不是本站官方域名，是否跳转到安全域名 blog.sakura.ink？")) {
+					window.location.href = "https://blog.sakura.ink";
+				} else {
+					setTimeout(checkDomain, 100);
+				}
+			}
+		})();
+		</script>
 
 
 
