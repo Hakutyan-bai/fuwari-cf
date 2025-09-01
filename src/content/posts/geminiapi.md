@@ -66,3 +66,6 @@ workers.dev这个域名是被墙的，你需要将域名托管到Cloudflare，�
 **修改管理面板访问密钥`7b18e536c27ab304266db3220b8e000db8fbbe35d6e1fde729a1a1d47303858d`，用于访问管理面板和管理 API 时的身份验证，强烈建议您在 Cloudflare Worker 环境变量中修改`HOME_ACCESS_KEY`值，完成后重新配置即可。**
 
 <img title="" src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAANQaLUNDGvDyDVUaJU1Uuj2vbF1QrYAAlrIMRvTaahV0ChYjQLUm-QBAAMCAAN3AAM2BA.png" alt="">
+---
+
+文章编辑：`@鈴奈咲桜`
