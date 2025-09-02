@@ -35,14 +35,11 @@ const currentYear = new Date().getFullYear();
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://vercel.com/">Vercel</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://www.cloudflare.com/">Cloudflare</a><br>
         <!-- 运行时间 -->
-        <div class="mt-2">
-            <span>⭐ 本站已运行 </span>
-            <span id="uptime" class="text-[var(--primary)] font-medium">计算中…</span>
-        </div>
-        <script is:inline>
+        <span>⭐ 本站已运行 </span> <span class="uptime others">计算中…</span>
+        <script>
             (function () {
                 const startTs = new Date('2025-06-07T00:00:00Z').getTime(); // 2025-06-07 08:00:00 +08:00
-                const el = document.getElementById('uptime');
+                const el = document.getElementsByClassName('uptime');
                 const pad = (n) => String(n).padStart(2, '0');
                 function render() {
                     const now = Date.now();
@@ -55,7 +52,9 @@ const currentYear = new Date().getFullYear();
                     const hours = Math.floor(diff / hourMs); diff -= hours * hourMs;
                     const minutes = Math.floor(diff / minMs); diff -= minutes * minMs;
                     const seconds = Math.floor(diff / secMs);
-                    if (el) el.textContent = `${days} 天 ${pad(hours)} 小时 ${pad(minutes)} 分 ${pad(seconds)} 秒`;
+                    for (let i = 0; i < el.length; i++) {
+                        el[i].textContent = `${days} 天 ${pad(hours)} 小时 ${pad(minutes)} 分 ${pad(seconds)} 秒`;
+                    }
                 }
                 render();
                 setInterval(render, 1000);
