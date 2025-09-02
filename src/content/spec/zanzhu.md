@@ -19,7 +19,7 @@
 </div>
 <div style="height: 40px;"></div> -->
 
-<h2>💗 赞助支持</h2>
+<h2>赞助支持</h2>
 <p>如果您觉得我的内容对您有帮助，欢迎通过以下方式支持我的创作。您的每一份支持都是我持续创作的动力！</p>
 <p style="color: #888;">所有赞助将用于网站维护、服务器费用以及内容创作。</p>
 
@@ -77,7 +77,7 @@
 
 <!-- 底部感谢语 -->
 <div style="text-align: center; color: #fff; margin-top: 40px;">
-  <div style="font-size: 20px;">💖 感谢您的支持</div>
+  <div style="font-size: 20px;"> 感谢您的支持</div>
   <p style="font-size: 14px; color: #ccc;">每一份支持都让我更有动力创作更好的内容。无论金额大小，您的心意我都深深感激！</p>
 </div>
 

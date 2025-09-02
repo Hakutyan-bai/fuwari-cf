@@ -20,8 +20,9 @@ const { Content } = await render(friendsPost);
         <div class="card-base z-10 px-9 py-6 relative w-full ">
             <Markdown class="mt-2">
                 <Content />
+<Comments client:only="svelte"></Comments>
             </Markdown>
         </div>
     </div>
-<Comments client:only="svelte"></Comments>
+
 </MainGridLayout>
