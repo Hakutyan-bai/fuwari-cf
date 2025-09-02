@@ -99,6 +99,13 @@
         mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%);
     }
 
+    /* 汉堡菜单Mobile hamburger menu: add Gaussian blur on panel background */
+    #nav-menu-panel {
+        background-color: color-mix(in oklab, var(--card-bg) 95%, transparent) !important;
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(1px);
+    }
+
     /* TOC目录 高亮与悬浮：75% 透明（颜色占 25%） */
     table-of-contents #active-indicator {
         background-color: color-mix(in oklab, var(--toc-btn-hover) 50%, transparent) !important;
