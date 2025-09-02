@@ -209,6 +209,26 @@ const bannerOffset =
 }
 </style>
 
+<!-- Global page background image with 50% overlay -->
+<style is:global>
+	/* 50% overlay that adapts to theme */
+	html { --bg-overlay: rgba(255, 255, 255, 0.65); }
+	html.dark { --bg-overlay: rgba(0, 0, 0, 0.5); }
+
+	html, body {
+		background-image:
+			linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+			url('https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMtaJM8e7A4OgUw5-hCnRDVI_mepDwAAgbDMRuumphUVY30OvaB8AUBAAMCAAN5AAM2BA.jpg');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+	@media (max-width: 768px) {
+		html, body { background-attachment: scroll; }
+	}
+</style>
+
 <script>
 import 'overlayscrollbars/overlayscrollbars.css';
 import {

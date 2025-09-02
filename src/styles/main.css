@@ -23,6 +23,11 @@
     .float-panel {
         @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
     }
+    /* 组件容器半透明（与主题卡片背景混合 50%） */
+    .card-base,
+    .float-panel {
+        background-color: color-mix(in oklab, var(--card-bg) 70%, transparent) !important;
+    }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
     }
