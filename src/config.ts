@@ -118,11 +118,11 @@ export const profileConfig: ProfileConfig = {
 			// `pnpm add @iconify-json/<icon-set-name>`
 			url: "https://space.bilibili.com/650530593",
 		},
-		// {
-		// 	name: "GitHub",
-		// 	icon: "fa6-brands:github",
-		// 	url: "https://github.com/Hakutyan-bai",
-		// },
+		{
+			name: "GitHub",
+			icon: "fa6-brands:github",
+			url: "https://github.com/Hakutyan-bai",
+		},
 		{
 			name: "Mail",
 			icon: "fa6-solid:envelope",
