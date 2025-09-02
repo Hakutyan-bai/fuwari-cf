@@ -3,8 +3,8 @@
 ---
 
 <!-- 自定义鼠标光标元素（默认渲染，样式/脚本会在移动端禁用） -->
-<div id="custom-cursor" class="custom-cursor"></div>
-<div id="custom-cursor-follower" class="custom-cursor-follower"></div>
+<div id="custom-cursor" class="custom-cursor" style="z-index: 2147483647 !important;"></div>
+<div id="custom-cursor-follower" class="custom-cursor-follower" style="z-index: 2147483646 !important;"></div>
 
 <script lang="ts">
 // 仅在具备精细指针且支持悬停的设备上启用（桌面端）
@@ -59,6 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const follower = document.getElementById('custom-cursor-follower');
     
     if (!cursor || !follower) return;
+    
+    // 强制设置最高z-index，确保在所有元素之上
+    cursor.style.zIndex = '2147483647';
+    follower.style.zIndex = '2147483646';
+    cursor.style.pointerEvents = 'none';
+    follower.style.pointerEvents = 'none';
+    cursor.style.position = 'fixed';
+    follower.style.position = 'fixed';
     
     let mouseX = 0;
     let mouseY = 0;
@@ -152,6 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // 强制隐藏光标的定期检查 - 使用TypeScript优化
     setInterval(() => {
         forceHideCursor();
+        // 确保z-index始终保持最高
+        if (cursor) cursor.style.zIndex = '2147483647';
+        if (follower) follower.style.zIndex = '2147483646';
     }, 200); // 每200毫秒检查一次，降低负载
     
     // 鼠标进入页面时显示光标
