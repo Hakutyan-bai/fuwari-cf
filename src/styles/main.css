@@ -23,10 +23,10 @@
     .float-panel {
         @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
     }
-    /* 组件容器半透明（与主题卡片背景混合 50%） */
+    /* 组件容器半透明（与主题卡片背景混合 50%）5行 */
     .card-base,
     .float-panel {
-        background-color: color-mix(in oklab, var(--card-bg) 70%, transparent) !important;
+        background-color: color-mix(in oklab, var(--card-bg) 75%, transparent) !important;
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -38,6 +38,31 @@
     .btn-card {
         @apply transition flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
         active:bg-[var(--btn-card-bg-active)]
+    }
+    /* 半透明玻璃按钮：用于文章底部前/后导航等局部，不全局影响 */
+    .btn-glass {
+        background-color: color-mix(in oklab, var(--card-bg) 75%, transparent) !important;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+    .btn-glass:hover {
+        background-color: color-mix(in oklab, var(--btn-card-bg-hover) 75%, transparent) !important;
+    }
+    .btn-glass:active {
+        background-color: color-mix(in oklab, var(--btn-card-bg-active) 75%, transparent) !important;
+    }
+
+    /* 75% 透明玻璃按钮（颜色 25%），用于回到顶部等场景 */
+    .btn-glass-75 {
+        background-color: color-mix(in oklab, var(--card-bg) 50%, transparent) !important;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+    .btn-glass-75:hover {
+        background-color: color-mix(in oklab, var(--btn-card-bg-hover) 50%, transparent) !important;
+    }
+    .btn-glass-75:active {
+        background-color: color-mix(in oklab, var(--btn-card-bg-active) 50%, transparent) !important;
     }
     .btn-card.disabled {
         @apply pointer-events-none text-black/10 dark:text-white/10
@@ -72,6 +97,22 @@
 
     #toc-inner-wrapper {
         mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%);
+    }
+
+    /* TOC目录 高亮与悬浮：75% 透明（颜色占 25%） */
+    table-of-contents #active-indicator {
+        background-color: color-mix(in oklab, var(--toc-btn-hover) 50%, transparent) !important;
+        border-color: color-mix(in oklab, var(--toc-btn-hover) 50%, transparent) !important;
+    }
+    table-of-contents.group:hover #active-indicator {
+        background-color: transparent !important;
+        border-color: color-mix(in oklab, var(--toc-btn-active) 50%, transparent) !important;
+    }
+    table-of-contents a:hover {
+        background-color: color-mix(in oklab, var(--toc-btn-hover) 50%, transparent) !important;
+    }
+    table-of-contents a:active {
+        background-color: color-mix(in oklab, var(--toc-btn-active) 50%, transparent) !important;
     }
 
     .hide-scrollbar {

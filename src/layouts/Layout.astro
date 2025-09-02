@@ -156,6 +156,21 @@ const bannerOffset =
 				}
 			}
 		})();
+		// 移动端访问提醒（仅针对手机）
+		(function mobileNotice() {
+			try {
+				const ua = navigator.userAgent || "";
+				const isPhoneUA =
+					/(Android.+Mobile|iPhone|iPod|Windows Phone|Mobi)/i.test(ua) &&
+					!/iPad|Tablet/i.test(ua);
+				const smallTouch = (window.innerWidth < 768) && (navigator.maxTouchPoints || 0) > 0;
+
+				if ((isPhoneUA || smallTouch) && !sessionStorage.getItem("mobileNoticeShown")) {
+					alert("为获得最佳浏览体验，请使用平板或电脑浏览本站。点击确定后，您仍然可以继续浏览。");
+					sessionStorage.setItem("mobileNoticeShown", "1");
+				}
+			} catch (_) {}
+		})();
 		</script>
 
 
@@ -209,24 +224,36 @@ const bannerOffset =
 }
 </style>
 
-<!-- Global page background image with 50% overlay -->
+<!-- Global page background image with overlay + Gaussian blur -->
 <style is:global>
-	/* 50% overlay that adapts to theme */
+	/* Theme-adaptive overlay color */
 	html { --bg-overlay: rgba(255, 255, 255, 0.65); }
 	html.dark { --bg-overlay: rgba(0, 0, 0, 0.5); }
 
-	html, body {
+	/* Use a pseudo-element to render the background so we can blur it safely */
+	html, body { background: none; }
+	body { position: relative; z-index: 0; }
+	body::before {
+		content: "";
+		position: fixed;
+		inset: -24px; /* expand to avoid blur edge clipping */
+		z-index: -1;
 		background-image:
 			linear-gradient(var(--bg-overlay), var(--bg-overlay)),
 			url('https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAMtaJM8e7A4OgUw5-hCnRDVI_mepDwAAgbDMRuumphUVY30OvaB8AUBAAMCAAN5AAM2BA.jpg');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
-		background-attachment: fixed;
+		/* 高斯模糊 */
+		filter: blur(5px);
+		-webkit-filter: blur(5px);
+		transform: translateZ(0);
+		will-change: transform, filter;
 	}
-	@media (max-width: 768px) {
-		html, body { background-attachment: scroll; }
-	}
+	/* On mobile移动端, avoid position: fixed issues by using absolute */
+	/* @media (max-width: 768px) {
+		body::before { position: absolute; }
+	} */
 </style>
 
 <script>

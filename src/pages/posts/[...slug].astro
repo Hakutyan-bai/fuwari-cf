@@ -138,7 +138,7 @@ const jsonLd = {
     
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextSlug}]}>
-            {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
+            {entry.data.nextSlug && <div class="btn-card btn-glass rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
                 <Icon name="material-symbols:chevron-left-rounded" class="text-[2rem] text-[var(--primary)]" />
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.nextTitle}
@@ -148,7 +148,7 @@ const jsonLd = {
         
         <a href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.prevSlug}]}>
-            {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
+            {entry.data.prevSlug && <div class="btn-card btn-glass rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
                 </div>
@@ -251,18 +251,15 @@ const jsonLd = {
             }
             setInterval(runtime, 1000);
         </script>
-        <div class="card-base p-1 mb-0.1">
+    <div class="p-1 mb-0.1">
             <script is:inline></script>
             <div class="flex items-center gap-2">
-
-                <div class="transition h-9 w-9 rounded-lg overflow-hidden
-            relative
-           flex items-center justify-center mr-0">
-  <Icon
-                  name="material-symbols:history-rounded"
-                  class="text-4xl text-[var(--primary)] transition-transform group-hover:translate-x-0.5 bg-[var(--enter-btn-bg)] p-2 rounded-md"
-                />
-</div>
+                <div class="transition h-9 w-9 rounded-lg overflow-hidden relative flex items-center justify-center mr-0">
+                    <Icon
+                        name="material-symbols:history-rounded"
+                        class="text-4xl text-[var(--primary)] transition-transform group-hover:translate-x-0.5 bg-[var(--enter-btn-bg)] p-2 rounded-md"
+                    />
+                </div>
 
                 <!-- 文字容器保持不变 -->
                 <div class="flex flex-col gap-0.1">
@@ -271,7 +268,7 @@ const jsonLd = {
                 </div>
             </div>
         </div>
-        <!--  <p>{lastModified}</p>   -->
+    <!--  <p>{lastModified}</p>   -->
     </div>
 <Comments client:only="svelte"></Comments>
 </MainGridLayout>
