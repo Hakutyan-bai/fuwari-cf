@@ -1,0 +1,245 @@
+---
+// CustomCursor.astro - 自定义鼠标光标组件
+---
+
+<!-- 自定义鼠标光标元素（默认渲染，样式/脚本会在移动端禁用） -->
+<div id="custom-cursor" class="custom-cursor"></div>
+<div id="custom-cursor-follower" class="custom-cursor-follower"></div>
+
+<script lang="ts">
+// 仅在具备精细指针且支持悬停的设备上启用（桌面端）
+const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const isCoarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+// 在触摸/粗指针设备上，直接退出并确保元素隐藏
+if (!isFinePointer || isCoarse) {
+  const c = document.getElementById('custom-cursor');
+  const f = document.getElementById('custom-cursor-follower');
+  if (c) c.style.display = 'none';
+  if (f) f.style.display = 'none';
+  // 不注入任何全局 cursor: none 样式
+} else {
+  // 立即隐藏所有光标 - 在任何其他代码执行之前（仅桌面端）
+  document.documentElement.style.cursor = 'none';
+  document.body.style.cursor = 'none';
+
+  // 创建样式标签强制隐藏光标（仅桌面端）
+  const style = document.createElement('style');
+  style.textContent = `
+      *, *::before, *::after, 
+      html, body, 
+      ::-webkit-scrollbar, 
+      ::-webkit-scrollbar-thumb, 
+      ::-webkit-scrollbar-track,
+      ::-webkit-scrollbar-corner,
+      ::-webkit-scrollbar-button {
+          cursor: none !important;
+      }
+  `;
+  document.head.appendChild(style);
+
+  // 强制隐藏光标的函数
+  function forceHideCursor() {
+      document.documentElement.style.cursor = 'none';
+      document.body.style.cursor = 'none';
+      
+      // 强制设置所有元素
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach((element) => {
+          if (element instanceof HTMLElement) {
+              element.style.cursor = 'none';
+          }
+      });
+  }
+
+// 自定义鼠标光标脚本
+document.addEventListener('DOMContentLoaded', function() {
+    if (!isFinePointer || isCoarse) return; // 移动端不启用
+    const cursor = document.getElementById('custom-cursor');
+    const follower = document.getElementById('custom-cursor-follower');
+    
+    if (!cursor || !follower) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
+    let currentScale = 1;
+    let targetScale = 1;
+    let baseOpacity = 0.5; // 基础透明度
+    let isHovering = false; // 悬停状态
+    
+    // 滚轮逃离效果变量
+    let escapeX = 0;
+    let escapeY = 0;
+    let escapeForce = 0;
+    let escapeDecay = 0.95; // 逃离力衰减速度
+    
+    // 鼠标移动事件
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // 强制隐藏光标 - 每次鼠标移动都检查
+        forceHideCursor();
+        
+        // 主光标立即跟随
+        if (cursor) {
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        }
+    });
+    
+    // 滚轮事件 - 创造逃离效果
+    document.addEventListener('wheel', function(e) {
+        // 不阻止默认行为，让页面正常滚动
+        
+        // 根据滚动方向设置逃离方向
+        const scrollDirection = e.deltaY > 0 ? 1 : -1; // 向下滚动为正，向上滚动为负
+        
+        // 页面向下滚动时，跟随光标向上逃离；向上滚动时，向下逃离
+        escapeX = (Math.random() - 0.5) * 20; // 添加一点水平随机性
+        escapeY = -scrollDirection * 40; // 与滚动方向相反
+        
+        // 根据滚轮速度调整逃离强度
+        escapeForce = Math.min(1, Math.abs(e.deltaY) / 100);
+        
+        // 添加一些随机性让效果更自然
+        escapeX += (Math.random() - 0.5) * 15;
+    }, { passive: true }); // 使用 passive: true 确保不会阻止滚动
+    
+    // 跟随光标的延迟动画
+    function animateFollower() {
+        // 逃离力衰减
+        escapeX *= escapeDecay;
+        escapeY *= escapeDecay;
+        escapeForce *= escapeDecay;
+        
+        // 计算目标位置（主光标位置 + 逃离偏移）
+        const targetX = mouseX + escapeX * escapeForce;
+        const targetY = mouseY + escapeY * escapeForce;
+        
+        // 位置缓动（向目标位置移动，但会被逃离力影响）
+        const positionSpeed = 0.15;
+        followerX += (targetX - followerX) * positionSpeed;
+        followerY += (targetY - followerY) * positionSpeed;
+        
+        // 缩放缓动
+        const scaleSpeed = 0.1;
+        currentScale += (targetScale - currentScale) * scaleSpeed;
+        
+        // 在逃离时稍微缩小，增加"害怕"的感觉
+        const fearScale = Math.max(0.8, 1 - Math.abs(escapeForce) * 0.3);
+        const finalScale = currentScale * fearScale;
+        
+        if (follower) {
+            follower.style.left = followerX + 'px';
+            follower.style.top = followerY + 'px';
+            follower.style.transform = `translate(-50%, -50%) scale(${finalScale})`;
+            
+            // 计算最终透明度（基础透明度 + 恐惧效果）
+            const fearOpacity = isHovering ? 0.8 : baseOpacity;
+            const finalOpacity = Math.max(0.2, fearOpacity - Math.abs(escapeForce) * 0.3);
+            follower.style.opacity = finalOpacity.toString();
+        }
+        
+        requestAnimationFrame(animateFollower);
+    }
+    
+    // 开始动画循环
+    animateFollower();
+    
+    // 强制隐藏光标的定期检查 - 使用TypeScript优化
+    setInterval(() => {
+        forceHideCursor();
+    }, 200); // 每200毫秒检查一次，降低负载
+    
+    // 鼠标进入页面时显示光标
+    document.addEventListener('mouseenter', () => {
+        if (cursor) cursor.style.opacity = '1';
+        if (follower) follower.style.opacity = '0.5';
+        forceHideCursor();
+    });
+    
+    // 鼠标离开页面时隐藏光标
+    document.addEventListener('mouseleave', () => {
+        if (cursor) cursor.style.opacity = '0';
+        if (follower) follower.style.opacity = '0';
+    });
+    
+    // 为可点击元素添加悬停效果
+    const clickableElements = document.querySelectorAll('a, button, input, textarea, select, [role="button"], [onclick]');
+    
+    clickableElements.forEach((element) => {
+        element.addEventListener('mouseenter', () => {
+            if (cursor) cursor.classList.add('hover');
+            targetScale = 1.5;
+            isHovering = true;
+            forceHideCursor();
+        });
+        
+        element.addEventListener('mouseleave', () => {
+            if (cursor) cursor.classList.remove('hover');
+            targetScale = 1;
+            isHovering = false;
+            forceHideCursor();
+        });
+    });
+    
+    // 监听动态添加的元素 - TypeScript优化版本
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === 1 && node instanceof Element) {
+                    const newClickableElements = node.querySelectorAll('a, button, input, textarea, select, [role="button"], [onclick]');
+                    newClickableElements.forEach((element) => {
+                        element.addEventListener('mouseenter', () => {
+                            if (cursor) cursor.classList.add('hover');
+                            targetScale = 1.5;
+                            isHovering = true;
+                            forceHideCursor();
+                        });
+                        
+                        element.addEventListener('mouseleave', () => {
+                            if (cursor) cursor.classList.remove('hover');
+                            targetScale = 1;
+                            isHovering = false;
+                            forceHideCursor();
+                        });
+                    });
+                }
+            });
+        });
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+    
+    // 额外的事件监听器确保光标隐藏
+    ['scroll', 'resize', 'focus', 'blur', 'click'].forEach((eventType) => {
+        document.addEventListener(eventType, forceHideCursor);
+    });
+});
+}
+</script>
+
+<style>
+/* 确保光标元素初始状态 */
+#custom-cursor,
+#custom-cursor-follower {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 页面加载完成后显示光标（桌面端 hover/fine 才会触发） */
+@media (hover: hover) and (pointer: fine) {
+    body:hover #custom-cursor {
+            opacity: 1;
+    }
+    body:hover #custom-cursor-follower {
+            opacity: 0.5;
+    }
+}
+</style>

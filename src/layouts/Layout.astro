@@ -19,6 +19,7 @@ import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
 import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
+import CustomCursor from "../components/CustomCursor.astro";
 
 interface Props {
 	title?: string;
@@ -182,6 +183,8 @@ const bannerOffset =
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
+		<!-- 自定义鼠标光标 -->
+		<CustomCursor />
 		<slot />
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
