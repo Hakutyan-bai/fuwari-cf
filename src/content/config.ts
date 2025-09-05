@@ -13,7 +13,10 @@ const postsCollection = defineCollection({
 		lang: z.string().optional().default(""),
 		series: z.string().optional(),
 		pinned: z.boolean().optional().default(false),
-		
+		// Featured posts
+		featured: z.boolean().optional().default(false),
+		featuredRank: z.number().optional().default(0),
+
 		/* For internal use */
 		prevTitle: z.string().default(""),
 		prevSlug: z.string().default(""),
@@ -24,4 +27,3 @@ const postsCollection = defineCollection({
 export const collections = {
 	posts: postsCollection,
 };
-

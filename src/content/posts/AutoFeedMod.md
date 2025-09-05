@@ -9,6 +9,7 @@ draft: false
 lang: ''
 updated: 2025-07-24 20:00:00
 series: Mod
+featured: true
 ---
 这是一个可以自动喂食周围牛、羊和猪，以及自动补种农作物的Mod，现在已经支持1.21所有版本！
 

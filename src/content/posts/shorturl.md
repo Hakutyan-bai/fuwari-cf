@@ -1,5 +1,5 @@
 ---
-title: 生成短链接
+title: 短链服务
 published: 2025-07-26
 description: ''
 image: ''
@@ -9,6 +9,8 @@ draft: false
 lang: ''
 updated: 2025-08-31 20:00:00
 series: CloudFlare
+featured: true
+featuredRank: 1 #可选，数字越大排序越靠前
 ---
 
 这是一个生成短链接的项目，本来有视频教程的，b站发不了，可恶啊

@@ -7,6 +7,8 @@ tags: [个人主页,教程]
 category: "个人主页"
 image: ""
 series: Fumomo个人主页
+featured: true
+featuredRank: 11 #可选，数字越大排序越靠前
 ---
 # 事先准备
 

@@ -22,22 +22,22 @@ async function getRawSortedPosts() {
 }
 
 export async function getPostSeries(
-  seriesName: string,
-): Promise<{ body: string; data: BlogPostData; slug: string }[]> {
-  const posts = (await getCollection('posts', ({ data }) => {
-    return (
-      (import.meta.env.PROD ? data.draft !== true : true) &&
-      data.series === seriesName
-    )
-  })) as unknown as { body: string; data: BlogPostData; slug: string }[]
+	seriesName: string,
+): Promise<CollectionEntry<"posts">[]> {
+	const posts = await getCollection("posts", ({ data }) => {
+		return (
+			(import.meta.env.PROD ? data.draft !== true : true) &&
+			data.series === seriesName
+		);
+	});
 
-  posts.sort((a, b) => {
-    const dateA = new Date(a.data.published)
-    const dateB = new Date(b.data.published)
-    return dateA > dateB ? 1 : -1
-  })
+	posts.sort((a, b) => {
+		const dateA = new Date(a.data.published);
+		const dateB = new Date(b.data.published);
+		return dateA > dateB ? 1 : -1;
+	});
 
-  return posts
+	return posts;
 }
 
 export async function getSortedPosts() {
@@ -68,6 +68,31 @@ export async function getSortedPostsList(): Promise<PostForList[]> {
 	}));
 
 	return sortedPostsList;
+}
+
+// Featured helpers
+type PostDataWithFeatured = CollectionEntry<"posts">["data"] & {
+	featured?: boolean;
+	featuredRank?: number;
+};
+
+export async function getFeaturedPosts(
+	limit?: number,
+): Promise<CollectionEntry<"posts">[]> {
+	const all = await getRawSortedPosts();
+	const featured = all
+		.filter((p) => (p.data as PostDataWithFeatured).featured === true)
+		.sort((a, b) => {
+			const ra = (a.data as PostDataWithFeatured).featuredRank ?? 0;
+			const rb = (b.data as PostDataWithFeatured).featuredRank ?? 0;
+			if (ra !== rb) return rb - ra;
+			if (a.data.pinned && !b.data.pinned) return -1;
+			if (!a.data.pinned && b.data.pinned) return 1;
+			const da = new Date(a.data.published).getTime();
+			const db = new Date(b.data.published).getTime();
+			return db - da;
+		});
+	return typeof limit === "number" ? featured.slice(0, limit) : featured;
 }
 export type Tag = {
 	name: string;

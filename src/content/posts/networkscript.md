@@ -10,6 +10,8 @@ draft: false
 lang: ''
 updated: 2025-08-10 10:00:00
 series: 脚本
+featured: true
+featuredRank: 18 #可选，数字越大排序越靠前
 ---
 
 # 免责声明

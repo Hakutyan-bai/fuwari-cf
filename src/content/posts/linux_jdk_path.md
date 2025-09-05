@@ -9,6 +9,8 @@ draft: false
 lang: ''
 updated: 2025-07-28 21:00:00
 series: Linux
+featured: true
+featuredRank: 15 #可选，数字越大排序越靠前
 ---
 
 # Ubuntu 设置 Java JDK 环境变量教程

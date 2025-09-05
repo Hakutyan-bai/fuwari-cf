@@ -55,6 +55,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "/", // not used when children exist
 			children: [
 				{
+					name: "精选",
+					url: "featured/",
+					external: false,
+				},
+				{
 					name: "归档",
 					url: "archive/",
 					external: false,

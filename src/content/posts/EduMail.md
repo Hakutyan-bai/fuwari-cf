@@ -10,7 +10,8 @@ draft: false
 lang: ''
 updated: 2025-08-08 10:00:00
 series: 教育认证
-
+featured: true
+featuredRank: 10 #可选，数字越大排序越靠前
 ---
 
 # 开始教程

@@ -14,7 +14,7 @@ interface Props {
 	category: string | null;
 	hideTagsForMobile?: boolean;
 	hideUpdateDate?: boolean;
-  pinned?: boolean;
+	pinned?: boolean;
 }
 const {
 	published,
@@ -23,7 +23,7 @@ const {
 	category,
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
-  pinned = false,
+	pinned = false,
 } = Astro.props;
 const className = Astro.props.class;
 
@@ -50,7 +50,13 @@ const className = Astro.props.class;
 // 	"19" ||
 // 	"20";
 
-const homePaths = ["/", ...Array.from({ length: 20 }, (_, i) => `/${i + 1}/`)];
+const homePaths = [
+	"/",
+	"/featured",
+	"/featured/",
+	...Array.from({ length: 20 }, (_, i) => `/${i + 1}/`),
+	...Array.from({ length: 20 }, (_, i) => `/featured/${i + 1}/`),
+];
 const isHome = homePaths.includes(Astro.url.pathname);
 ---
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>

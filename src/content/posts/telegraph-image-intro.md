@@ -9,6 +9,8 @@ draft: false
 lang: ''
 updated: 2025-07-19 20:00:00
 series: CloudFlare
+featured: true
+featuredRank: 2 #可选，数字越大排序越靠前
 ---
 # Telegraph-Image：免费、快速、优雅的图床方案
 

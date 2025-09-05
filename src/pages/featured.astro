@@ -1,0 +1,10 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import FeaturedSection from "../components/FeaturedSection.astro";
+import { getFeaturedPosts } from "../utils/content-utils";
+
+const featuredPosts = await getFeaturedPosts();
+---
+<MainGridLayout>
+  <FeaturedSection posts={featuredPosts} />
+</MainGridLayout>
