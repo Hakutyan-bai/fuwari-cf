@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
 	subtitle: "愛することを忘れないで",
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
-		hue: 360, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
+		hue: 240, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
 		fixed: true, // 调色盘 - 设为true将隐藏调色盘按钮
 	},
 	banner: {
