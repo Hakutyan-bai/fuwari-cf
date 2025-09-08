@@ -228,6 +228,27 @@
       </a>
     </td>
   </tr>
+  </tr>
+    <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://kitakita.top" target="_blank" class="friend-card">
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2373752155&spec=5" width="32" height="32" alt="头像"/>
+        <div>
+          <b>CappuccinoZ's Blog</b><br/>
+          <span style="font-size:12px;">良机一直就在你眼前</span>
+        </div>
+      </a>
+    </td>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.linux-qitong.top" target="_blank" class="friend-card">
+        <img src="https://blog.linux-qitong.top/img/avatar.webp" width="32" height="32" alt="头像"/>
+        <div>
+          <b>青稚の空间</b><br/>
+          <span style="font-size:12px;">越努力，越幸运.</span>
+        </div>
+      </a>
+    </td>
+  </tr>
 </table>
 
 添加完我的友链后请通过**评论**或[i@sakura.ink](mailto:i@sakura.ink)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
