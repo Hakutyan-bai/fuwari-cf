@@ -211,22 +211,22 @@
     <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://eitanac.github.io" target="_blank" class="friend-card">
-        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2130839076&spec=5" width="32" height="32" alt="zero头像"/>
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=2130839076&spec=5" width="32" height="32" alt="头像"/>
         <div>
           <b>EitanのBlog</b><br/>
           <span style="font-size:12px;">Look first,then leap.</span>
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://www.almango.cn/" target="_blank" class="friend-card">
-        <img src="https://www.almango.cn/img/favicon.png" width="32" height="32" alt="Almango头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://mias.moe/" target="_blank" class="friend-card">
+        <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=1354198117&spec=5" width="32" height="32" alt="头像"/>
         <div>
-          <b>Almango</b><br/>
-          <span style="font-size:12px;">天真永不消逝，浪漫至死不渝。</span>
+          <b>AsperforMias' Blog</b><br/>
+          <span style="font-size:12px;"></span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 
