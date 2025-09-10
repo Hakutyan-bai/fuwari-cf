@@ -114,15 +114,6 @@
 <table style="border-collapse:separate; border-spacing:0 10px;">
   <tr>
     <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.sakura.ink/" target="_blank" class="friend-card">
-        <img src="https://avatars.githubusercontent.com/u/91101909?v=4" width="32" height="32" alt="友人A头像"/>
-        <div>
-          <b>我自己</b><br/>
-          <span style="font-size:12px;">2025-07-23   50CNY</span>
-        </div>
-      </a>
-    </td>
-    <td style="padding:8px 8px; width:320px;">
       <a href="" target="_blank" class="friend-card">
         <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=3368760156&spec=100&t=1754536226983" width="32" height="32" alt=""/>
         <div>
