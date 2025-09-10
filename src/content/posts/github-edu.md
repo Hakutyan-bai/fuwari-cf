@@ -1,4 +1,5 @@
 ---
+pinned: true
 title: 如何申请Github学生认证
 published: 2025-08-08
 description: ''

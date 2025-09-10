@@ -1,0 +1,237 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+export const prerender = true;
+---
+
+<MainGridLayout title="ICS 日历查看器">
+	<div id="ics-viewer" class="card-base p-6 mb-4">
+		<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+			<h1 id="month-title" class="text-2xl md:text-3xl font-bold text-90"></h1>
+			<div class="flex gap-2">
+				<button id="prev" class="btn-regular-dark px-4 py-2 rounded-lg text-white font-medium">上个月</button>
+				<button id="next" class="btn-regular px-4 py-2 rounded-lg font-medium">下个月</button>
+			</div>
+		</div>
+
+		<!-- 星期表头 + 日历网格容器 -->
+		<div id="calendar"></div>
+	</div>
+
+	<style>
+		/* 适配站点主题变量，保持整体样式一致 */
+		#ics-viewer .calendar {
+			display: grid;
+			grid-template-columns: repeat(7, minmax(0, 1fr));
+			gap: 0.25rem; /* 4px */
+			margin-top: 0.5rem; /* 8px */
+		}
+		#ics-viewer .day {
+			border: 1px solid #e5e5e5;
+			border-radius: 0.25rem; /* 4px */
+			padding: 0.5rem; /* 8px */
+			min-height: 6.5rem; /* ~104px */
+			background: #ffffff;
+			position: relative;
+		}
+		:root.dark #ics-viewer .day {
+			border-color: #404040;
+			background: #1a1a1a;
+		}
+		#ics-viewer .day.weekend .date { color: #666; }
+		:root.dark #ics-viewer .day.weekend .date { color: #999; }
+		#ics-viewer .day.today { 
+			border-color: var(--primary); 
+			box-shadow: 0 0 0 1px var(--primary) inset; 
+		}
+		#ics-viewer .day .date {
+			position: absolute;
+			top: 4px; right: 6px;
+			font-size: 0.875rem;
+			font-weight: 500;
+			line-height: 1;
+			color: #333;
+		}
+		:root.dark #ics-viewer .day .date { color: #ccc; }
+		#ics-viewer .event {
+			background: #e8f4ff;
+			border-left: 3px solid #2196f3;
+			margin: 2px 0;
+			padding: 2px 6px;
+			border-radius: 2px;
+			font-size: 0.75rem;
+			line-height: 1.2;
+			color: #1976d2;
+		}
+		:root.dark #ics-viewer .event {
+			background: rgba(33, 150, 243, 0.15);
+			color: #64b5f6;
+		}
+	</style>
+
+	<script is:inline>
+		let events = [];
+		let currentMonth = new Date();
+
+		function updateMonthTitle(){
+			const y = currentMonth.getFullYear();
+			const m = currentMonth.getMonth() + 1;
+			const el = document.getElementById('month-title');
+			if (el) el.textContent = `${y}年${m}月`;
+		}
+
+		function unfoldLines(ics){
+			return ics
+				.replace(/\r\n/g,'\n')
+				.replace(/\r/g,'\n')
+				.replace(/\n[ \t]/g,'');
+		}
+
+		function parseICalDate(value){
+			if(/^\d{8}$/.test(value)){
+				const y=value.slice(0,4), m=value.slice(4,6)-1, d=value.slice(6,8);
+				return new Date(y, m, d);
+			}
+			const mt=value.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(Z?)$/);
+			if(mt){
+				const [_,Y,Mo,D,h,mi,s,Z]=mt;
+				return Z==='Z' ? new Date(Date.UTC(+Y,+Mo-1,+D,+h,+mi,+s)) : new Date(+Y,+Mo-1,+D,+h,+mi,+s);
+			}
+			return new Date(value);
+		}
+
+		function expandRecurrence(event, start, end) {
+			if (!event.RRULE) return [start];
+			const ruleParts = event.RRULE.split(';').reduce((acc, part) => {
+				const [k, v] = part.split('=');
+				acc[k] = v; return acc;
+			}, {});
+			const freq = ruleParts.FREQ;
+			const interval = parseInt(ruleParts.INTERVAL || '1', 10);
+			const until = ruleParts.UNTIL ? parseICalDate(ruleParts.UNTIL) : null;
+			const count = ruleParts.COUNT ? parseInt(ruleParts.COUNT) : null;
+			const occurrences = [];
+			const current = new Date(start);
+			let added = 0;
+			while ((!until || current <= until) && (!count || added < count)) {
+				occurrences.push(new Date(current));
+				if (freq === 'DAILY') current.setDate(current.getDate() + interval);
+				else if (freq === 'WEEKLY') current.setDate(current.getDate() + 7 * interval);
+				else if (freq === 'MONTHLY') current.setMonth(current.getMonth() + interval);
+				else if (freq === 'YEARLY') current.setFullYear(current.getFullYear() + interval);
+				else break;
+				added++;
+			}
+			return occurrences;
+		}
+
+		function parseICal(ics){
+			const unfolded = unfoldLines(ics);
+			const lines = unfolded.split(/\n/);
+			const out = []; let cur = {}, inEvent = false;
+			for (let raw of lines){
+				if(/^BEGIN:VEVENT/i.test(raw)){ inEvent = true; cur = {}; continue; }
+				if(/^END:VEVENT/i.test(raw)){
+					inEvent = false;
+					if(cur.DTSTART) cur.start = parseICalDate(cur.DTSTART);
+					if(cur.DTEND) cur.end = parseICalDate(cur.DTEND);
+					out.push(cur); cur = {}; continue;
+				}
+				if(!inEvent) continue;
+				const m = raw.match(/^([^:;]+)(?:;[^:]+)*:(.*)$/);
+				if(!m) continue;
+				const prop = m[1].toUpperCase(), val = m[2];
+				if(prop==='SUMMARY') cur.SUMMARY = val;
+				else if(prop==='DTSTART') cur.DTSTART = val;
+				else if(prop==='DTEND') cur.DTEND = val;
+				else if(prop==='DESCRIPTION') cur.DESCRIPTION = val;
+				else if(prop==='LOCATION') cur.LOCATION = val;
+				else if(prop==='RRULE') cur.RRULE = val;
+			}
+			// 展开重复事件
+			const expanded = [];
+			for(const e of out){
+				if(e.start){
+					const occ = expandRecurrence(e, e.start, e.end);
+					occ.forEach(date => {
+						expanded.push({ ...e, start: date });
+					});
+				}
+			}
+			return expanded;
+		}
+
+		function renderCalendar(){
+			updateMonthTitle();
+			const container = document.getElementById('calendar');
+			if (!container) return;
+			container.innerHTML='';
+			const year = currentMonth.getFullYear(), month = currentMonth.getMonth();
+			const firstDay = new Date(year, month, 1);
+			const lastDay = new Date(year, month+1, 0);
+			const startDay = firstDay.getDay();
+			const daysInMonth = lastDay.getDate();
+
+			// 直接创建日历网格，不要星期表头
+			const grid = document.createElement('div');
+			grid.className = 'calendar';
+			for(let i=0;i<startDay;i++){
+				const cell=document.createElement('div'); cell.className='day'; grid.appendChild(cell);
+			}
+			for(let d=1; d<=daysInMonth; d++){
+				const cell = document.createElement('div'); cell.className='day';
+				const date = new Date(year, month, d);
+				const dow = (startDay + d - 1) % 7; // 0(日) ... 6(六)
+				if (dow === 0 || dow === 6) cell.classList.add('weekend');
+				const now = new Date();
+				if (date.getFullYear()===now.getFullYear() && date.getMonth()===now.getMonth() && date.getDate()===now.getDate()) {
+					cell.classList.add('today');
+				}
+				const dateEl = document.createElement('div');
+				dateEl.className = 'date';
+				dateEl.textContent = String(d);
+				cell.appendChild(dateEl);
+				const dayEvents = events.filter(e => e.start && e.start.getFullYear()===year && e.start.getMonth()===month && e.start.getDate()===d);
+				dayEvents.forEach(e => {
+					const div=document.createElement('div');
+					div.className='event';
+					div.textContent = e.SUMMARY || '未命名事件';
+					if (e.DESCRIPTION) div.title = e.DESCRIPTION;
+					cell.appendChild(div);
+				});
+				grid.appendChild(cell);
+			}
+
+			// 补全尾部空格以形成完整网格(最多6行)
+			const totalCells = startDay + daysInMonth;
+			const trailing = (7 - (totalCells % 7)) % 7;
+			for (let i=0; i<trailing; i++) {
+				const cell=document.createElement('div'); cell.className='day'; grid.appendChild(cell);
+			}
+			container.appendChild(grid);
+		}
+
+		async function loadICS(){
+			const url = 'https://sakura.ink/newkb.ics';
+			try {
+				const res = await fetch(url);
+				if(!res.ok) throw new Error('无法加载ICS文件');
+				const text = await res.text();
+				events = parseICal(text);
+				renderCalendar();
+			} catch(err) {
+				const el = document.getElementById('calendar');
+				if (el) el.innerHTML = '<p>加载失败: ' + (err?.message || err) + '</p>';
+			}
+		}
+
+		document.addEventListener('click', (e) => {
+			const prev = document.getElementById('prev');
+			const next = document.getElementById('next');
+			if (e.target === prev) { currentMonth.setMonth(currentMonth.getMonth()-1); renderCalendar(); }
+			if (e.target === next) { currentMonth.setMonth(currentMonth.getMonth()+1); renderCalendar(); }
+		});
+
+		loadICS();
+	</script>
+</MainGridLayout>
+
