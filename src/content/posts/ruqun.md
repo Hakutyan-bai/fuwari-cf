@@ -3,7 +3,7 @@ pinned: true
 title: '入群向导'
 published: 2025-09-09
 description: '怎么联系到我呢？'
-image: 'https://random.api.mikus.ink/'
+image: ''
 tags: [联系]
 category: '联系'
 draft: false 
