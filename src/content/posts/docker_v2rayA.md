@@ -10,6 +10,7 @@ lang: ''
 updated: 2025-09-23 22:30:00
 ---
 ## 在一台 Linux 服务器上使用 Docker 部署v2rayA
+
 1. 拉取镜像
 ```
 docker pull mzz2017/v2raya
@@ -34,6 +35,7 @@ docker run -d \
 4. 运行V2rayA
 
 ## 使用 proxychains代理
+
 1. 安装
 ```
 sudo apt update 
@@ -48,6 +50,7 @@ socks5 127.0.0.1 20170
 ```
 
 ## 测试&使用方法
+
 测试
 ```
 proxychains curl https://www.google.com
