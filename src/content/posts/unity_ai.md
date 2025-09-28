@@ -33,7 +33,7 @@ updated: 2025-09-28 17:30:00
 <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAANwaNkMXQABDr1peGtJZwABwY1n1XO6_AAC-csxG8a_yVYez8GEH9qNPAEAAwIAA3cAAzYE.png">
 
 6. 编写脚本：PlayerController.cs
-```cs title="PlayerController.cs"{6}
+```cs title="PlayerController.cs"  {6}
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
