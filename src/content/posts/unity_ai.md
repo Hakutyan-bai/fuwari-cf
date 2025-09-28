@@ -62,6 +62,17 @@ public class PlayerController : MonoBehaviour
 }
 ```
 7. 将脚本挂载到胶囊体然后运行游戏
+
+# 进阶（NavMeshLink桥接组件）
+1. 给 **空对象** 添加 **NavMeshLink** 桥接组件
+<img src="https://pic3.zhimg.com/v2-fe430c0f5a279684545eb5308fbda714_1440w.jpg">
+Start Point：链接的起始点，相对于 GameObject。使用 XYZ 坐标定义。
+End Point：链接的结束点，相对于 GameObject。使用 XYZ 坐标定义。
+
+2. 调节起点和终点位置，Type改成Jump，宽度给个1 
+<img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAANxaNkVMvTq34g6Q4vtgj74f0FtumkAAg3MMRvGv8lWMp3nolXXt5ABAAMCAAN3AAM2BA.png">
+
+运行游戏你就会发现，他会从中间跳过去
 ---
 
 文章编辑：`@鈴奈咲桜`
