@@ -260,15 +260,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.linux-qitong.top" target="_blank" class="friend-card">
-        <img src="https://blog.linux-qitong.top/img/avatar.webp" width="32" height="32" alt="头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://www.refact.cc/" target="_blank" class="friend-card">
+        <img src="https://www.refact.cc/avatar.png" width="32" height="32" alt="头像"/>
         <div>
-          <b>青稚の空间</b><br/>
-          <span style="font-size:12px;">越努力，越幸运.</span>
+          <b>RefactX Project</b><br/>
+          <span style="font-size:12px;">形体是简单而纯粹的，它不是完整的群体，每个形体都指向其复杂性，并最终被复杂性联系在一起。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 

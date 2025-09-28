@@ -72,7 +72,7 @@ End Point：链接的结束点，相对于 GameObject。使用 XYZ 坐标定义�
 2. 调节起点和终点位置，Type改成Jump，宽度给个1 
 <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAANxaNkVMvTq34g6Q4vtgj74f0FtumkAAg3MMRvGv8lWMp3nolXXt5ABAAMCAAN3AAM2BA.png">
 
-运行游戏你就会发现，他会从中间跳过去
+3. 运行游戏你就会发现，他会从中间跳过去
 ---
 
 文章编辑：`@鈴奈咲桜`
