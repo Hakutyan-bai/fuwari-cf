@@ -39,7 +39,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Playctrl : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     void Start()
