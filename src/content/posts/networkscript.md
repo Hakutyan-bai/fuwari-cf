@@ -1,5 +1,4 @@
 ---
-pinned: true
 title: '大学生必备技能，自动刷网课！'
 published: 2025-08-10
 description: '彻底解放双手的自动网课脚本！'

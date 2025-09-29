@@ -1,5 +1,4 @@
 ---
-pinned: true
 title: '如何向学校申请Edu邮箱'
 published: 2025-08-08
 description: '怎么申请Edu邮箱呢？很简单！'

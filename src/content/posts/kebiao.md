@@ -8,7 +8,8 @@ category: '课程表'
 draft: false 
 lang: ''
 updated: 2025-09-03 11:00:00
-pinned: true
+featured: true
+featuredRank: 180 #可选，数字越大排序越靠前
 ---
 将课表导入Apple日历后，所有登录iCloud的设备都会进行同步，只需要一次操作即可<br>
 在开始之前，你需要准备一个会思考的大脑
