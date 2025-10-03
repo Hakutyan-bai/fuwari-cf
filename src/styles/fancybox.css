@@ -24,10 +24,19 @@
 	z-index: 1000005 !important;
 }
 
-/* 自定义光标在 Fancybox 之上 */
-.custom-cursor,
-.custom-cursor-follower {
+/* 强制：自定义光标必须在所有Fancybox元素之上 */
+#custom-cursor,
+.custom-cursor {
 	z-index: 2147483647 !important;
+	position: fixed !important;
+	pointer-events: none !important;
+}
+
+#custom-cursor-follower,
+.custom-cursor-follower {
+	z-index: 2147483646 !important;
+	position: fixed !important;
+	pointer-events: none !important;
 }
 
 /* Fancybox 按钮样式 */

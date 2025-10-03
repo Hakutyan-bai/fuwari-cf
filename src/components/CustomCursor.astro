@@ -2,9 +2,19 @@
 // CustomCursor.astro - 自定义鼠标光标组件
 ---
 
-<!-- 自定义鼠标光标元素（默认渲染，样式/脚本会在移动端禁用） -->
-<div id="custom-cursor" class="custom-cursor" style="z-index: 2147483647 !important;"></div>
-<div id="custom-cursor-follower" class="custom-cursor-follower" style="z-index: 2147483646 !important;"></div>
+<!-- 直接创建光标元素，不使用容器 -->
+<div id="custom-cursor" class="custom-cursor" style="
+  position: fixed !important;
+  pointer-events: none !important;
+  z-index: 2147483647 !important;
+  will-change: transform, left, top;
+"></div>
+<div id="custom-cursor-follower" class="custom-cursor-follower" style="
+  position: fixed !important;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  will-change: transform, left, top;
+"></div>
 
 <script lang="ts">
 // 仅在具备精细指针且支持悬停的设备上启用（桌面端）
@@ -52,6 +62,45 @@ if (!isFinePointer || isCoarse) {
       });
   }
 
+// 强制光标置顶的超级函数 - 突破stacking context版本
+function forceMaxZIndex() {
+    const cursor = document.getElementById('custom-cursor');
+    const follower = document.getElementById('custom-cursor-follower');
+    
+    // 检查是否有Fancybox容器
+    const fancyboxContainer = document.querySelector('.fancybox__container');
+    
+    if (fancyboxContainer && cursor && follower) {
+        // 如果Fancybox存在，将光标移到Fancybox容器内部！
+        if (!fancyboxContainer.contains(cursor)) {
+            fancyboxContainer.appendChild(follower);
+            fancyboxContainer.appendChild(cursor);
+        }
+        
+        // 在Fancybox内部设置超高z-index
+        cursor.style.setProperty('z-index', '9999999', 'important');
+        follower.style.setProperty('z-index', '9999998', 'important');
+    } else if (cursor && follower) {
+        // 如果没有Fancybox，确保光标在body的最后
+        if (cursor.parentElement === document.body && document.body.lastElementChild !== cursor) {
+            document.body.appendChild(follower);
+            document.body.appendChild(cursor);
+        }
+        cursor.style.setProperty('z-index', '2147483647', 'important');
+        follower.style.setProperty('z-index', '2147483646', 'important');
+    }
+    
+    // 确保position和pointer-events
+    if (cursor) {
+        cursor.style.setProperty('position', 'fixed', 'important');
+        cursor.style.setProperty('pointer-events', 'none', 'important');
+    }
+    if (follower) {
+        follower.style.setProperty('position', 'fixed', 'important');
+        follower.style.setProperty('pointer-events', 'none', 'important');
+    }
+}
+
 // 自定义鼠标光标脚本
 document.addEventListener('DOMContentLoaded', function() {
     if (!isFinePointer || isCoarse) return; // 移动端不启用
@@ -60,13 +109,86 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!cursor || !follower) return;
     
-    // 强制设置最高z-index，确保在所有元素之上
-    cursor.style.zIndex = '2147483647';
-    follower.style.zIndex = '2147483646';
-    cursor.style.pointerEvents = 'none';
-    follower.style.pointerEvents = 'none';
-    cursor.style.position = 'fixed';
-    follower.style.position = 'fixed';
+    // 确保光标元素初始可见且位置正确
+    cursor.style.opacity = '1';
+    follower.style.opacity = '0.5';
+    cursor.style.display = 'block';
+    follower.style.display = 'block';
+    
+    // 初始化z-index
+    forceMaxZIndex();
+    
+    // 创建MutationObserver监控DOM变化（特别是Fancybox的加载）
+    const zIndexObserver = new MutationObserver((mutations) => {
+        let needsUpdate = false;
+        mutations.forEach((mutation) => {
+            // 检测是否有fancybox相关的类名变化
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target && target.className && typeof target.className === 'string' && target.className.includes('fancybox')) {
+                    needsUpdate = true;
+                }
+            }
+            // 检测是否有新元素添加
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) {
+                        const element = node;
+                        if (element.className && typeof element.className === 'string' && element.className.includes('fancybox')) {
+                            needsUpdate = true;
+                        }
+                    }
+                });
+            }
+        });
+        
+        if (needsUpdate) {
+            // 立即强制移动光标到Fancybox容器
+            setTimeout(() => {
+                forceMaxZIndex();
+            }, 0);
+            setTimeout(() => {
+                forceMaxZIndex();
+            }, 50);
+            setTimeout(() => {
+                forceMaxZIndex();
+            }, 100);
+        }
+    });
+    
+    // 开始观察整个document
+    zIndexObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+    });
+    
+    // 定期强制检查（作为后备方案，但频率降低以避免影响性能）
+    setInterval(forceMaxZIndex, 500);
+    
+    // 监听URL hash变化（Fancybox通常会改变hash）
+    window.addEventListener('hashchange', () => {
+        // 立即强制移动光标，多次执行确保生效
+        setTimeout(() => forceMaxZIndex(), 0);
+        setTimeout(() => forceMaxZIndex(), 50);
+        setTimeout(() => forceMaxZIndex(), 100);
+        setTimeout(() => forceMaxZIndex(), 200);
+        setTimeout(() => forceMaxZIndex(), 300);
+    });
+    
+    // 监听点击事件（用户点击图片打开Fancybox）
+    document.addEventListener('click', (e) => {
+        // 延迟检查是否出现了Fancybox
+        setTimeout(() => {
+            const fancyboxContainer = document.querySelector('.fancybox__container');
+            if (fancyboxContainer) {
+                forceMaxZIndex();
+                setTimeout(() => forceMaxZIndex(), 50);
+                setTimeout(() => forceMaxZIndex(), 100);
+            }
+        }, 50);
+    }, true);
     
     let mouseX = 0;
     let mouseY = 0;
@@ -93,10 +215,39 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 主光标立即跟随
         if (cursor) {
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
+            cursor.style.setProperty('left', mouseX + 'px', 'important');
+            cursor.style.setProperty('top', mouseY + 'px', 'important');
+            
+            // 检查是否有Fancybox，设置对应的z-index
+            const fancyboxContainer = document.querySelector('.fancybox__container');
+            if (fancyboxContainer) {
+                cursor.style.setProperty('z-index', '9999999', 'important');
+                // 确保光标在Fancybox容器内
+                if (!fancyboxContainer.contains(cursor)) {
+                    fancyboxContainer.appendChild(follower);
+                    fancyboxContainer.appendChild(cursor);
+                }
+            } else {
+                cursor.style.setProperty('z-index', '2147483647', 'important');
+            }
         }
-    });
+        
+        if (follower) {
+            const fancyboxContainer = document.querySelector('.fancybox__container');
+            if (fancyboxContainer) {
+                follower.style.setProperty('z-index', '9999998', 'important');
+            } else {
+                follower.style.setProperty('z-index', '2147483646', 'important');
+            }
+        }
+        
+        // 如果没有Fancybox，每次移动都将光标元素移到DOM最后
+        const fancybox = document.querySelector('.fancybox__container');
+        if (!fancybox && cursor && document.body.lastElementChild !== cursor) {
+            document.body.appendChild(follower);
+            document.body.appendChild(cursor);
+        }
+    }, true); // 使用捕获阶段
     
     // 滚轮事件 - 创造逃离效果
     document.addEventListener('wheel', function(e) {
@@ -141,14 +292,42 @@ document.addEventListener('DOMContentLoaded', function() {
         const finalScale = currentScale * fearScale;
         
         if (follower) {
-            follower.style.left = followerX + 'px';
-            follower.style.top = followerY + 'px';
-            follower.style.transform = `translate(-50%, -50%) scale(${finalScale})`;
+            follower.style.setProperty('left', followerX + 'px', 'important');
+            follower.style.setProperty('top', followerY + 'px', 'important');
+            follower.style.setProperty('transform', `translate(-50%, -50%) scale(${finalScale})`, 'important');
             
             // 计算最终透明度（基础透明度 + 恐惧效果）
             const fearOpacity = isHovering ? 0.8 : baseOpacity;
             const finalOpacity = Math.max(0.2, fearOpacity - Math.abs(escapeForce) * 0.3);
-            follower.style.opacity = finalOpacity.toString();
+            follower.style.setProperty('opacity', finalOpacity.toString(), 'important');
+            
+            // 根据是否有Fancybox设置z-index
+            const fancyboxContainer = document.querySelector('.fancybox__container');
+            if (fancyboxContainer) {
+                follower.style.setProperty('z-index', '9999998', 'important');
+            } else {
+                follower.style.setProperty('z-index', '2147483646', 'important');
+            }
+        }
+        
+        // 每帧都确保主光标z-index正确
+        if (cursor) {
+            const fancyboxContainer = document.querySelector('.fancybox__container');
+            if (fancyboxContainer) {
+                cursor.style.setProperty('z-index', '9999999', 'important');
+                // 确保光标在Fancybox容器内
+                if (!fancyboxContainer.contains(cursor) || !fancyboxContainer.contains(follower)) {
+                    fancyboxContainer.appendChild(follower);
+                    fancyboxContainer.appendChild(cursor);
+                }
+            } else {
+                cursor.style.setProperty('z-index', '2147483647', 'important');
+                // 如果没有Fancybox，确保在body中
+                if (cursor.parentElement !== document.body) {
+                    document.body.appendChild(follower);
+                    document.body.appendChild(cursor);
+                }
+            }
         }
         
         requestAnimationFrame(animateFollower);
@@ -157,13 +336,33 @@ document.addEventListener('DOMContentLoaded', function() {
     // 开始动画循环
     animateFollower();
     
-    // 强制隐藏光标的定期检查 - 使用TypeScript优化
+    // 强制z-index的定期检查 - 高频率确保覆盖
     setInterval(() => {
         forceHideCursor();
-        // 确保z-index始终保持最高
-        if (cursor) cursor.style.zIndex = '2147483647';
-        if (follower) follower.style.zIndex = '2147483646';
-    }, 200); // 每200毫秒检查一次，降低负载
+        forceMaxZIndex();
+        
+        // 额外的暴力方法：直接设置内联样式
+        if (cursor) {
+            cursor.setAttribute('style', 
+                cursor.getAttribute('style') + 
+                '; z-index: 2147483647 !important; position: fixed !important; pointer-events: none !important;'
+            );
+        }
+        if (follower) {
+            follower.setAttribute('style', 
+                follower.getAttribute('style') + 
+                '; z-index: 2147483646 !important; position: fixed !important; pointer-events: none !important;'
+            );
+        }
+        
+        // 确保元素在DOM最后
+        if (cursor && follower) {
+            if (document.body.contains(follower) && document.body.contains(cursor)) {
+                document.body.appendChild(follower);
+                document.body.appendChild(cursor);
+            }
+        }
+    }, 50); // 每50毫秒强制检查一次
     
     // 鼠标进入页面时显示光标
     document.addEventListener('mouseenter', () => {
@@ -197,8 +396,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // 监听动态添加的元素 - TypeScript优化版本
-    const observer = new MutationObserver((mutations) => {
+    // 监听动态添加的可点击元素
+    const clickableObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             mutation.addedNodes.forEach((node) => {
                 if (node.nodeType === 1 && node instanceof Element) {
@@ -223,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    observer.observe(document.body, {
+    clickableObserver.observe(document.body, {
         childList: true,
         subtree: true
     });
@@ -237,20 +436,33 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* 确保光标元素初始状态 */
+/* 确保光标元素可见且在最顶层 */
 #custom-cursor,
 #custom-cursor-follower {
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    position: fixed !important;
+    pointer-events: none !important;
+    will-change: transform, left, top;
 }
 
-/* 页面加载完成后显示光标（桌面端 hover/fine 才会触发） */
+#custom-cursor {
+    opacity: 1 !important;
+    z-index: 2147483647 !important;
+}
+
+#custom-cursor-follower {
+    opacity: 0.5 !important;
+    z-index: 2147483646 !important;
+}
+
+/* 桌面端确保显示 */
 @media (hover: hover) and (pointer: fine) {
-    body:hover #custom-cursor {
-            opacity: 1;
+    #custom-cursor {
+        opacity: 1 !important;
+        display: block !important;
     }
-    body:hover #custom-cursor-follower {
-            opacity: 0.5;
+    #custom-cursor-follower {
+        opacity: 0.5 !important;
+        display: block !important;
     }
 }
 </style>
