@@ -1,0 +1,62 @@
+/* Fancybox 自定义样式 */
+.fancybox__container {
+	z-index: 1000000 !important;
+}
+
+.fancybox__backdrop {
+	z-index: 1000001 !important;
+	background: rgba(0, 0, 0, 0.85);
+}
+
+.fancybox__carousel {
+	z-index: 1000002 !important;
+}
+
+.fancybox__slide {
+	z-index: 1000003 !important;
+}
+
+.fancybox__toolbar {
+	z-index: 1000004 !important;
+}
+
+.fancybox__thumbs {
+	z-index: 1000005 !important;
+}
+
+/* 自定义光标在 Fancybox 之上 */
+.custom-cursor,
+.custom-cursor-follower {
+	z-index: 2147483647 !important;
+}
+
+/* Fancybox 按钮样式 */
+.fancybox__button {
+	@apply transition bg-black/40 hover:bg-black/50 active:bg-black/60 flex items-center justify-center mr-0 w-12 h-12 !important;
+}
+
+.fancybox__button--zoom, 
+.fancybox__button--slideshow,
+.fancybox__button--close {
+	@apply mt-4 rounded-xl active:scale-90 !important;
+}
+
+.fancybox__button--zoom {
+	@apply mr-2.5 !important;
+}
+
+.fancybox__button--close {
+	@apply mr-4 !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+	.fancybox__toolbar {
+		padding: 8px !important;
+	}
+	
+	.fancybox__button {
+		width: 10px !important;
+		height: 10px !important;
+	}
+}
