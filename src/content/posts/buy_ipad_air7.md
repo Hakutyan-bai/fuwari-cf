@@ -31,7 +31,7 @@ iPad这个电子产品，我从小馋到大，现在有能力了就想给小时�
 <img src="https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAOBaONk11WLkAlcv253S9VJ6HLYJK4AApQMaxvYPBlXVwtjxcYLhgIBAAMCAAN3AAM2BA.jpg">
 不做评价，反正我够用
 
-# ...
+# 末
 
 虽然我是一个Apple的老用户了，iPhone4→iPhone6Plus→iPhone6s→iPhoneX→iPhone14ProMax（无一例外全是二手）但是我还是第二次买新品（第一次买了MacBook Air M1 8+256），而且也没用过iPad，不过我想这应该很好上手（事实上确实很好上手）<br>
 有了iPad那没有Pencil说不过去吧，但是我没买（打算过年之后再买）。不知道你们有没听说过Affinity（好啦现在你听说了），刚好Affinity 2.0全家桶限（时）免（费购买）了！！！！（好像只有iPad，Windows我也没看）这不巧了啊，更加想买Pencil了
