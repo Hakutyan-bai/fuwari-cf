@@ -7,7 +7,7 @@ tags: [Apple,日历,课程表,提醒]
 category: '课程表'
 draft: false 
 lang: ''
-updated: 2025-10-03 11:00:00
+updated: 2025-10-07 11:00:00
 ---
 # 前提条件
 1. 需要一份准备好的ics文件（通用日历格式）
