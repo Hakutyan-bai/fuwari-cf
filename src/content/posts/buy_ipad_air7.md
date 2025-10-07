@@ -1,5 +1,4 @@
 ---
-
 title: 买了个iPad
 published: 2025-10-06
 description: '欲买桂花同载酒......'
@@ -9,7 +8,6 @@ category: 'Apple'
 draft: false 
 lang: ''
 updated: 2025-10-06 12:00:00
-
 ---
 
 # 为什么买一个iPad
