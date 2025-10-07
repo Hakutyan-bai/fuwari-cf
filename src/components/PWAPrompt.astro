@@ -1,0 +1,242 @@
+<div id="pwa-install-toast" class="pwa-install-toast" data-visible="false">
+	<div class="pwa-install-card">
+		<div class="pwa-install-icon" aria-hidden="true">📱</div>
+		<div class="pwa-install-body">
+			<h3>安装应用</h3>
+			<p>将本站添加到主屏幕，获得类似原生应用的体验。</p>
+			<div class="pwa-install-actions">
+				<button type="button" data-action="install" class="primary">立即安装</button>
+				<button type="button" data-action="later" class="ghost">稍后</button>
+			</div>
+		</div>
+		<button type="button" data-action="close" class="pwa-install-close" aria-label="关闭">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+</div>
+
+<script is:inline>
+(function () {
+	const storageKey = "pwa-install-dismissed-until";
+	const showDelay = 2000; // ms
+	let deferredPrompt = null;
+
+	const toast = document.getElementById("pwa-install-toast");
+	if (!toast) return;
+
+	const installButton = toast.querySelector('[data-action="install"]');
+	const laterButton = toast.querySelector('[data-action="later"]');
+	const closeButton = toast.querySelector('[data-action="close"]');
+
+	function getDismissedUntil() {
+		try {
+			const value = localStorage.getItem(storageKey);
+			return value ? new Date(value) : null;
+		} catch (_error) {
+			return null;
+		}
+	}
+
+	function setDismissedUntil(date) {
+		try {
+			localStorage.setItem(storageKey, date.toISOString());
+		} catch (_error) {
+			/* 忽略 */
+		}
+	}
+
+	function clearDismissed() {
+		try {
+			localStorage.removeItem(storageKey);
+		} catch (_error) {
+			/* 忽略 */
+		}
+	}
+
+	function shouldShowPrompt() {
+		const dismissedUntil = getDismissedUntil();
+		if (!dismissedUntil) return true;
+		return Date.now() > dismissedUntil.getTime();
+	}
+
+	function showToast() {
+		if (!toast || toast.dataset.visible === "true") return;
+		toast.dataset.visible = "true";
+		toast.classList.add("visible");
+	}
+
+	function hideToast() {
+		if (!toast || toast.dataset.visible === "false") return;
+		toast.dataset.visible = "false";
+		toast.classList.remove("visible");
+	}
+
+	window.addEventListener("beforeinstallprompt", (event) => {
+		event.preventDefault();
+		deferredPrompt = event;
+
+		if (!shouldShowPrompt()) return;
+
+		setTimeout(() => {
+			if (deferredPrompt && shouldShowPrompt()) {
+				showToast();
+			}
+		}, showDelay);
+	});
+
+	installButton?.addEventListener("click", async () => {
+		if (!deferredPrompt) return;
+		deferredPrompt.prompt();
+		try {
+			await deferredPrompt.userChoice;
+		} finally {
+			deferredPrompt = null;
+			hideToast();
+		}
+	});
+
+	laterButton?.addEventListener("click", () => {
+		const in24h = new Date(Date.now() + 1000 * 60 * 60 * 24);
+		setDismissedUntil(in24h);
+		hideToast();
+	});
+
+	closeButton?.addEventListener("click", () => {
+		const in30d = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+		setDismissedUntil(in30d);
+		hideToast();
+	});
+
+	window.addEventListener("appinstalled", () => {
+		clearDismissed();
+		deferredPrompt = null;
+		hideToast();
+	});
+
+	if (shouldShowPrompt()) {
+		const dismissedUntil = getDismissedUntil();
+		if (dismissedUntil && dismissedUntil.getTime() <= Date.now()) {
+			clearDismissed();
+		}
+	}
+})();
+</script>
+
+<style is:global>
+	#pwa-install-toast {
+		position: fixed;
+		bottom: 1.5rem;
+		right: 1.5rem;
+		z-index: 50;
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(10px);
+		transition: opacity 0.25s ease, transform 0.25s ease;
+	}
+
+	#pwa-install-toast.visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.pwa-install-card {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		background: var(--card-bg, rgba(255,255,255,0.92));
+		color: inherit;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+		border-radius: 1rem;
+		padding: 1rem 1.25rem;
+		min-width: 18rem;
+		max-width: 22rem;
+		backdrop-filter: blur(16px);
+		border: 1px solid rgba(255,255,255,0.6);
+	}
+
+	html.dark .pwa-install-card {
+		background: rgba(32,32,36,0.92);
+		border-color: rgba(255,255,255,0.08);
+	}
+
+	.pwa-install-icon {
+		font-size: 1.75rem;
+	}
+
+	.pwa-install-body h3 {
+		margin: 0 0 0.25rem;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	.pwa-install-body p {
+		margin: 0 0 0.75rem;
+		font-size: 0.875rem;
+		line-height: 1.4;
+		color: rgba(0,0,0,0.65);
+	}
+
+	html.dark .pwa-install-body p {
+		color: rgba(255,255,255,0.7);
+	}
+
+	.pwa-install-actions {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.pwa-install-actions button {
+		border: none;
+		padding: 0.5rem 0.9rem;
+		border-radius: 999px;
+		font-size: 0.8rem;
+		cursor: pointer;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.pwa-install-actions button:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: 2px;
+	}
+
+	.pwa-install-actions button.primary {
+		background: var(--primary);
+		color: #fff;
+		box-shadow: 0 8px 20px rgba(255,107,157,0.28);
+	}
+
+	.pwa-install-actions button.primary:hover {
+		transform: translateY(-1px);
+	}
+
+	.pwa-install-actions button.ghost {
+		background: transparent;
+		color: inherit;
+		border: 1px solid currentColor;
+	}
+
+	.pwa-install-close {
+		border: none;
+		background: transparent;
+		color: rgba(0,0,0,0.4);
+		font-size: 1.5rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	html.dark .pwa-install-close {
+		color: rgba(255,255,255,0.4);
+	}
+
+	@media (max-width: 768px) {
+		#pwa-install-toast {
+			left: 1.25rem;
+			right: 1.25rem;
+		}
+
+		.pwa-install-card {
+			width: 100%;
+		}
+	}
+</style>
