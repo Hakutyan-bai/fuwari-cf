@@ -125,7 +125,7 @@ export default defineConfig({
 			disable: process.env.DISABLE_PWA === "true",
 			manifest: {
 				name: "鈴奈咲桜的Blog",
-				short_name: "桜のBlog",
+				short_name: "鈴奈咲桜のBlog",
 				description: "愛することを忘れないで",
 				start_url: "/",
 				scope: "/",
