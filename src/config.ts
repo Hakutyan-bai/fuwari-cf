@@ -47,6 +47,13 @@ export const siteConfig: SiteConfig = {
 		],
 		intervalSeconds: 5,
 	},
+	umami: {
+		enable: true,
+		websiteId: "f7b1324b-9b51-4b00-bc8d-726cbed5168d",
+		apiEndpoint: "https://api.umami.is",
+		apiKey: "api_NqmrT65HsrwXosO7VqPCXXQPvWr6DclQ",
+		timezone: "Asia/Shanghai",
+	},
 };
 
 export const navBarConfig: NavBarConfig = {
