@@ -245,35 +245,49 @@
         cursor: none !important;
     }
 
-    /* 主光标（小白点） */
-    .custom-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
+    /* 主光标（小白点） - 最高z-index */
+    .custom-cursor,
+    #custom-cursor {
+        position: fixed !important;
         width: 8px;
         height: 8px;
         background-color: var(--primary);
         border-radius: 50%;
-        pointer-events: none;
-        z-index: 2147483647; /* 最大安全整数值，确保在所有元素之上 */
+        pointer-events: none !important;
+        z-index: 2147483647 !important; /* 最大安全整数值 */
         transform: translate(-50%, -50%);
         transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+    
+    /* 多层选择器确保优先级 */
+    html body #custom-cursor,
+    body #custom-cursor,
+    html #custom-cursor {
+        z-index: 2147483647 !important;
+        position: fixed !important;
+    }
 
     /* 跟随光标（大圆点，延迟效果） */
-    .custom-cursor-follower {
-        position: fixed;
-        top: 0;
-        left: 0;
+    .custom-cursor-follower,
+    #custom-cursor-follower {
+        position: fixed !important;
         width: 24px;
         height: 24px;
         background-color: var(--primary);
         border-radius: 50%;
-        pointer-events: none;
-        z-index: 2147483646; /* 稍低于主光标，但仍然是极高层级 */
+        pointer-events: none !important;
+        z-index: 2147483646 !important;
         opacity: 0.5;
         transform: translate(-50%, -50%);
         transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    /* 多层选择器确保优先级 */
+    html body #custom-cursor-follower,
+    body #custom-cursor-follower,
+    html #custom-cursor-follower {
+        z-index: 2147483646 !important;
+        position: fixed !important;
     }
 
     /* 当鼠标悬停在可点击元素上时的效果 */

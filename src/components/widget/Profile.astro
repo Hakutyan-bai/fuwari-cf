@@ -1,10 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
-import { profileConfig } from "../../config";
+import { profileConfig, siteConfig } from "../../config";
 import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+const umamiConfig = siteConfig.umami;
 ---
 <div class="card-base p-3">
     <a aria-label="Go to About Page" href={url('/about/')}
@@ -35,51 +36,75 @@ const config = profileConfig;
             </a>}
         </div>
         <!-- 浏览量和访问次数显示区域，插入在社交链接下方 -->
+        {umamiConfig?.enable && (
         <div class="text-sm text-gray-500 mt-2 text-center">
           <Icon name="fa6-solid:eye" class="inline-block mr-1 text-gray-400 text-sm align-middle" />
           浏览量：<span id="umami-pageviews">-</span>，
           访问次数：<span id="umami-visits">-</span>
         </div>
-        <script is:inline>
-          const fetchUmamiStats = async () => {
-
-            const shareRes = await fetch('https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr');
-            const shareData = await shareRes.json();
-            const token = shareData.token;
-
-            
-            const url = 'https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?' +
-              new URLSearchParams({
-                startAt: '1753333200000',
-                endAt: Date.now(),
-                unit: 'hour',
-                timezone: 'Asia/Shanghai',
-                url: '/',
-                compare: 'false',
-              });
-            try {
-              const res = await fetch(url, {
-                method: 'GET',
-                headers: {
-                  'x-umami-share-token': token,
-                },
-              });
-              const data = await res.json();
-              if (res.ok) {
-                const pageviews = data?.pageviews?.value ?? 'N/A';
-                const visits = data?.visits?.value ?? 'N/A';
-                document.getElementById('umami-pageviews').textContent = pageviews;
-                document.getElementById('umami-visits').textContent = visits;
-              } else {
+        )}
+        <script is:inline define:vars={{ umamiConfig }}>
+          // 清除可能的旧函数
+          window.fetchUmamiStats = null;
+          
+          if (umamiConfig?.enable) {
+            const fetchUmamiStats = async () => {
+              try {
+                // 构建 API URL - 根据官方文档使用 /v1/websites/{websiteId}/stats
+                const apiUrl = `${umamiConfig.apiEndpoint}/v1/websites/${umamiConfig.websiteId}/stats?` +
+                  new URLSearchParams({
+                    startAt: new Date('2025-01-01').getTime().toString(),
+                    endAt: Date.now().toString(),
+                  });
+                
+                console.log('[Umami Profile] Fetching from:', apiUrl);
+                console.log('[Umami Profile] Using API Key:', umamiConfig.apiKey.substring(0, 10) + '...');
+                
+                const res = await fetch(apiUrl, {
+                  method: 'GET',
+                  headers: {
+                    'Accept': 'application/json',
+                    'x-umami-api-key': umamiConfig.apiKey,
+                  },
+                });
+                
+                console.log('[Umami Profile] Response status:', res.status);
+                
+                if (res.ok) {
+                  const data = await res.json();
+                  console.log('[Umami Profile] Response data:', data);
+                  console.log('[Umami Profile] pageviews:', data.pageviews);
+                  console.log('[Umami Profile] visits:', data.visits);
+                  
+                  // 根据 Umami API 返回格式：可能是 { pageviews: { value, prev }, visits: { value, prev } }
+                  // 或者直接是数字：{ pageviews: 123, visits: 45 }
+                  let pageviews, visits;
+                  
+                  if (typeof data.pageviews === 'object' && data.pageviews !== null) {
+                    pageviews = data.pageviews.value ?? 'N/A';
+                    visits = data.visits.value ?? 'N/A';
+                  } else {
+                    pageviews = data.pageviews ?? 'N/A';
+                    visits = data.visits ?? 'N/A';
+                  }
+                  
+                  console.log('[Umami Profile] Final values - pageviews:', pageviews, 'visits:', visits);
+                  document.getElementById('umami-pageviews').textContent = pageviews;
+                  document.getElementById('umami-visits').textContent = visits;
+                } else {
+                  const errorText = await res.text();
+                  console.error('[Umami Profile] API error:', res.status, errorText);
+                  document.getElementById('umami-pageviews').textContent = 'N/A';
+                  document.getElementById('umami-visits').textContent = 'N/A';
+                }
+              } catch (err) {
+                console.error('[Umami Profile] Fetch error:', err);
                 document.getElementById('umami-pageviews').textContent = 'N/A';
                 document.getElementById('umami-visits').textContent = 'N/A';
               }
-            } catch (err) {
-              document.getElementById('umami-pageviews').textContent = 'N/A';
-              document.getElementById('umami-visits').textContent = 'N/A';
-            }
-          };
-          fetchUmamiStats();
+            };
+            fetchUmamiStats();
+          }
         </script>
     </div>
 </div>

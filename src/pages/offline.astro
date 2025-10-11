@@ -1,0 +1,22 @@
+---
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout title="离线模式" description="您当前处于离线状态">
+	<section class="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center gap-6 px-6 text-center">
+		<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-3xl">
+			📡
+		</div>
+		<h1 class="text-3xl font-bold md:text-4xl">您当前处于离线状态</h1>
+		<p class="text-base text-neutral-600 dark:text-neutral-300">
+			看起来网络连接暂时中断。您仍然可以浏览一些已缓存的内容，恢复连接后再试一次即可访问全部功能。
+		</p>
+		<button
+			type="button"
+			onclick="window.location.reload()"
+			class="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:-translate-y-0.5 hover:shadow-xl"
+		>
+			重新加载页面
+		</button>
+	</section>
+</Layout>

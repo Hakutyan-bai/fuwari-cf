@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
+import AstroPWA from "@vite-pwa/astro";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
@@ -108,6 +109,98 @@ export default defineConfig({
 		sitemap(),
 		fuwariLinkCard({
 			internalLink: { enabled: true },
+		}),
+		AstroPWA({
+			mode:
+				process.env.NODE_ENV === "development" ? "development" : "production",
+			base: "/",
+			scope: "/",
+			includeAssets: [
+				"favicon/favicon-light-32.png",
+				"favicon/favicon-dark-32.png",
+				"favicon/favicon-light-192.png",
+				"favicon/favicon-dark-192.png",
+			],
+			registerType: "autoUpdate",
+			disable: process.env.DISABLE_PWA === "true",
+			manifest: {
+				name: "鈴奈咲桜的Blog",
+				short_name: "鈴奈咲桜のBlog",
+				description: "愛することを忘れないで",
+				start_url: "/",
+				scope: "/",
+				display: "standalone",
+				lang: "zh-CN",
+				dir: "ltr",
+				background_color: "#ffffff",
+				theme_color: "#ff6b9d",
+				orientation: "portrait-primary",
+				icons: [
+					{
+						src: "pwa-64x64.png",
+						sizes: "64x64",
+						type: "image/png",
+					},
+					{
+						src: "pwa-192x192.png",
+						sizes: "192x192",
+						type: "image/png",
+					},
+					{
+						src: "pwa-512x512.png",
+						sizes: "512x512",
+						type: "image/png",
+						purpose: "any",
+					},
+					{
+						src: "maskable-icon-512x512.png",
+						sizes: "512x512",
+						type: "image/png",
+						purpose: "maskable",
+					},
+				],
+			},
+			workbox: {
+				navigateFallback: "/offline/",
+				globPatterns: ["**/*.{html,js,css,svg,png,ico,webp,woff2}"],
+				runtimeCaching: [
+					{
+						urlPattern: ({ request }) => request.destination === "document",
+						handler: "NetworkFirst",
+						options: {
+							cacheName: "pages",
+							networkTimeoutSeconds: 10,
+							cacheableResponse: {
+								statuses: [0, 200],
+							},
+						},
+					},
+					{
+						urlPattern: ({ request }) =>
+							["style", "script", "worker"].includes(request.destination),
+						handler: "StaleWhileRevalidate",
+						options: {
+							cacheName: "assets",
+						},
+					},
+					{
+						urlPattern: ({ request }) => request.destination === "image",
+						handler: "CacheFirst",
+						options: {
+							cacheName: "images",
+							expiration: {
+								maxEntries: 60,
+								maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+							},
+						},
+					},
+				],
+			},
+			devOptions: {
+				enabled: true,
+				navigateFallbackAllowlist: [/^\/$/],
+				reloadPageOnUpdate: true,
+			},
 		}),
 	],
 	markdown: {
