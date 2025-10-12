@@ -1,7 +1,3 @@
-/**
- * Umami 统计数据获取和缓存工具
- */
-
 const CACHE_CONFIG = {
   shareData: {
     keyPrefix: 'umami_share_',
@@ -39,7 +35,6 @@ function setCache(key, data, ttl) {
     };
     localStorage.setItem(key, JSON.stringify(cacheEntry));
   } catch (error) {
-    // Ignore cache errors
   }
 }
 
@@ -52,13 +47,11 @@ function clearUmamiCache() {
       }
     });
   } catch (error) {
-    // Ignore cache errors
   }
 }
 
 async function fetchShareData(shareId) {
   const cacheKey = `${CACHE_CONFIG.shareData.keyPrefix}${shareId}`;
-  
   const cachedData = getCache(cacheKey);
   if (cachedData) {
     return cachedData;
@@ -80,7 +73,6 @@ async function fetchShareData(shareId) {
 
 async function fetchWebsiteStats(websiteId, token, params) {
   const cacheKey = `${CACHE_CONFIG.websiteStats.keyPrefix}${websiteId}_${JSON.stringify(params)}`;
-  
   const cachedData = getCache(cacheKey);
   if (cachedData) {
     return cachedData;

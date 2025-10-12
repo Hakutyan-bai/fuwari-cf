@@ -1,16 +1,24 @@
         <script is:inline>
+          let scriptLoading = null;
+          
           const loadUmamiScript = () => {
-            return new Promise((resolve, reject) => {
-              if (window.fetchShareData && window.fetchWebsiteStats) {
-                resolve();
-              } else {
-                const script = document.createElement('script');
-                script.src = '/js/umami-share.js';
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
-              }
+            if (window.fetchShareData && window.fetchWebsiteStats) {
+              return Promise.resolve();
+            }
+            
+            if (scriptLoading) {
+              return scriptLoading;
+            }
+            
+            scriptLoading = new Promise((resolve, reject) => {
+              const script = document.createElement('script');
+              script.src = '/js/umami-share.js';
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
             });
+            
+            return scriptLoading;
           };
           
           const fetchUmamiStats = async () => {

@@ -48,28 +48,25 @@ let visits = '加载中...';
 
 if (url && !isHome) {
   try {
-    // 获取分享令牌
     const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
     if (shareRes.ok) {
       const shareData = await shareRes.json();
       const token = shareData.token;
       
-      // 从 URL 中提取文章 slug（例如 /posts/my-article/ -> my-article）
       const slug = url.split('/').filter(Boolean).pop() || '';
       
-      // 构造统计数据 URL，使用 path 参数而不是 url 参数
-      const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
-        new URLSearchParams({
-          startAt: '0',
-          endAt: Date.now().toString(),
-          unit: 'hour',
-          timezone: 'Asia/Shanghai',
-          // 使用 path 参数来精确匹配文章路径
-          path: `eq./posts/${slug}/`,
-          compare: 'false',
-        });
+      const params = {
+        startAt: '0',
+        endAt: Date.now().toString(),
+        unit: 'hour',
+        timezone: 'Asia/Shanghai',
+        path: `eq./posts/${slug}/`,
+        compare: 'false',
+      };
         
-      // 获取统计数据
+      const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
+        new URLSearchParams(params);
+      
       const res = await fetch(statsUrl, {
         method: 'GET',
         headers: {
@@ -79,7 +76,6 @@ if (url && !isHome) {
       
       if (res.ok) {
         const data = await res.json();
-        // 根据 Umami API v2 数据结构变更的经验，直接使用数值字段
         pageviews = data.pageviews?.toString() ?? 'N/A';
         visits = data.visits?.toString() ?? 'N/A';
       }
@@ -164,18 +160,26 @@ if (url && !isHome) {
           </div>
 
           <script is:inline>
+            let scriptLoading = null;
+            
             const loadUmamiScript = () => {
-              return new Promise((resolve, reject) => {
-                if (window.fetchShareData && window.fetchWebsiteStats) {
-                  resolve();
-                } else {
-                  const script = document.createElement('script');
-                  script.src = '/js/umami-share.js';
-                  script.onload = resolve;
-                  script.onerror = reject;
-                  document.head.appendChild(script);
-                }
+              if (window.fetchShareData && window.fetchWebsiteStats) {
+                return Promise.resolve();
+              }
+              
+              if (scriptLoading) {
+                return scriptLoading;
+              }
+              
+              scriptLoading = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = '/js/umami-share.js';
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
               });
+              
+              return scriptLoading;
             };
             
             const getArticlePathname = () => {
@@ -185,7 +189,6 @@ if (url && !isHome) {
                   return container.dataset.url;
                 }
               } catch (e) {
-                // Fallback to window.location.pathname
               }
               return window.location.pathname;
             };
