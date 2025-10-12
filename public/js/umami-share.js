@@ -1,26 +1,67 @@
 /**
  * Umami 统计数据获取和缓存工具
- * 用于处理共享数据获取、缓存和错误处理
  */
 
-// 全局缓存对象
-const umamiCache = new Map();
+const CACHE_CONFIG = {
+  shareData: {
+    keyPrefix: 'umami_share_',
+    ttl: 60 * 60 * 1000
+  },
+  websiteStats: {
+    keyPrefix: 'umami_stats_',
+    ttl: 5 * 60 * 1000
+  }
+};
 
-/**
- * 获取 Umami 共享数据
- * @param {string} shareId - 共享ID
- * @returns {Promise<Object>} 共享数据
- */
-async function fetchShareData(shareId) {
-  const cacheKey = `share_${shareId}`;
-  
-  // 检查缓存
-  if (umamiCache.has(cacheKey)) {
-    const cached = umamiCache.get(cacheKey);
-    // 缓存1小时
-    if (Date.now() - cached.timestamp < 60 * 60 * 1000) {
-      return cached.data;
+function getCache(key) {
+  try {
+    const cached = localStorage.getItem(key);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.timestamp < parsed.ttl) {
+        return parsed.data;
+      } else {
+        localStorage.removeItem(key);
+      }
     }
+  } catch (error) {
+    localStorage.removeItem(key);
+  }
+  return null;
+}
+
+function setCache(key, data, ttl) {
+  try {
+    const cacheEntry = {
+      data,
+      timestamp: Date.now(),
+      ttl
+    };
+    localStorage.setItem(key, JSON.stringify(cacheEntry));
+  } catch (error) {
+    // Ignore cache errors
+  }
+}
+
+function clearUmamiCache() {
+  try {
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith(CACHE_CONFIG.shareData.keyPrefix) || 
+          key.startsWith(CACHE_CONFIG.websiteStats.keyPrefix)) {
+        localStorage.removeItem(key);
+      }
+    });
+  } catch (error) {
+    // Ignore cache errors
+  }
+}
+
+async function fetchShareData(shareId) {
+  const cacheKey = `${CACHE_CONFIG.shareData.keyPrefix}${shareId}`;
+  
+  const cachedData = getCache(cacheKey);
+  if (cachedData) {
+    return cachedData;
   }
   
   try {
@@ -30,37 +71,19 @@ async function fetchShareData(shareId) {
     }
     
     const data = await response.json();
-    
-    // 存储到缓存
-    umamiCache.set(cacheKey, {
-      data,
-      timestamp: Date.now()
-    });
-    
+    setCache(cacheKey, data, CACHE_CONFIG.shareData.ttl);
     return data;
   } catch (error) {
-    console.error('Error fetching Umami share data:', error);
     throw error;
   }
 }
 
-/**
- * 获取网站统计数据
- * @param {string} websiteId - 网站ID
- * @param {string} token - 访问令牌
- * @param {Object} params - 查询参数
- * @returns {Promise<Object>} 统计数据
- */
 async function fetchWebsiteStats(websiteId, token, params) {
-  const cacheKey = `stats_${websiteId}_${JSON.stringify(params)}`;
+  const cacheKey = `${CACHE_CONFIG.websiteStats.keyPrefix}${websiteId}_${JSON.stringify(params)}`;
   
-  // 检查缓存
-  if (umamiCache.has(cacheKey)) {
-    const cached = umamiCache.get(cacheKey);
-    // 缓存5分钟
-    if (Date.now() - cached.timestamp < 5 * 60 * 1000) {
-      return cached.data;
-    }
+  const cachedData = getCache(cacheKey);
+  if (cachedData) {
+    return cachedData;
   }
   
   try {
@@ -79,20 +102,13 @@ async function fetchWebsiteStats(websiteId, token, params) {
     }
     
     const data = await response.json();
-    
-    // 存储到缓存
-    umamiCache.set(cacheKey, {
-      data,
-      timestamp: Date.now()
-    });
-    
+    setCache(cacheKey, data, CACHE_CONFIG.websiteStats.ttl);
     return data;
   } catch (error) {
-    console.error('Error fetching Umami stats:', error);
     throw error;
   }
 }
 
-// 导出函数供全局使用
 window.fetchShareData = fetchShareData;
 window.fetchWebsiteStats = fetchWebsiteStats;
+window.clearUmamiCache = clearUmamiCache;
