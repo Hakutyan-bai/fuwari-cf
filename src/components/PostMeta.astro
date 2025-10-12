@@ -41,8 +41,57 @@ const isHome = homePaths.includes(Astro.url.pathname);
 
 // 为每个文章生成唯一的 ID
 const uniqueId = url ? encodeURIComponent(url) : 'default';
+
+// 在服务端获取 Umami 统计数据
+let pageviews = '加载中...';
+let visits = '加载中...';
+
+if (url && !isHome) {
+  try {
+    // 获取分享令牌
+    const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
+    if (shareRes.ok) {
+      const shareData = await shareRes.json();
+      const token = shareData.token;
+      
+      // 从 URL 中提取文章 slug（例如 /posts/my-article/ -> my-article）
+      const slug = url.split('/').filter(Boolean).pop() || '';
+      
+      // 构造统计数据 URL，使用 path 参数而不是 url 参数
+      const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
+        new URLSearchParams({
+          startAt: '0',
+          endAt: Date.now().toString(),
+          unit: 'hour',
+          timezone: 'Asia/Shanghai',
+          // 使用 path 参数来精确匹配文章路径
+          path: `eq./posts/${slug}/`,
+          compare: 'false',
+        });
+        
+      // 获取统计数据
+      const res = await fetch(statsUrl, {
+        method: 'GET',
+        headers: {
+          'x-umami-share-token': token,
+        },
+      });
+      
+      if (res.ok) {
+        const data = await res.json();
+        // 根据 Umami API v2 数据结构变更的经验，直接使用数值字段
+        pageviews = data.pageviews?.toString() ?? 'N/A';
+        visits = data.visits?.toString() ?? 'N/A';
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching Umami stats in Astro component:', error);
+    pageviews = 'N/A';
+    visits = 'N/A';
+  }
+}
 ---
-<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]} data-url={url}>
   {pinned && (
     <div class="flex items-center text-[var(--primary)]">
       <div class="meta-icon">
@@ -110,50 +159,110 @@ const uniqueId = url ? encodeURIComponent(url) : 'default';
               <div class="meta-icon">
                   <Icon name="material-symbols:visibility-outline-rounded" class="text-xl"></Icon>
               </div>
-              <span>浏览量：<span id={`post-umami-pageviews-meta-${uniqueId}`}>加载中...</span></span>，
-              <span>访问次数：<span id={`post-umami-visits-meta-${uniqueId}`}>加载中...</span></span>
+              <span>浏览量：<span id={`post-umami-pageviews-meta-${uniqueId}`}>{pageviews}</span></span>，
+              <span>访问次数：<span id={`post-umami-visits-meta-${uniqueId}`}>{visits}</span></span>
           </div>
 
           <script is:inline>
             const fetchUmamiStatss = async () => {
-              // 使用传入的 url 参数，如果没有则使用当前页面路径
-              const pathname = "{url}" || window.location.pathname;
-              const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
-              const shareData = await shareRes.json();
-              const token = shareData.token;
-              const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
-                new URLSearchParams({
-                  startAt: '0',
-                  endAt: Date.now(),
-                  unit: 'hour',
-                  timezone: 'Asia/Shanghai',
-                  url: pathname,
-                  compare: 'false',
-                });
-              const res = await fetch(statsUrl, {
-                method: 'GET',
-                headers: {
-                  'x-umami-share-token': token,
-                },
-              });
-              
-              // 构造 uniqueId
-              const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
-              const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
-              const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
-              
-              // 检查元素是否存在，避免设置 null 的 textContent
-              if (!res.ok) {
-                if (pageviewsElement) pageviewsElement.textContent = 'N/A';
-                if (visitsElement) visitsElement.textContent = 'N/A';
-                return;
+              // 安全地获取文章路径，避免 null 错误
+              let pathname = window.location.pathname;
+              try {
+                const container = document.currentScript ? document.currentScript.closest('.flex.flex-wrap') : null;
+                if (container && container.dataset.url) {
+                  pathname = container.dataset.url;
+                }
+              } catch (e) {
+                console.warn('Could not get URL from data attribute, using window.location.pathname');
               }
               
-              const data = await res.json();
-              if (pageviewsElement) pageviewsElement.textContent = data.pageviews ?? 'N/A';
-              if (visitsElement) visitsElement.textContent = data.visits ?? 'N/A';
+              try {
+                // 获取分享令牌
+                const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
+                if (!shareRes.ok) {
+                  throw new Error(`Share API failed with status ${shareRes.status}`);
+                }
+                const shareData = await shareRes.json();
+                const token = shareData.token;
+                
+                // 从 URL 中提取文章 slug（例如 /posts/my-article/ -> my-article）
+                const slug = pathname.split('/').filter(Boolean).pop() || '';
+                
+                // 构造统计数据 URL，使用 path 参数而不是 url 参数
+                const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
+                  new URLSearchParams({
+                    startAt: '0',
+                    endAt: Date.now(),
+                    unit: 'hour',
+                    timezone: 'Asia/Shanghai',
+                    // 使用 path 参数来精确匹配文章路径
+                    path: `eq./posts/${slug}/`,
+                    compare: 'false',
+                  });
+                  
+                // 获取统计数据
+                const res = await fetch(statsUrl, {
+                  method: 'GET',
+                  headers: {
+                    'x-umami-share-token': token,
+                  },
+                });
+                
+                // 构造 uniqueId
+                const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
+                
+                // 获取页面元素
+                const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+                const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+                
+                // 检查元素是否存在
+                if (!pageviewsElement || !visitsElement) {
+                  return;
+                }
+                
+                if (!res.ok) {
+                  pageviewsElement.textContent = 'N/A';
+                  visitsElement.textContent = 'N/A';
+                  return;
+                }
+                
+                const data = await res.json();
+                
+                // 根据 Umami API v2 数据结构变更的经验，直接使用数值字段
+                pageviewsElement.textContent = data.pageviews ?? 'N/A';
+                visitsElement.textContent = data.visits ?? 'N/A';
+              } catch (error) {
+                console.error('Error fetching Umami stats:', error);
+                
+                // 安全地获取文章路径，避免 null 错误
+                let pathname = window.location.pathname;
+                try {
+                  const container = document.currentScript ? document.currentScript.closest('.flex.flex-wrap') : null;
+                  if (container && container.dataset.url) {
+                    pathname = container.dataset.url;
+                  }
+                } catch (e) {
+                  console.warn('Could not get URL from data attribute, using window.location.pathname');
+                }
+                
+                // 构造 uniqueId
+                const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
+                
+                const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+                const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+                
+                if (pageviewsElement) pageviewsElement.textContent = 'N/A';
+                if (visitsElement) visitsElement.textContent = 'N/A';
+              }
             };
-            fetchUmamiStatss();
+            
+            // 等待 DOM 加载完成后执行
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', fetchUmamiStatss);
+            } else {
+              fetchUmamiStatss();
+            }
+            
             setInterval(fetchUmamiStatss, 5000);
           </script>
         </>
