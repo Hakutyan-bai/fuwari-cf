@@ -15,6 +15,7 @@ interface Props {
 	hideTagsForMobile?: boolean;
 	hideUpdateDate?: boolean;
 	pinned?: boolean;
+	url?: string; // 添加 url 参数支持
 }
 const {
 	published,
@@ -24,32 +25,11 @@ const {
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
 	pinned = false,
+	url // 解构 url 参数
 } = Astro.props;
 const className = Astro.props.class;
 
 // 判断是否是首页
-// const isHome =
-// 	Astro.url.pathname === "/" ||
-// 	"2" ||
-// 	"3" ||
-// 	"4" ||
-// 	"5" ||
-// 	"6" ||
-// 	"7" ||
-// 	"8" ||
-// 	"9" ||
-// 	"10" ||
-// 	"11" ||
-// 	"12" ||
-// 	"13" ||
-// 	"14" ||
-// 	"15" ||
-// 	"16" ||
-// 	"17" ||
-// 	"18" ||
-// 	"19" ||
-// 	"20";
-
 const homePaths = [
 	"/",
 	"/featured",
@@ -58,6 +38,9 @@ const homePaths = [
 	...Array.from({ length: 20 }, (_, i) => `/featured/${i + 1}/`),
 ];
 const isHome = homePaths.includes(Astro.url.pathname);
+
+// 为每个文章生成唯一的 ID
+const uniqueId = url ? encodeURIComponent(url) : 'default';
 ---
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
   {pinned && (
@@ -127,13 +110,14 @@ const isHome = homePaths.includes(Astro.url.pathname);
               <div class="meta-icon">
                   <Icon name="material-symbols:visibility-outline-rounded" class="text-xl"></Icon>
               </div>
-              <span>浏览量：<span id="post-umami-pageviews">加载中...</span></span>，
-              <span>访问次数：<span id="post-umami-visits">加载中...</span></span>
+              <span>浏览量：<span id={`post-umami-pageviews-meta-${uniqueId}`}>加载中...</span></span>，
+              <span>访问次数：<span id={`post-umami-visits-meta-${uniqueId}`}>加载中...</span></span>
           </div>
 
           <script is:inline>
             const fetchUmamiStatss = async () => {
-              const pathname = window.location.pathname;
+              // 使用传入的 url 参数，如果没有则使用当前页面路径
+              const pathname = "{url}" || window.location.pathname;
               const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
               const shareData = await shareRes.json();
               const token = shareData.token;
@@ -152,14 +136,22 @@ const isHome = homePaths.includes(Astro.url.pathname);
                   'x-umami-share-token': token,
                 },
               });
+              
+              // 构造 uniqueId
+              const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
+              const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+              const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+              
+              // 检查元素是否存在，避免设置 null 的 textContent
               if (!res.ok) {
-                document.getElementById('post-umami-pageviews').textContent = 'N/A';
-                document.getElementById('post-umami-visits').textContent = 'N/A';
+                if (pageviewsElement) pageviewsElement.textContent = 'N/A';
+                if (visitsElement) visitsElement.textContent = 'N/A';
                 return;
               }
+              
               const data = await res.json();
-              document.getElementById('post-umami-pageviews').textContent = data.pageviews ?? 'N/A';
-              document.getElementById('post-umami-visits').textContent = data.visits ?? 'N/A';
+              if (pageviewsElement) pageviewsElement.textContent = data.pageviews ?? 'N/A';
+              if (visitsElement) visitsElement.textContent = data.visits ?? 'N/A';
             };
             fetchUmamiStatss();
             setInterval(fetchUmamiStatss, 5000);

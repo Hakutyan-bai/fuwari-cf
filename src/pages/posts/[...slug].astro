@@ -105,15 +105,9 @@ const jsonLd = {
                         tags={entry.data.tags}
                         category={entry.data.category}
                         pinned={entry.data.pinned}
+                        url={Astro.url.pathname}
 
                 ></PostMetadata>
-
-                    <!-- ✅ 浏览量展示插入此处 -->
-                    <div class="text-sm text-gray-500 ml-1 mb-4 flex items-center gap-1">
-                    <Icon name="fa6-solid:eye" class="text-gray-400 text-sm" />
-                    <span>浏览量：<span id="post-umami-pageviews">-</span></span>，
-                    <span>访问次数：<span id="post-umami-visits">-</span></span>
-                    </div>
 
                 {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
             </div>
@@ -159,48 +153,6 @@ const jsonLd = {
 
     <!-- 添加隐藏元素存储日期 -->
     <div id="last-modified" data-last-modified={lastModified} style="display: none;"></div>
-
-
-
-    <script is:inline>
-      const fetchUmamiStatss = async () => {
-        // 获取当前文章路径
-        const pathname = window.location.pathname;
-        // 获取 websiteId 和 token
-        const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
-        const shareData = await shareRes.json();
-        
-        const token = shareData.token;
-        
-
-        const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
-          new URLSearchParams({
-            startAt: '0',
-            endAt: Date.now(),
-            unit: 'hour',
-            timezone: 'Asia/Shanghai',
-            url: pathname,
-            compare: 'false',
-          });
-        const res = await fetch(statsUrl, {
-          method: 'GET',
-          headers: {
-            'x-umami-share-token': token,
-          },
-        });
-        if (!res.ok) {
-          document.getElementById('post-umami-pageviews').textContent = 'N/A';
-          document.getElementById('post-umami-visits').textContent = 'N/A';
-          return;
-        }
-        const data = await res.json();
-        document.getElementById('post-umami-pageviews').textContent = data.pageviews ?? 'N/A';
-        document.getElementById('post-umami-visits').textContent = data.visits ?? 'N/A';
-      };
-      fetchUmamiStatss();
-      setInterval(fetchUmamiStatss, 5000);
-    </script>
-
 
     <div class="card-base p-6 mb-4">
         <script is:inline>
