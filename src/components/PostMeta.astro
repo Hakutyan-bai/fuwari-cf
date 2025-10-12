@@ -134,15 +134,15 @@ const isHome = homePaths.includes(Astro.url.pathname);
           <script is:inline>
             const fetchUmamiStatss = async () => {
               const pathname = window.location.pathname;
-              const shareRes = await fetch('https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr');
+              const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
               const shareData = await shareRes.json();
               const token = shareData.token;
-              const statsUrl = `https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
+              const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
                 new URLSearchParams({
-                  startAt: '1753333200000',
+                  startAt: '0',
                   endAt: Date.now(),
                   unit: 'hour',
-                  timezone: 'Asia/Hong_Kong',
+                  timezone: 'Asia/Shanghai',
                   url: pathname,
                   compare: 'false',
                 });
@@ -158,8 +158,8 @@ const isHome = homePaths.includes(Astro.url.pathname);
                 return;
               }
               const data = await res.json();
-              document.getElementById('post-umami-pageviews').textContent = data.pageviews?.value ?? 'N/A';
-              document.getElementById('post-umami-visits').textContent = data.visits?.value ?? 'N/A';
+              document.getElementById('post-umami-pageviews').textContent = data.pageviews ?? 'N/A';
+              document.getElementById('post-umami-visits').textContent = data.visits ?? 'N/A';
             };
             fetchUmamiStatss();
             setInterval(fetchUmamiStatss, 5000);
