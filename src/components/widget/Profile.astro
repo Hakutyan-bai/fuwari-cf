@@ -1,111 +1,61 @@
----
-import { Icon } from "astro-icon/components";
-import { profileConfig, siteConfig } from "../../config";
-import { url } from "../../utils/url-utils";
-import ImageWrapper from "../misc/ImageWrapper.astro";
-
-const config = profileConfig;
-const umamiConfig = siteConfig.umami;
----
-<div class="card-base p-3">
-    <a aria-label="Go to About Page" href={url('/about/')}
-       class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
-        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center">
-            <Icon name="fa6-regular:address-card"
-                  class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
-            </Icon>
-        </div>
-        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
-    </a>
-    <div class="px-2">
-        <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
-        <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
-        <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
-        <div class="flex gap-2 justify-center mb-1">
-            {config.links.length > 1 && config.links.map(item =>
-                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                        <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                    </a>
-            )}
-            {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
-                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                <Icon name={config.links[0].icon} class="text-[1.5rem]"></Icon>
-                {config.links[0].name}
-            </a>}
-        </div>
-        <!-- 浏览量和访问次数显示区域，插入在社交链接下方 -->
-        {umamiConfig?.enable && (
-        <div class="text-sm text-gray-500 mt-2 text-center">
-          <Icon name="fa6-solid:eye" class="inline-block mr-1 text-gray-400 text-sm align-middle" />
-          浏览量：<span id="umami-pageviews">-</span>，
-          访问次数：<span id="umami-visits">-</span>
-        </div>
-        )}
-        <script is:inline define:vars={{ umamiConfig }}>
-          // 清除可能的旧函数
-          window.fetchUmamiStats = null;
+        <script is:inline>
+          let scriptLoading = null;
           
-          if (umamiConfig?.enable) {
-            const fetchUmamiStats = async () => {
-              try {
-                // 构建 API URL - 根据官方文档使用 /v1/websites/{websiteId}/stats
-                const apiUrl = `${umamiConfig.apiEndpoint}/v1/websites/${umamiConfig.websiteId}/stats?` +
-                  new URLSearchParams({
-                    startAt: new Date('2025-01-01').getTime().toString(),
-                    endAt: Date.now().toString(),
-                  });
-                
-                console.log('[Umami Profile] Fetching from:', apiUrl);
-                console.log('[Umami Profile] Using API Key:', umamiConfig.apiKey.substring(0, 10) + '...');
-                
-                const res = await fetch(apiUrl, {
-                  method: 'GET',
-                  headers: {
-                    'Accept': 'application/json',
-                    'x-umami-api-key': umamiConfig.apiKey,
-                  },
-                });
-                
-                console.log('[Umami Profile] Response status:', res.status);
-                
-                if (res.ok) {
-                  const data = await res.json();
-                  console.log('[Umami Profile] Response data:', data);
-                  console.log('[Umami Profile] pageviews:', data.pageviews);
-                  console.log('[Umami Profile] visits:', data.visits);
-                  
-                  // 根据 Umami API 返回格式：可能是 { pageviews: { value, prev }, visits: { value, prev } }
-                  // 或者直接是数字：{ pageviews: 123, visits: 45 }
-                  let pageviews, visits;
-                  
-                  if (typeof data.pageviews === 'object' && data.pageviews !== null) {
-                    pageviews = data.pageviews.value ?? 'N/A';
-                    visits = data.visits.value ?? 'N/A';
-                  } else {
-                    pageviews = data.pageviews ?? 'N/A';
-                    visits = data.visits ?? 'N/A';
-                  }
-                  
-                  console.log('[Umami Profile] Final values - pageviews:', pageviews, 'visits:', visits);
-                  document.getElementById('umami-pageviews').textContent = pageviews;
-                  document.getElementById('umami-visits').textContent = visits;
-                } else {
-                  const errorText = await res.text();
-                  console.error('[Umami Profile] API error:', res.status, errorText);
-                  document.getElementById('umami-pageviews').textContent = 'N/A';
-                  document.getElementById('umami-visits').textContent = 'N/A';
-                }
-              } catch (err) {
-                console.error('[Umami Profile] Fetch error:', err);
-                document.getElementById('umami-pageviews').textContent = 'N/A';
-                document.getElementById('umami-visits').textContent = 'N/A';
-              }
-            };
+          const loadUmamiScript = () => {
+            if (window.fetchShareData && window.fetchWebsiteStats) {
+              return Promise.resolve();
+            }
+            
+            if (scriptLoading) {
+              return scriptLoading;
+            }
+            
+            scriptLoading = new Promise((resolve, reject) => {
+              const script = document.createElement('script');
+              script.src = '/js/umami-share.js';
+              script.onload = resolve;
+              script.onerror = reject;
+              document.head.appendChild(script);
+            });
+            
+            return scriptLoading;
+          };
+          
+          const fetchUmamiStats = async () => {
+            try {
+              await loadUmamiScript();
+              
+              const shareData = await window.fetchShareData('2dKQ5T0WrUn6AYtr');
+              const token = shareData.token;
+              
+              const params = {
+                startAt: '0',
+                endAt: Date.now().toString(),
+                unit: 'day',
+                timezone: 'Asia/Shanghai',
+                url: '/',
+                compare: 'false',
+              };
+              
+              const data = await window.fetchWebsiteStats(
+                'f7b1324b-9b51-4b00-bc8d-726cbed5168d', 
+                token, 
+                params
+              );
+              
+              const pageviews = data?.pageviews ?? 'N/A';
+              const visits = data?.visits ?? 'N/A';
+              document.getElementById('umami-pageviews').textContent = pageviews;
+              document.getElementById('umami-visits').textContent = visits;
+            } catch (err) {
+              document.getElementById('umami-pageviews').textContent = 'N/A';
+              document.getElementById('umami-visits').textContent = 'N/A';
+            }
+          };
+          
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fetchUmamiStats);
+          } else {
             fetchUmamiStats();
           }
         </script>
-    </div>
-</div>
-

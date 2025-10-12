@@ -15,6 +15,7 @@ interface Props {
 	hideTagsForMobile?: boolean;
 	hideUpdateDate?: boolean;
 	pinned?: boolean;
+	url?: string; // 添加 url 参数支持
 }
 const {
 	published,
@@ -24,32 +25,11 @@ const {
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
 	pinned = false,
+	url // 解构 url 参数
 } = Astro.props;
 const className = Astro.props.class;
 
 // 判断是否是首页
-// const isHome =
-// 	Astro.url.pathname === "/" ||
-// 	"2" ||
-// 	"3" ||
-// 	"4" ||
-// 	"5" ||
-// 	"6" ||
-// 	"7" ||
-// 	"8" ||
-// 	"9" ||
-// 	"10" ||
-// 	"11" ||
-// 	"12" ||
-// 	"13" ||
-// 	"14" ||
-// 	"15" ||
-// 	"16" ||
-// 	"17" ||
-// 	"18" ||
-// 	"19" ||
-// 	"20";
-
 const homePaths = [
 	"/",
 	"/featured",
@@ -58,8 +38,56 @@ const homePaths = [
 	...Array.from({ length: 20 }, (_, i) => `/featured/${i + 1}/`),
 ];
 const isHome = homePaths.includes(Astro.url.pathname);
+
+// 为每个文章生成唯一的 ID
+const uniqueId = url ? encodeURIComponent(url) : 'default';
+
+// 在服务端获取 Umami 统计数据
+let pageviews = '加载中...';
+let visits = '加载中...';
+
+if (url && !isHome) {
+  try {
+    const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
+    if (shareRes.ok) {
+      const shareData = await shareRes.json();
+      const token = shareData.token;
+      
+      const slug = url.split('/').filter(Boolean).pop() || '';
+      
+      const params = {
+        startAt: '0',
+        endAt: Date.now().toString(),
+        unit: 'hour',
+        timezone: 'Asia/Shanghai',
+        path: `eq./posts/${slug}/`,
+        compare: 'false',
+      };
+        
+      const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
+        new URLSearchParams(params);
+      
+      const res = await fetch(statsUrl, {
+        method: 'GET',
+        headers: {
+          'x-umami-share-token': token,
+        },
+      });
+      
+      if (res.ok) {
+        const data = await res.json();
+        pageviews = data.pageviews?.toString() ?? 'N/A';
+        visits = data.visits?.toString() ?? 'N/A';
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching Umami stats in Astro component:', error);
+    pageviews = 'N/A';
+    visits = 'N/A';
+  }
+}
 ---
-<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]} data-url={url}>
   {pinned && (
     <div class="flex items-center text-[var(--primary)]">
       <div class="meta-icon">
@@ -127,41 +155,99 @@ const isHome = homePaths.includes(Astro.url.pathname);
               <div class="meta-icon">
                   <Icon name="material-symbols:visibility-outline-rounded" class="text-xl"></Icon>
               </div>
-              <span>浏览量：<span id="post-umami-pageviews">加载中...</span></span>，
-              <span>访问次数：<span id="post-umami-visits">加载中...</span></span>
+              <span>浏览量：<span id={`post-umami-pageviews-meta-${uniqueId}`}>{pageviews}</span></span>，
+              <span>访问次数：<span id={`post-umami-visits-meta-${uniqueId}`}>{visits}</span></span>
           </div>
 
           <script is:inline>
-            const fetchUmamiStatss = async () => {
-              const pathname = window.location.pathname;
-              const shareRes = await fetch('https://eu.umami.is/api/share/2dKQ5T0WrUn6AYtr');
-              const shareData = await shareRes.json();
-              const token = shareData.token;
-              const statsUrl = `https://eu.umami.is/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
-                new URLSearchParams({
-                  startAt: '1753333200000',
-                  endAt: Date.now(),
-                  unit: 'hour',
-                  timezone: 'Asia/Hong_Kong',
-                  url: pathname,
-                  compare: 'false',
-                });
-              const res = await fetch(statsUrl, {
-                method: 'GET',
-                headers: {
-                  'x-umami-share-token': token,
-                },
-              });
-              if (!res.ok) {
-                document.getElementById('post-umami-pageviews').textContent = 'N/A';
-                document.getElementById('post-umami-visits').textContent = 'N/A';
-                return;
+            let scriptLoading = null;
+            
+            const loadUmamiScript = () => {
+              if (window.fetchShareData && window.fetchWebsiteStats) {
+                return Promise.resolve();
               }
-              const data = await res.json();
-              document.getElementById('post-umami-pageviews').textContent = data.pageviews?.value ?? 'N/A';
-              document.getElementById('post-umami-visits').textContent = data.visits?.value ?? 'N/A';
+              
+              if (scriptLoading) {
+                return scriptLoading;
+              }
+              
+              scriptLoading = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = '/js/umami-share.js';
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+              });
+              
+              return scriptLoading;
             };
-            fetchUmamiStatss();
+            
+            const getArticlePathname = () => {
+              try {
+                const container = document.currentScript ? document.currentScript.closest('.flex.flex-wrap') : null;
+                if (container && container.dataset.url) {
+                  return container.dataset.url;
+                }
+              } catch (e) {
+              }
+              return window.location.pathname;
+            };
+            
+            const fetchUmamiStatss = async () => {
+              const pathname = getArticlePathname();
+              
+              try {
+                await loadUmamiScript();
+                
+                const shareData = await window.fetchShareData('2dKQ5T0WrUn6AYtr');
+                const token = shareData.token;
+                
+                const slug = pathname.split('/').filter(Boolean).pop() || '';
+                
+                const params = {
+                  startAt: '0',
+                  endAt: Date.now().toString(),
+                  unit: 'hour',
+                  timezone: 'Asia/Shanghai',
+                  path: `eq./posts/${slug}/`,
+                  compare: 'false',
+                };
+                  
+                const data = await window.fetchWebsiteStats(
+                  'f7b1324b-9b51-4b00-bc8d-726cbed5168d', 
+                  token, 
+                  params
+                );
+                
+                const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
+                
+                const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+                const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+                
+                if (!pageviewsElement || !visitsElement) {
+                  return;
+                }
+                
+                pageviewsElement.textContent = data.pageviews ?? 'N/A';
+                visitsElement.textContent = data.visits ?? 'N/A';
+              } catch (error) {
+                const pathname = getArticlePathname();
+                const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
+                
+                const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+                const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+                
+                if (pageviewsElement) pageviewsElement.textContent = 'N/A';
+                if (visitsElement) visitsElement.textContent = 'N/A';
+              }
+            };
+            
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', fetchUmamiStatss);
+            } else {
+              fetchUmamiStatss();
+            }
+            
             setInterval(fetchUmamiStatss, 5000);
           </script>
         </>

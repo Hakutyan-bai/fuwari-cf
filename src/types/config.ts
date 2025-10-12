@@ -31,13 +31,6 @@ export type SiteConfig = {
 		content: string | string[];
 		intervalSeconds?: number; // auto-switch interval for multiple announcements
 	};
-	umami?: {
-		enable: boolean;
-		websiteId?: string;
-		apiEndpoint?: string;
-		apiKey?: string;
-		timezone?: string;
-	};
 };
 
 export type Favicon = {
