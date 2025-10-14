@@ -74,6 +74,11 @@ export const navBarConfig: NavBarConfig = {
 		},
 		LinkPreset.About,
 		{
+			name: "设备",
+			url: "devices/",
+			external: false,
+		},
+		{
 			name: "友链",
 			url: "friends/", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 			external: false, // Show an external link icon and will open in a new tab

@@ -1,0 +1,209 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+export const prerender = true;
+
+// 设备数据
+const devices = {
+  Apple: [
+    {
+      name: "11 英寸 iPad Air (M3)",
+      image: "/1ipad.png",
+      specs: "深空灰色 / 128G",
+      description: "性能出色，轻薄便携，屏幕优质，体验良好。",
+      link: "https://support.apple.com/zh-cn/122241"
+    },
+    {
+      name: "iPhone 14 Pro Max",
+      image: "/1IP14pm.png",
+      specs: "暗紫色 / 256G",
+      description: "首款灵动岛设计，最后一款搭载Lightning接口的iPhone。",
+      link: "https://support.apple.com/zh-cn/111846"
+    },
+    {
+      name: "MacBook Air (M1)",
+      image: "/1mac.png",
+      specs: "银色 / 256G",
+      description: "首款搭载M系列芯片的MacBook。",
+      link: "https://support.apple.com/zh-cn/docs/mac/300267"
+    },
+    {
+      name: "iPhone X",
+      image: "/1ipx.png",
+      specs: "黑色 / 64G",
+      description: "十周年纪念款",
+      link: "https://support.apple.com/zh-cn/docs/iphone/504268"
+    },
+  ],
+  Legion: [
+    {
+      name: "联想拯救者Y7000P 2024 16英寸",
+      image: "https://p1.lefile.cn/product/adminweb/2024/01/08/uUEalA1bwn249xwcvGUjVg7Kz-2395.jpg",
+      specs: "月蚀灰 / 2T / 32G DDR5 5600MHz / RTX4050 / i7-14650HX",
+      description: "溢价本，不想多说。",
+      link: "https://item.lenovo.com.cn/product/1035316.html"
+    },
+  ],
+  Cudy: [
+    {
+      name: "CUDY TR 3000",
+      image: "/cudy.webp",
+      specs: "128M闪存 / USB3.0 / 2.5G/1G 双网口",
+      description: "很好用的路由器，刷OpenWrt很爽。",
+      link: "https://www.cudy.com/en-apac/products/tr3000-1-0"
+    },
+  ]
+};
+
+const brands = Object.keys(devices);
+const defaultBrand = 'Apple';
+---
+
+<MainGridLayout title="我的设备">
+  <!-- 主容器 -->
+  <div class="card-base p-6 mb-4">
+    <!-- 标题 -->
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold text-90 mb-2">我的设备</h1>
+      <p class="text-50 text-sm">这里展示了我日常使用的各类设备</p>
+    </div>
+
+    <!-- 品牌选项卡 -->
+    <div class="flex flex-wrap gap-3 mb-8">
+      {brands.map((brand) => (
+        <button 
+          data-brand={brand}
+          class={`brand-tab px-6 py-2.5 rounded-lg font-medium transition-all ${
+            brand === defaultBrand
+              ? 'btn-regular-dark text-white' 
+              : 'btn-regular text-75'
+          }`}
+        >
+          {brand}
+        </button>
+      ))}
+    </div>
+
+    <!-- 设备卡片网格 -->
+    <div id="devices-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {devices[defaultBrand].map((device, index) => (
+        <a 
+          href={device.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="device-card card-base group relative p-6 transition-all duration-300 onload-animation hover:shadow-xl block cursor-pointer"
+          style={`animation-delay: ${index * 100}ms`}
+        >
+          <!-- 设备图片 -->
+          <div class="flex justify-center items-center h-64 mb-6 bg-[var(--btn-regular-bg)] rounded-xl overflow-hidden">
+            <img 
+              src={device.image} 
+              alt={device.name}
+              class="w-auto h-full object-contain group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+          
+          <!-- 设备信息 -->
+          <div class="text-center">
+            <h3 class="text-xl font-bold text-90 mb-2 group-hover:text-[var(--primary)] transition-colors">
+              {device.name}
+            </h3>
+            <div class="flex items-center justify-center gap-2 mb-3">
+              <Icon name="material-symbols:info-outline" class="text-lg text-75" />
+              <p class="text-75 font-medium">
+                {device.specs}
+              </p>
+            </div>
+            <p class="text-sm text-50 leading-relaxed mb-3">
+              {device.description}
+            </p>
+            <!-- 查看详情提示 -->
+            <div class="flex items-center justify-center gap-1 text-[var(--primary)] opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="text-sm font-medium">查看详情</span>
+              <Icon name="material-symbols:arrow-forward-rounded" class="text-lg" />
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <script define:vars={{ devices }}>
+    // 品牌切换功能
+    const brandTabs = document.querySelectorAll('.brand-tab');
+    const devicesContainer = document.getElementById('devices-container');
+
+    brandTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const brand = tab.dataset.brand;
+        
+        // 更新选中状态
+        brandTabs.forEach(t => {
+          t.classList.remove('btn-regular-dark', 'text-white');
+          t.classList.add('btn-regular', 'text-75');
+        });
+        tab.classList.add('btn-regular-dark', 'text-white');
+        tab.classList.remove('btn-regular', 'text-75');
+
+        // 渲染对应品牌的设备
+        const brandDevices = devices[brand] || [];
+        devicesContainer.innerHTML = brandDevices.map((device, index) => `
+          <a 
+            href="${device.link}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="device-card card-base group relative p-6 transition-all duration-300 hover:shadow-xl block cursor-pointer"
+            style="animation-delay: ${index * 100}ms; animation: fadeInUp 0.3s ease-out forwards;"
+          >
+            <div class="flex justify-center items-center h-64 mb-6 bg-[var(--btn-regular-bg)] rounded-xl overflow-hidden">
+              <img 
+                src="${device.image}" 
+                alt="${device.name}"
+                class="w-auto h-full object-contain group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-90 mb-2 group-hover:text-[var(--primary)] transition-colors">
+                ${device.name}
+              </h3>
+              <div class="flex items-center justify-center gap-2 mb-3">
+                <svg class="w-5 h-5 text-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-75 font-medium">
+                  ${device.specs}
+                </p>
+              </div>
+              <p class="text-sm text-50 leading-relaxed mb-3">
+                ${device.description}
+              </p>
+              <div class="flex items-center justify-center gap-1 text-[var(--primary)] opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="text-sm font-medium">查看详情</span>
+                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        `).join('');
+      });
+    });
+  </script>
+
+  <style>
+    .brand-tab {
+      cursor: pointer;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</MainGridLayout>
