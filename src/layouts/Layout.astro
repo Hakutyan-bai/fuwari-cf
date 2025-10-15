@@ -198,7 +198,27 @@ const bannerOffset =
 	>
 		<ConfigCarrier></ConfigCarrier>
 		<!-- 自定义鼠标光标 -->
-		<CustomCursor />
+		{siteConfig.customCursor?.enable && <CustomCursor />}
+		
+		<!-- 禁用自定义鼠标时，确保恢复默认鼠标样式 -->
+		{!siteConfig.customCursor?.enable && (
+			<script is:inline>
+				// 立即移除可能残留的自定义鼠标类
+				document.body.classList.remove('custom-cursor-enabled', 'custom-cursor-active');
+				
+				// 恢复默认鼠标样式
+				document.documentElement.style.cursor = '';
+				document.body.style.cursor = '';
+				
+				// 移除所有元素的内联 cursor: none 样式
+				document.querySelectorAll('*').forEach(el => {
+					if (el.style.cursor === 'none') {
+						el.style.cursor = '';
+					}
+				});
+			</script>
+		)}
+		
 		<PWAPrompt />
 		<slot />
 

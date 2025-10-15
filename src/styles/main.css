@@ -198,41 +198,50 @@
 /* =========================
      自定义鼠标光标效果（仅桌面端启用）
      ========================= */
+/* 只在自定义鼠标启用时隐藏默认光标 */
 @media (hover: hover) and (pointer: fine) {
-    /* 彻底隐藏所有默认鼠标光标 */
-    *, *::before, *::after {
+    /* 彻底隐藏所有默认鼠标光标 - 仅当启用自定义鼠标时 */
+    body.custom-cursor-enabled *, 
+    body.custom-cursor-enabled *::before, 
+    body.custom-cursor-enabled *::after {
         cursor: none !important;
     }
 
-    html, body {
+    body.custom-cursor-enabled html, 
+    body.custom-cursor-enabled {
         cursor: none !important;
     }
 
     /* 确保滚动条区域也隐藏默认光标 */
-    ::-webkit-scrollbar {
+    body.custom-cursor-enabled ::-webkit-scrollbar {
         cursor: none !important;
     }
 
-    ::-webkit-scrollbar-thumb {
+    body.custom-cursor-enabled ::-webkit-scrollbar-thumb {
         cursor: none !important;
     }
 
-    ::-webkit-scrollbar-track {
+    body.custom-cursor-enabled ::-webkit-scrollbar-track {
         cursor: none !important;
     }
 
-    ::-webkit-scrollbar-corner {
+    body.custom-cursor-enabled ::-webkit-scrollbar-corner {
         cursor: none !important;
     }
 
     /* Firefox 滚动条 */
-    html {
+    body.custom-cursor-enabled html {
         scrollbar-width: thin;
         cursor: none !important;
     }
 
     /* 确保所有可能显示光标的元素都隐藏 */
-    input, textarea, button, a, select, option {
+    body.custom-cursor-enabled input, 
+    body.custom-cursor-enabled textarea, 
+    body.custom-cursor-enabled button, 
+    body.custom-cursor-enabled a, 
+    body.custom-cursor-enabled select, 
+    body.custom-cursor-enabled option {
         cursor: none !important;
     }
 
@@ -299,24 +308,30 @@
          强制光标隐藏 - 最高优先级
          ========================= */
 
-    /* 覆盖所有可能的滚动条光标设置 */
-    ::-webkit-scrollbar,
-    ::-webkit-scrollbar-button,
-    ::-webkit-scrollbar-track,
-    ::-webkit-scrollbar-track-piece,
-    ::-webkit-scrollbar-thumb,
-    ::-webkit-scrollbar-corner,
-    ::-webkit-resizer {
+    /* 覆盖所有可能的滚动条光标设置 - 仅当启用自定义鼠标时 */
+    body.custom-cursor-enabled ::-webkit-scrollbar,
+    body.custom-cursor-enabled ::-webkit-scrollbar-button,
+    body.custom-cursor-enabled ::-webkit-scrollbar-track,
+    body.custom-cursor-enabled ::-webkit-scrollbar-track-piece,
+    body.custom-cursor-enabled ::-webkit-scrollbar-thumb,
+    body.custom-cursor-enabled ::-webkit-scrollbar-corner,
+    body.custom-cursor-enabled ::-webkit-resizer {
         cursor: none !important;
     }
 
-    /* 最终保险 - 强制所有元素隐藏光标 */
-    html, body, * {
+    /* 最终保险 - 强制所有元素隐藏光标 - 仅当启用自定义鼠标时 */
+    body.custom-cursor-enabled html, 
+    body.custom-cursor-enabled body, 
+    body.custom-cursor-enabled * {
         cursor: none !important;
     }
 
-    /* 针对所有伪类状态 */
-    *:hover, *:active, *:focus, *:visited, *:link {
+    /* 针对所有伪类状态 - 仅当启用自定义鼠标时 */
+    body.custom-cursor-enabled *:hover, 
+    body.custom-cursor-enabled *:active, 
+    body.custom-cursor-enabled *:focus, 
+    body.custom-cursor-enabled *:visited, 
+    body.custom-cursor-enabled *:link {
         cursor: none !important;
     }
 }

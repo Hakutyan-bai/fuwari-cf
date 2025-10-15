@@ -29,6 +29,9 @@ if (!isFinePointer || isCoarse) {
   if (f) f.style.display = 'none';
   // 不注入任何全局 cursor: none 样式
 } else {
+  // 添加标识类到 body，表示自定义鼠标已启用
+  document.body.classList.add('custom-cursor-enabled');
+  
   // 立即隐藏所有光标 - 在任何其他代码执行之前（仅桌面端）
   document.documentElement.style.cursor = 'none';
   document.body.style.cursor = 'none';

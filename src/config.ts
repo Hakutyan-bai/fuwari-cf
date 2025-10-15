@@ -47,6 +47,9 @@ export const siteConfig: SiteConfig = {
 		],
 		intervalSeconds: 5,
 	},
+	customCursor: {
+		enable: false, // 设置为 false 可禁用自定义鼠标样式
+	},
 };
 
 export const navBarConfig: NavBarConfig = {

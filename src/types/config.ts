@@ -31,6 +31,9 @@ export type SiteConfig = {
 		content: string | string[];
 		intervalSeconds?: number; // auto-switch interval for multiple announcements
 	};
+	customCursor?: {
+		enable: boolean; // 是否启用自定义鼠标样式
+	};
 };
 
 export type Favicon = {
