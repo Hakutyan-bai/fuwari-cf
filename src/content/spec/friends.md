@@ -281,15 +281,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://www.refact.cc/" target="_blank" class="friend-card">
-        <img src="https://www.refact.cc/avatar.png" width="32" height="32" alt="头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://www.matsusatou.top/" target="_blank" class="friend-card">
+        <img src="https://github.com/SokiSama/picked/blob/main/avatar.jpg?raw=true" width="32" height="32" alt="头像"/>
         <div>
-          <b>RefactX Project</b><br/>
-          <span style="font-size:12px;">形体是简单而纯粹的，它不是完整的群体，每个形体都指向其复杂性，并最终被复杂性联系在一起。</span>
+          <b>SatouのBlog</b><br/>
+          <span style="font-size:12px;">彼女の愛は、甘くて痛い。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 
 </table>
