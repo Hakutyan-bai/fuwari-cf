@@ -1,6 +1,6 @@
 ---
 title: "观澜湖 | 春日微风里的绿意"
-location: "日本·冲绳"
+location: "深圳·观澜"
 startDate: 2025-01-31
 endDate: 2025-01-31
 weather: "晴阴天"

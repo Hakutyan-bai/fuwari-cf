@@ -9,7 +9,7 @@ transportation:
   - "MTR"
 spots:
   - "维多利亚港"
-cover: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAPLaPHUSfKI4mftEivKWKKwItDLUQwAAtsMaxtcs5BX042WlK9seI4BAAMCAAN3AAM2BA.jpeg"
+cover: "https://img.sakura.ink/file/AgACAgUAAyEGAASIHQfFAAOwaPHTV7tvrbPCnPXg3Cf2R7i5R4UAAsAMaxtcs5BX3w-JhkX1g8QBAAMCAAN3AAM2BA.jpeg"
 description: "重逢维港灯火，在熟悉的街角再次迷路"
 ---
 <div style="display: flex; gap: 10px;">
