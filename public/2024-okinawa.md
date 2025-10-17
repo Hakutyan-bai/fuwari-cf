@@ -27,6 +27,6 @@ description: "追逐南国海风与蔚蓝海岸的五日旅程"
 > 小贴士：冲绳阳光充足但海风不小，记得带上轻薄外套和防晒补水喷雾。
 
 <div style="display: flex; gap: 10px;">
-    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80" style="flex: 1; width: 50%;">
-    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80" style="flex: 1; width: 50%;">
+    <img src="" style="flex: 1; width: 50%;">
+    <img src="" style="flex: 1; width: 50%;">
 </div>
