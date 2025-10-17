@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
+import { formatTravelDateRange, calculateTravelDays } from "@utils/travel-utils";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	entry: CollectionEntry<"travels">;
+}
+
+const { entry } = Astro.props;
+const { data, slug } = entry;
+const dateRange = formatTravelDateRange(data.startDate, data.endDate);
+const days = calculateTravelDays(data.startDate, data.endDate);
+const travelUrl = `/travels/${slug}/`;
+---
+<a href={travelUrl} class="group relative block card-base overflow-hidden rounded-[var(--radius-large)]">
+	<div class="relative h-56 md:h-64 w-full">
+		<ImageWrapper src={data.cover} alt={`${data.title} 封面`} class="h-full w-full" />
+		<div class="absolute inset-0 bg-black/35 transition group-hover:bg-black/25"></div>
+		<div class="absolute inset-x-4 bottom-4 rounded-2xl bg-black/55 px-5 py-3 text-white backdrop-blur-sm">
+			<div class="flex items-center justify-between text-sm text-white/80">
+				<span class="flex items-center gap-1">
+					<Icon name="material-symbols:location-on-rounded" class="text-base" />
+					{data.location}
+				</span>
+				<span class="flex items-center gap-1">
+					<Icon name="material-symbols:calendar-month-rounded" class="text-base" />
+					{dateRange}
+				</span>
+			</div>
+			<div class="mt-2 flex items-center gap-2 text-xs text-white/70">
+				<Icon name="mdi:timer-sand" class="text-base" />
+				<span>{days} 天探索</span>
+			</div>
+		</div>
+	</div>
+	<div class="flex flex-col gap-2 px-6 py-5">
+		<h3 class="text-xl font-semibold text-black/85 transition group-hover:text-[var(--primary)] dark:text-white/85">
+			{data.title}
+		</h3>
+		<p class="line-clamp-2 text-sm text-black/60 transition group-hover:text-black/75 dark:text-white/60 dark:group-hover:text-white/70">
+			{data.description}
+		</p>
+	</div>
+</a>

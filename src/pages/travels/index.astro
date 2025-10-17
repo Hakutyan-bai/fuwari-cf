@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import TravelCard from "@components/travel/TravelCard.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+
+const travels = ((await getCollection(
+	"travels",
+	({ data }) => !data.draft,
+)) as CollectionEntry<"travels">[]).sort(
+	(a, b) => b.data.startDate.getTime() - a.data.startDate.getTime(),
+);
+---
+<MainGridLayout title="旅记" description="记录那些抵达过的风景与沿途故事">
+	{travels.length === 0 ? (
+		<div class="card-base flex h-48 items-center justify-center rounded-[var(--radius-large)] text-black/60 dark:text-white/60">
+			暂未发布任何旅行记录。
+		</div>
+	) : (
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+			{travels.map((entry) => (
+				<TravelCard entry={entry} />
+			))}
+		</div>
+	)}
+</MainGridLayout>

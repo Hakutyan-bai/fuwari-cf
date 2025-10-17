@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
+import { calculateTravelDays, formatTravelDateRange } from "@utils/travel-utils";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	entry: CollectionEntry<"travels">;
+	compact?: boolean;
+}
+
+const { entry, compact = false } = Astro.props;
+const { data } = entry;
+const dateRange = formatTravelDateRange(data.startDate, data.endDate);
+const travelDays = calculateTravelDays(data.startDate, data.endDate);
+const infoItems = [
+	{
+		label: "时间",
+		icon: "material-symbols:calendar-today-outline-rounded",
+		value: dateRange,
+	},
+	{
+		label: "地点",
+		icon: "material-symbols:location-on-rounded",
+		value: data.location,
+	},
+	{
+		label: "天气",
+		icon: "material-symbols:partly-cloudy-day-rounded",
+		value: data.weather,
+	},
+	{
+		label: "天数",
+		icon: "mdi:timer-sand",
+		value: `${travelDays} 天`,
+	},
+	{
+		label: "交通",
+		icon: "material-symbols:train",
+		value:
+			data.transportation.length > 0
+				? data.transportation.join(" · ")
+				: "未记录",
+	},
+	{
+		label: "景点",
+		icon: "mdi:mountain",
+		value: data.spots.length > 0 ? data.spots.join(" · ") : "未记录",
+	},
+];
+---
+<div class:list={["relative overflow-hidden rounded-[var(--radius-large)]", { "grid grid-cols-1 lg:grid-cols-[2fr_1fr]": compact, "grid grid-cols-1 xl:grid-cols-[1.25fr_1fr]": !compact }]}>
+	<div class="relative">
+		<ImageWrapper src={data.cover} alt={`${data.title} 封面`} class="h-full min-h-[16rem] w-full object-cover" />
+		<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+		<div class="absolute inset-0 flex flex-col justify-end gap-3 p-6 text-white">
+			<span class="text-sm uppercase tracking-widest text-white/70">Travel Log</span>
+			<h1 class="text-3xl font-bold leading-tight md:text-4xl">{data.title}</h1>
+			<p class="text-sm text-white/80">{data.description}</p>
+		</div>
+	</div>
+	<div class="flex flex-col gap-4 bg-[var(--card-bg)]/90 p-6 backdrop-blur supports-[backdrop-filter]:backdrop-blur">
+		{infoItems.map((item) => (
+			<div class="flex items-start gap-3">
+				<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--primary)]/15 text-[var(--primary)]">
+					<Icon name={item.icon} class="text-xl" />
+				</div>
+				<div class="flex flex-col text-sm text-black/80 dark:text-white/80">
+					<span class="text-xs uppercase tracking-wide text-black/40 dark:text-white/40">{item.label}</span>
+					<span class="mt-1 leading-relaxed">{item.value}</span>
+				</div>
+			</div>
+		))}
+	</div>
+</div>

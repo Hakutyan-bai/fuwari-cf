@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Markdown from "@components/misc/Markdown.astro";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
+import TravelHero from "@components/travel/TravelHero.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+
+export async function getStaticPaths() {
+	const travels = (await getCollection(
+		"travels",
+		({ data }) => !data.draft,
+	)) as CollectionEntry<"travels">[];
+	return travels.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props as { entry: CollectionEntry<"travels"> };
+const { Content } = await entry.render();
+const gallery = (entry.data.gallery ?? []) as Array<{
+	src: string;
+	caption?: string;
+}>;
+---
+<MainGridLayout title={`${entry.data.title} · 旅记`} description={entry.data.description}>
+	<div class="mb-8 card-base rounded-[var(--radius-large)] px-6 py-8">
+		<TravelHero entry={entry} compact />
+	</div>
+
+	<div class="card-base rounded-[var(--radius-large)] px-6 py-8">
+		<Markdown class="markdown-content">
+			<Content />
+		</Markdown>
+	</div>
+
+	{gallery.length > 0 && (
+		<div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
+			{gallery.map((item) => (
+				<div class="card-base overflow-hidden rounded-[var(--radius-large)]">
+					<ImageWrapper src={item.src} alt={item.caption ?? entry.data.title} class="h-56 w-full" />
+					{item.caption && (
+						<div class="px-4 py-3 text-sm text-black/60 dark:text-white/60">{item.caption}</div>
+					)}
+				</div>
+			))}
+		</div>
+	)}
+</MainGridLayout>

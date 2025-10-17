@@ -283,5 +283,6 @@ export default defineConfig({
 		"@components": "./src/components",
 		"@layouts": "./src/layouts",
 		"@i18n": "./src/i18n",
+		"@utils": "./src/utils",
 	},
 });

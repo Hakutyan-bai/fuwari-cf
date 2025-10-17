@@ -75,11 +75,26 @@ export const navBarConfig: NavBarConfig = {
 				},
 			],
 		},
-		LinkPreset.About,
 		{
-			name: "设备",
-			url: "devices/",
-			external: false,
+			name: "关于",
+			url: "/", // not used when children exist
+			children: [
+				{
+					name: "关于我",
+					url: "about/",
+					external: false,
+				},
+				{
+					name: "设备",
+					url: "devices/",
+					external: false,
+				},
+				{
+					name: "旅记",
+					url: "travels/",
+					external: false,
+				},
+			],
 		},
 		{
 			name: "友链",
