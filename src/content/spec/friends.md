@@ -271,7 +271,7 @@
     </td>
   </tr>
   </tr>
-    <tr>
+  <tr>
     <td style="padding:8px 8px; width:320px;">
       <a href="https://rhen.cloud" target="_blank" class="friend-card">
         <img src="https://rhen.cloud/avatar.webp" width="32" height="32" alt="头像"/>
@@ -290,6 +290,26 @@
         </div>
       </a>
     </td>
+  </tr>
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.pljzy.top/" target="_blank" class="friend-card">
+        <img src="https://blog.pljzy.top/_astro/logo.BxIxyJV1_Z19cEQW.webp" width="32" height="32" alt="头像"/>
+        <div>
+          <b>ZY知识库</b><br/>
+          <span style="font-size:12px;">一个技术探索与分享的平台</span>
+        </div>
+      </a>
+    </td>
+    <!-- <td style="padding:8px 8px; width:320px;">
+      <a href="https://www.matsusatou.top/" target="_blank" class="friend-card">
+        <img src="https://github.com/SokiSama/picked/blob/main/avatar.jpg?raw=true" width="32" height="32" alt="头像"/>
+        <div>
+          <b>SatouのBlog</b><br/>
+          <span style="font-size:12px;">彼女の愛は、甘くて痛い。</span>
+        </div>
+      </a>
+    </td> -->
   </tr>
 
 </table>
