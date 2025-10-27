@@ -110,7 +110,7 @@ let visits = "加载中...";
     <!-- 访问量（首页不显示） -->
     {!isHome && (
         <>
-          <div class="flex items-center">
+          <div class="flex items-center" data-umami-meta={uniqueId}>
               <div class="meta-icon">
                   <Icon name="material-symbols:visibility-outline-rounded" class="text-xl"></Icon>
               </div>
@@ -118,96 +118,79 @@ let visits = "加载中...";
               <span>访问次数：<span id={`post-umami-visits-meta-${uniqueId}`}>{visits}</span></span>
           </div>
 
-          <script is:inline>
-            let scriptLoading = null;
-            
-            const loadUmamiScript = () => {
-              if (window.fetchShareData && window.fetchWebsiteStats) {
-                return Promise.resolve();
-              }
-              
-              if (scriptLoading) {
-                return scriptLoading;
-              }
-              
-              scriptLoading = new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = '/js/umami-share.js';
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
-              });
-              
-              return scriptLoading;
-            };
-            
-            const getArticlePathname = () => {
-              try {
-                const container = document.currentScript ? document.currentScript.closest('.flex.flex-wrap') : null;
-                if (container && container.dataset.url) {
-                  return container.dataset.url;
+          <script define:vars={{ uniqueId, url }}>
+            (function() {
+              const loadUmamiScript = () => {
+                if (window.fetchShareData && window.fetchWebsiteStats) {
+                  return Promise.resolve();
                 }
-              } catch (e) {
-              }
-              return window.location.pathname;
-            };
-            
-            const fetchUmamiStatss = async () => {
-              const pathname = getArticlePathname();
+                
+                if (window.umamiScriptLoading) {
+                  return window.umamiScriptLoading;
+                }
+                
+                window.umamiScriptLoading = new Promise((resolve, reject) => {
+                  const script = document.createElement('script');
+                  script.src = '/js/umami-share.js';
+                  script.onload = resolve;
+                  script.onerror = reject;
+                  document.head.appendChild(script);
+                });
+                
+                return window.umamiScriptLoading;
+              };
               
-              try {
-                await loadUmamiScript();
+              const fetchUmamiStats = async () => {
+                const pathname = url;
                 
-                const shareData = await window.fetchShareData('2dKQ5T0WrUn6AYtr');
-                const token = shareData.token;
-                
-                const slug = pathname.split('/').filter(Boolean).pop() || '';
-                
-                const params = {
-                  startAt: '0',
-                  endAt: Date.now().toString(),
-                  unit: 'hour',
-                  timezone: 'Asia/Shanghai',
-                  path: `eq./posts/${slug}/`,
-                  compare: 'false',
-                };
+                try {
+                  await loadUmamiScript();
                   
-                const data = await window.fetchWebsiteStats(
-                  'f7b1324b-9b51-4b00-bc8d-726cbed5168d', 
-                  token, 
-                  params
-                );
-                
-                const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
-                
-                const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
-                const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
-                
-                if (!pageviewsElement || !visitsElement) {
-                  return;
+                  const shareData = await window.fetchShareData('2dKQ5T0WrUn6AYtr');
+                  const token = shareData.token;
+                  
+                  const slug = pathname.split('/').filter(Boolean).pop() || '';
+                  
+                  const params = {
+                    startAt: '0',
+                    endAt: Date.now().toString(),
+                    unit: 'hour',
+                    timezone: 'Asia/Shanghai',
+                    path: `eq./posts/${slug}/`,
+                    compare: 'false',
+                  };
+                    
+                  const data = await window.fetchWebsiteStats(
+                    'f7b1324b-9b51-4b00-bc8d-726cbed5168d', 
+                    token, 
+                    params
+                  );
+                  
+                  const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+                  const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+                  
+                  if (pageviewsElement && visitsElement) {
+                    pageviewsElement.textContent = data.pageviews ?? 'N/A';
+                    visitsElement.textContent = data.visits ?? 'N/A';
+                  }
+                } catch (error) {
+                  console.error('Umami stats error:', error);
+                  const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
+                  const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
+                  
+                  if (pageviewsElement) pageviewsElement.textContent = 'N/A';
+                  if (visitsElement) visitsElement.textContent = 'N/A';
                 }
-                
-                pageviewsElement.textContent = data.pageviews ?? 'N/A';
-                visitsElement.textContent = data.visits ?? 'N/A';
-              } catch (error) {
-                const pathname = getArticlePathname();
-                const uniqueId = pathname ? encodeURIComponent(pathname) : 'default';
-                
-                const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
-                const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
-                
-                if (pageviewsElement) pageviewsElement.textContent = 'N/A';
-                if (visitsElement) visitsElement.textContent = 'N/A';
+              };
+              
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', fetchUmamiStats);
+              } else {
+                fetchUmamiStats();
               }
-            };
-            
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', fetchUmamiStatss);
-            } else {
-              fetchUmamiStatss();
-            }
-            
-            setInterval(fetchUmamiStatss, 5000);
+              
+              setInterval(fetchUmamiStats, 5000);
+            })();
           </script>
         </>
     )}
