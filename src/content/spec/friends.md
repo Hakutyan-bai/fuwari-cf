@@ -301,15 +301,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://www.matsusatou.top/" target="_blank" class="friend-card">
-        <img src="https://github.com/SokiSama/picked/blob/main/avatar.jpg?raw=true" width="32" height="32" alt="头像"/>
+   <td style="padding:8px 8px; width:320px;">
+      <a href="https://seln.cn/" target="_blank" class="friend-card">
+        <img src="https://seln.cn/img/head.jpg" width="32" height="32" alt="头像"/>
         <div>
-          <b>SatouのBlog</b><br/>
-          <span style="font-size:12px;">彼女の愛は、甘くて痛い。</span>
+          <b>mccsjs</b><br/>
+          <span style="font-size:12px;">点一盏灯，等一个迷路的夜🍁🍁🍁。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 
 </table>
