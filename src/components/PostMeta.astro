@@ -25,7 +25,7 @@ const {
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
 	pinned = false,
-	url // 解构 url 参数
+	url, // 解构 url 参数
 } = Astro.props;
 const className = Astro.props.class;
 
@@ -40,52 +40,11 @@ const homePaths = [
 const isHome = homePaths.includes(Astro.url.pathname);
 
 // 为每个文章生成唯一的 ID
-const uniqueId = url ? encodeURIComponent(url) : 'default';
+const uniqueId = url ? encodeURIComponent(url) : "default";
 
-// 在服务端获取 Umami 统计数据
-let pageviews = '加载中...';
-let visits = '加载中...';
-
-if (url && !isHome) {
-  try {
-    const shareRes = await fetch('https://cloud.umami.is/analytics/eu/api/share/2dKQ5T0WrUn6AYtr');
-    if (shareRes.ok) {
-      const shareData = await shareRes.json();
-      const token = shareData.token;
-      
-      const slug = url.split('/').filter(Boolean).pop() || '';
-      
-      const params = {
-        startAt: '0',
-        endAt: Date.now().toString(),
-        unit: 'hour',
-        timezone: 'Asia/Shanghai',
-        path: `eq./posts/${slug}/`,
-        compare: 'false',
-      };
-        
-      const statsUrl = `https://cloud.umami.is/analytics/eu/api/websites/f7b1324b-9b51-4b00-bc8d-726cbed5168d/stats?` +
-        new URLSearchParams(params);
-      
-      const res = await fetch(statsUrl, {
-        method: 'GET',
-        headers: {
-          'x-umami-share-token': token,
-        },
-      });
-      
-      if (res.ok) {
-        const data = await res.json();
-        pageviews = data.pageviews?.toString() ?? 'N/A';
-        visits = data.visits?.toString() ?? 'N/A';
-      }
-    }
-  } catch (error) {
-    console.error('Error fetching Umami stats in Astro component:', error);
-    pageviews = 'N/A';
-    visits = 'N/A';
-  }
-}
+// 不再在服务端获取数据，改为客户端加载以加快构建速度
+let pageviews = "加载中...";
+let visits = "加载中...";
 ---
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]} data-url={url}>
   {pinned && (
