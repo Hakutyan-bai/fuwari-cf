@@ -17,7 +17,8 @@ updated: 2025-09-06 22:30:00
     "https://docker.1ms.run",
     "https://docker.m.daocloud.io",
     "https://dhub.kubesre.xyz",
-    "https://docker.1panel.live"
+    "https://docker.1panel.live",
+    "https://docker.m.ixdev.cn"
   ]
 }
 ```
