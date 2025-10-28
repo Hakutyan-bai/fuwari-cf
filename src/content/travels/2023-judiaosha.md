@@ -5,7 +5,7 @@ startDate: 2023-07-09
 endDate: 2023-07-09
 weather: "晴朗，海风微咸"
 transportation:
-    - "深圳de地铁"
+    - "深圳地铁"
     - "东部巴士"
 spots:
     - "桔钓沙"
