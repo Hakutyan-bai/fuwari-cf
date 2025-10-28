@@ -6,6 +6,7 @@ endDate: 2023-07-26
 weather: "晴天"
 transportation:
   - "高铁"
+  - "广州地铁"
 spots:
   - "沙面"
   - "海星沙"
