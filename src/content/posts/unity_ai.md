@@ -8,7 +8,7 @@ category: '文档'
 draft: false 
 lang: ''
 series: Unity开发
-updated: 2025-09-28 17:30:00
+updated: 2025-10-29 17:30:00
 ---
 # 注意事项
 1. 2022版本及以上需要在包管理器中添加包
@@ -57,6 +57,15 @@ public class PlayerController : MonoBehaviour
                 Vector3 targetPosition = hit.point;
                 agent.SetDestination(hit.point);
             }
+        }
+        //如果还想让人物有动画的话
+        if(agent.velocity.magnitude > 0.1f)
+        {
+            ani.SetBool("walk", true); // 切换动画参数为走路状态
+        }
+        else
+        {
+            ani.SetBool("walk", false); // 切换动画参数为待机状态
         }
     }
 }
