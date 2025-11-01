@@ -311,7 +311,26 @@
       </a>
     </td>
   </tr>
-
+  <tr>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.lonzov.top/" target="_blank" class="friend-card">
+        <img src="https://img.fastmirror.net/s/2025/09/12/68c39893a84aa.png" width="32" height="32" alt="头像"/>
+        <div>
+          <b>浪小舟的博客</b><br/>
+          <span style="font-size:12px;">向利而生，随心而活</span>
+        </div>
+      </a>
+    </td>
+   <!-- <td style="padding:8px 8px; width:320px;">
+      <a href="https://seln.cn/" target="_blank" class="friend-card">
+        <img src="https://seln.cn/img/head.jpg" width="32" height="32" alt="头像"/>
+        <div>
+          <b>mccsjs</b><br/>
+          <span style="font-size:12px;">点一盏灯，等一个迷路的夜🍁🍁🍁。</span>
+        </div>
+      </a>
+    </td> -->
+  </tr>
 </table>
 
 添加完我的友链后请通过**评论**或[i@sakura.ink](mailto:i@sakura.ink)以下面的格式（不做要求，我看得懂就行）联系我添加你的友链
