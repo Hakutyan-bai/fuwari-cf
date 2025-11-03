@@ -321,15 +321,15 @@
         </div>
       </a>
     </td>
-   <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://seln.cn/" target="_blank" class="friend-card">
-        <img src="https://seln.cn/img/head.jpg" width="32" height="32" alt="头像"/>
+   <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.lzch.top" target="_blank" class="friend-card">
+        <img src="https://blog.lzch.top/favicon.png" width="32" height="32" alt="头像"/>
         <div>
-          <b>mccsjs</b><br/>
-          <span style="font-size:12px;">点一盏灯，等一个迷路的夜🍁🍁🍁。</span>
+          <b>幽默的小刘吖</b><br/>
+          <span style="font-size:12px;">每天分享不一样的知识内容。</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 
