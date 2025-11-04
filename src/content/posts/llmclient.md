@@ -3,8 +3,8 @@ title: ios的大模型客户端推荐
 published: 2025-10-24
 description: 'BotGem'
 image: ''
-tags: [Ai,ios]
-category: 'Ai'
+tags: [AI,ios]
+category: 'AI'
 draft: false 
 lang: ''
 updated: 2025-10-24 12:00:00
