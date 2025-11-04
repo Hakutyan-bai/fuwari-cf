@@ -16,10 +16,13 @@ const className = Astro.props.class;
 const series = Astro.props.series
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
-	<div class="flex flex-col w-full gap-4 mb-4">
-		<Profile></Profile>
-        
-	</div>
+    {
+      series && series.length > 0 && (
+        <div id="series" class="flex flex-col w-full gap-4">
+          <Series series={series} />
+        </div>
+      )
+    }
 	<div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 sticky top-4">
         <Announcement class="onload-animation" style="animation-delay: 120ms"></Announcement>
 		<div id="series" class="flex flex-col w-full gap-4">
