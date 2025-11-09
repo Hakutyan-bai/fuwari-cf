@@ -342,15 +342,15 @@
         </div>
       </a>
     </td>
-    <!-- <td style="padding:8px 8px; width:320px;">
-      <a href="https://blog.lonzov.top/" target="_blank" class="friend-card">
-        <img src="https://img.fastmirror.net/s/2025/09/12/68c39893a84aa.png" width="32" height="32" alt="头像"/>
+    <td style="padding:8px 8px; width:320px;">
+      <a href="https://blog.Ayeez.cn" target="_blank" class="friend-card">
+        <img src="https://blog.ayeez.cn/imgs/photo.jpg" width="32" height="32" alt="头像"/>
         <div>
-          <b>浪小舟的博客</b><br/>
-          <span style="font-size:12px;">向利而生，随心而活</span>
+          <b>阿叶Ayeez的小站</b><br/>
+          <span style="font-size:12px;">记录学习历程，记录美好生活</span>
         </div>
       </a>
-    </td> -->
+    </td>
   </tr>
 </table>
 
