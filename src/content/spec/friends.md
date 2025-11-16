@@ -243,7 +243,7 @@
       <a href="https://blog.linux-qitong.top" target="_blank" class="friend-card">
         <img src="https://blog.linux-qitong.top/img/avatar.webp" width="32" height="32" alt="头像"/>
         <div>
-          <b>青稚の空间</b><br/>
+          <b>栖童の小站</b><br/>
           <span style="font-size:12px;">越努力，越幸运.</span>
         </div>
       </a>
