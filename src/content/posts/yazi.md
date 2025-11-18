@@ -237,9 +237,9 @@ Yazi 是一款兼具速度与美观的终端文件管理器，特别适合：
 
 通过本文的配置与技巧，你可以打造一套高效的终端文件管理工作流。如果你在使用中遇到问题，欢迎查阅 [官方文档](https://yazi-rs.github.io/) 或加入社区讨论。
 
-：：：note
+:::note
 推荐阅读：[Yazi 官方配置示例](https://github.com/sxyazi/yazi/tree/main/yazi-config/preset) 与 [插件列表](https://github.com/yazi-rs/plugins)
-：：：
+:::
 
 ---
 文章编辑：`@鈴奈咲桜`

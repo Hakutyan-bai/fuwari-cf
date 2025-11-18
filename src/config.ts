@@ -5,7 +5,6 @@ import type {
 	ProfileConfig,
 	SiteConfig,
 } from "./types/config";
-import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "鈴奈咲桜的Blog",
@@ -136,7 +135,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "鈴奈咲桜",
 	bio: "愛することを忘れないで",
 	links: [
