@@ -1,28 +1,304 @@
 ---
-
-import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import Comments from '@components/widget/Comments.svelte'
 
-const friendsPost = await getEntry("spec", "friends");
-
-if (!friendsPost) {
-	throw new Error("Friends page content not found");
-}
-
-const { Content } = await render(friendsPost);
+const friendLinks = [
+	{
+		title: "HongXiovo",
+		imgurl: "https://avatars.githubusercontent.com/u/177866244?v=4",
+		desc: "热爱编程与分享的博主。",
+		siteurl: "https://blog.hongxiovo.cn/",
+	},
+	{
+		title: "imxizhen",
+		imgurl: "https://q1.qlogo.cn/g?b=qq&nk=89525295&s=640",
+		desc: "永远相信美好的事情即将发生.",
+		siteurl: "https://www.imxizhen.asia",
+	},
+	{
+		title: "AcoFork",
+		imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=5",
+		desc: "Protect What You Love!",
+		siteurl: "https://2x.nz/",
+	},
+	{
+		title: "Tavre Blog",
+		imgurl: "https://q1.qlogo.cn/g?b=qq&nk=2987304764&s=640",
+		desc: "茫茫大海 我与你相遇。",
+		siteurl: "https://blog.tsd.my",
+	},
+	{
+		title: "星辰の笔记",
+		imgurl: "https://blog.strarry.top/avatar.jpg",
+		desc: "Code | Think | Share | Repeat",
+		siteurl: "https://blog.strarry.top",
+	},
+	{
+		title: "fishcpy的小破站",
+		imgurl: "https://www.fis.ink/img/logo.png",
+		desc: "非淡泊无以明志，非宁静无以致远。",
+		siteurl: "https://blog.fis.ink",
+	},
+	{
+		title: "AlexMa's Blog",
+		imgurl: "https://blog-backend.alexma.top/api/v2/objects/avatar/112zjnt1f3c2cf3prp.webp",
+		desc: "Create things with love",
+		siteurl: "https://blog.alexma.top/",
+	},
+	{
+		title: "夜轻Blog",
+		imgurl: "https://image.yeqing.net/i/2025/05/15/62868e67dff91285992985db0cce57d5.webp",
+		desc: "一个人。",
+		siteurl: "https://blog.yeqing.net/",
+	},
+	{
+		title: "RukaaX Blog",
+		imgurl: "https://blogs.rukaax.top/pic/icon.png",
+		desc: "RukaaX 一名高中牲的博客",
+		siteurl: "https://blogs.rukaax.top",
+	},
+	{
+		title: "百里博客",
+		imgurl: "https://blog.my0811.cn/favicon.ico",
+		desc: "一个高中生的博客。",
+		siteurl: "https://blog.my0811.cn/",
+	},
+	{
+		title: "Wer Blog",
+		imgurl: "https://blog.isyyo.com/favicon/logo.png",
+		desc: "The only way to do great is to love what you do",
+		siteurl: "https://blog.isyyo.com/",
+	},
+	{
+		title: "MIFENG BLOG",
+		imgurl: "https://blog.imbee.top/images/logo/logo.webp",
+		desc: "一个菜鸟的博客。",
+		siteurl: "https://blog.imbee.top/",
+	},
+	{
+		title: "yunsen2025 的小窝",
+		imgurl: "https://img.alicdn.com/bao/uploaded/i4/O1CN01TWOpM42DSyY5nC0hM_!!0-mtopupload.jpg",
+		desc: "计算机爱好者",
+		siteurl: "https://www.yunsen2025.top/",
+	},
+	{
+		title: "TNTの小破站",
+		imgurl: "https://cdn.fis.ink/cdn/2025/08/15/689ed0ef4b2a3.webp",
+		desc: "萝卜青菜，各有所爱。",
+		siteurl: "https://blog.tnto.fun/",
+	},
+	{
+		title: "Seitx",
+		imgurl: "https://i.setix.xyz/setix.png",
+		desc: "我的个人博客和想法。",
+		siteurl: "https://setix.xyz",
+	},
+	{
+		title: "松板日记",
+		imgurl: "http://q.qlogo.cn/headimg_dl?dst_uin=3231515355&spec=640&img_type=jpg",
+		desc: "一个基于内容分享,创作与灵感结合折腾的笔记博客。",
+		siteurl: "https://blog.mysqil.com/",
+	},
+	{
+		title: "zero",
+		imgurl: "https://vtdd.vip/_astro/lx.U15Ju0Ce_1mLhMp.webp",
+		desc: "生命是一座迂回的迷宫,除了记忆,我们一无所有。",
+		siteurl: "https://vtdd.vip",
+	},
+	{
+		title: "Almango",
+		imgurl: "https://www.almango.cn/img/favicon.png",
+		desc: "天真永不消逝，浪漫至死不渝。",
+		siteurl: "https://www.almango.cn/",
+	},
+	{
+		title: "EitanのBlog",
+		imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=2130839076&spec=5",
+		desc: "Look first,then leap.",
+		siteurl: "https://eitanac.github.io",
+	},
+	{
+		title: "AsperforMias' Blog",
+		imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=1354198117&spec=5",
+		desc: "",
+		siteurl: "https://mias.moe/",
+	},
+	{
+		title: "CappuccinoZ's Blog",
+		imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=2373752155&spec=5",
+		desc: "良机一直就在你眼前",
+		siteurl: "https://kitakita.top",
+	},
+	{
+		title: "栖童の小站",
+		imgurl: "https://blog.linux-qitong.top/img/avatar.webp",
+		desc: "越努力，越幸运.",
+		siteurl: "https://blog.linux-qitong.top",
+	},
+	{
+		title: "ATao-Blog",
+		imgurl: "https://cdn.atao.cyou/Web/Avatar.png",
+		desc: "做自己喜欢的事",
+		siteurl: "https://blog.atao.cyou",
+	},
+	{
+		title: "RefactX Project",
+		imgurl: "https://www.refact.cc/avatar.png",
+		desc: "形体是简单而纯粹的，它不是完整的群体，每个形体都指向其复杂性，并最终被复杂性联系在一起。",
+		siteurl: "https://www.refact.cc/",
+	},
+	{
+		title: "RhenCloud",
+		imgurl: "https://rhen.cloud/avatar.webp",
+		desc: "趁世界还未重启之前 约一次爱恋",
+		siteurl: "https://rhen.cloud",
+	},
+	{
+		title: "SatouのBlog",
+		imgurl: "https://github.com/SokiSama/picked/blob/main/avatar.jpg?raw=true",
+		desc: "彼女の愛は、甘くて痛い。",
+		siteurl: "https://www.matsusatou.top/",
+	},
+	{
+		title: "ZY知识库",
+		imgurl: "https://blog.pljzy.top/_astro/logo.BxIxyJV1_Z19cEQW.webp",
+		desc: "一个技术探索与分享的平台",
+		siteurl: "https://blog.pljzy.top/",
+	},
+	{
+		title: "mccsjs",
+		imgurl: "https://seln.cn/img/head.jpg",
+		desc: "点一盏灯，等一个迷路的夜🍁🍁🍁。",
+		siteurl: "https://seln.cn/",
+	},
+	{
+		title: "浪小舟的博客",
+		imgurl: "https://img.fastmirror.net/s/2025/09/12/68c39893a84aa.png",
+		desc: "向利而生，随心而活",
+		siteurl: "https://blog.lonzov.top/",
+	},
+	{
+		title: "云海花瑶",
+		imgurl: "https://dn-qiniu-avatar.qbox.me/avatar/d00de9fbffe50946b950a3fd0cd1bfdb",
+		desc: "白头并非雪可替,相遇已是上上签",
+		siteurl: "https://www.moeyao.cn/",
+	},
+	{
+		title: "阿叶Ayeez的小站",
+		imgurl: "https://blog.ayeez.cn/imgs/photo.jpg",
+		desc: "记录学习历程，记录美好生活",
+		siteurl: "https://blog.Ayeez.cn",
+	},
+	{
+		title: "随笔与分享",
+		imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=3790300010&spec=5",
+		desc: "拥抱变化，享受过程",
+		siteurl: "https://xn--djrr55i.top/",
+	},
+];
 ---
 <MainGridLayout title={i18n(I18nKey.friends)} description={i18n(I18nKey.friends)}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
+        <div class="card-base z-10 px-9 py-6 relative w-full">
             <Markdown class="mt-2">
-                <Content />
-<Comments client:only="svelte"></Comments>
+                <h2>友链列表</h2>
+                
+                <style>
+                .friend-card {
+                  display: flex;
+                  align-items: center;
+                  width: 100%;
+                  min-height: 48px;
+                  text-decoration: none !important;
+                  color: inherit;
+                  outline: none !important;
+                  border: none !important;
+                  box-sizing: border-box;
+                  transition: background 0.2s;
+                  padding-left: 20px;
+                }
+                .friend-card:focus,
+                .friend-card:hover {
+                  outline: none !important;
+                  border: none !important;
+                  text-decoration: none !important;
+                  background: #f5f5f5;
+                }
+                .friend-card img {
+                  margin-left: 20px;
+                  margin-right: 8px;
+                }
+                </style>
+
+                <table style="border-collapse:separate; border-spacing:0 10px;">
+                  {friendLinks.reduce((rows, friend, index) => {
+                    if (index % 2 === 0) {
+                      rows.push([friend]);
+                    } else {
+                      rows[rows.length - 1].push(friend);
+                    }
+                    return rows;
+                  }, []).map(row => (
+                    <tr>
+                      {row.map(friend => (
+                        <td style="padding:8px 8px; width:320px;">
+                          <a href={friend.siteurl} target="_blank" class="friend-card">
+                            <img src={friend.imgurl} width="32" height="32" alt={`${friend.title}头像`}/>
+                            <div>
+                              <b>{friend.title}</b><br/>
+                              <span style="font-size:12px;">{friend.desc}</span>
+                            </div>
+                          </a>
+                        </td>
+                      ))}
+                      {row.length === 1 && <td style="padding:8px 8px; width:320px;"></td>}
+                    </tr>
+                  ))}
+                </table>
+
+                <p>添加完我的友链后请通过<strong>评论</strong>或<a href="mailto:i@sakura.ink">i@sakura.ink</a>以下面的格式（不做要求，我看得懂就行）联系我添加你的友链</p>
+
+                <div style="position: relative;">
+                  <pre><code id="friend-link-code">title: "鈴奈咲桜のBlog",
+imgurl: "https://q2.qlogo.cn/headimg_dl?dst_uin=2731443459&spec=5",
+desc: "愛することを忘れないで",
+siteurl: "https://blog.sakura.ink",</code></pre>
+                  <button 
+                    id="copy-friend-link"
+                    style="position: absolute; top: 8px; right: 8px; padding: 6px 12px; background: var(--btn-regular-bg); border: none; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.2s;"
+                    onmouseover="this.style.background='var(--btn-card-bg-hover)'"
+                    onmouseout="this.style.background='var(--btn-regular-bg)'"
+                  >
+                    复制
+                  </button>
+                </div>
+
+                <script is:inline>
+                  document.getElementById('copy-friend-link')?.addEventListener('click', function() {
+                    const code = document.getElementById('friend-link-code')?.textContent || '';
+                    navigator.clipboard.writeText(code).then(() => {
+                      const btn = this;
+                      const originalText = btn.textContent;
+                      btn.textContent = '已复制!';
+                      btn.style.background = 'var(--primary)';
+                      btn.style.color = 'white';
+                      setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = 'var(--btn-regular-bg)';
+                        btn.style.color = '';
+                      }, 2000);
+                    }).catch(err => {
+                      console.error('复制失败:', err);
+                      alert('复制失败，请手动复制');
+                    });
+                  });
+                </script>
+
+                <Comments client:only="svelte"></Comments>
             </Markdown>
         </div>
     </div>
-
 </MainGridLayout>
