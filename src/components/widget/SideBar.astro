@@ -22,13 +22,13 @@ const series = Astro.props.series
 	</div>
 	<div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 sticky top-4">
         <Announcement class="onload-animation" style="animation-delay: 120ms"></Announcement>
-		    {
-			series && series.length > 0 && (
-				<div id="series" class="flex flex-col w-full gap-4">
-				<Series series={series} />
+		<div id="series-container" class="transition-swup-fade">
+			{series && series.length > 0 && (
+				<div class="flex flex-col w-full gap-4 mb-4">
+					<Series series={series} />
 				</div>
-			)
-			}
+			)}
+		</div>
 		<Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
 		<Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
 		<!-- 赞助标 -->
