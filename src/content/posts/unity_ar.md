@@ -20,7 +20,7 @@ updated: 2025-12-05 20:30:00
 来到EasyAR的开发中心，创建一个密钥
 1. 选择EasyAR Sense 4.x 个人版
 2. 是否使用稀疏空间地图：否
-3. 应用名称需要注意的是Package Name，要填写xxx.xxx.xxx
+3. 应用名称需要注意的是Package Name，要填写xxx.xxx.xxx(如ink.sakura.ar)
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPSaTLfvMphX3lKK78bzJ66YXkUxkUAAuALaxurIZhVusip9K7Y98QBAAMCAAN3AAM2BA.png"><img>
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPUaTLgvr0eYxp7E5PlRy7XpB9SAAF5AALhC2sbqyGYVd1zE_edH5FlAQADAgADdwADNgQ.png"><img>
 
@@ -40,7 +40,7 @@ updated: 2025-12-05 20:30:00
 
 # 配置场景
 ## 添加并配置Image Tracking
-1. 在GameObject中找到EasyAR Sense > Image tracking 然后分别添加AR Session （Image Tracking Preset）和Target:Image Target
+1. 在GameObject中找到EasyAR Sense > Image tracking 然后分别添加AR Session （Image Tracking Preset）和Target：Image Target
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPXaTLiPTSuP7PpXEdyYjTQ59pv7VsAAuQLaxurIZhVr9nOVos1cSwBAAMCAAN3AAM2BA.png"><img>
 
 2. 在Assets文件夹中新建StreamingAssets文件夹，将想要识别的图片放进去(这里用miku.jpg演示)
@@ -52,13 +52,17 @@ updated: 2025-12-05 20:30:00
 1. 将场景放入Image Target这个Object的子级（这边使用Cube演示）
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPZaTLiVod_odgbW0kKTt_rHtEIZ8oAAuYLaxurIZhVBi_8MI-1AAH6AQADAgADdwADNgQ.png">
 
-2. 打开Main Camera的Inspector面板，将Clear Flags设置为Solid Color
+2. 打开Main Camera的Inspector面板，将Clear Flags设置为Solid Color，然后运行就完成啦
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPaaTLibDkHepQcNa5t37YrDmoYsxQAAucLaxurIZhVAAFG2kTINGUfAQADAgADdwADNgQ.png">
 
 # Q&A
-## 无法打开“LibEasyAR.dylib”因为Apple无法检查其是否包含恶意软件。
+## MacOS无法打开“LibEasyAR.dylib”因为Apple无法检查其是否包含恶意软件。
 1. 点击在访达中显示
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPbaTLieF-AIKRWVE3ZS2o7YUV7akYAAugLaxurIZhVeGU0stndYQsBAAMCAAN3AAM2BA.png"><img>
 2. 打开设置>安全与隐私
 3. 点击已阻止使用“xxxxxx”后面的“允许访问”
 <img src="https://telegraph-image-6j7.pages.dev/file/AgACAgUAAyEGAASIHQfFAAPcaTLigxv1ki9ySDjji6-eiWhJbvAAAukLaxurIZhVLDngDcrbnzEBAAMCAAN5AAM2BA.png"><img>
+
+---
+
+文章编辑：`@鈴奈咲桜`
