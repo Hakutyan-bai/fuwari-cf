@@ -129,6 +129,11 @@ export const navBarConfig: NavBarConfig = {
 					url: "https://jk.sakura.ink/status/", // xuguo
 					external: true,
 				},
+				{
+					name: "Umami",
+					url: "https://cloud.umami.is/share/2dKQ5T0WrUn6AYtr", // Cloudflare
+					external: true,
+				},
 			],
 		},
 	],
