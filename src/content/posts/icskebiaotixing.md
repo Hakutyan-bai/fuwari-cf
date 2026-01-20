@@ -1,21 +1,24 @@
 ---
-title: '企微机器人推送课表'
+title: "企微机器人推送课表"
 published: 2025-10-07
-description: '让企业微信机器人提醒你上课！'
-image: ''
-tags: [Apple,日历,课程表,提醒]
-category: '课程表'
-draft: false 
-lang: ''
+description: "让企业微信机器人提醒你上课！"
+image: ""
+tags: [Apple, 日历, 课程表, 提醒]
+category: "课程表"
+draft: false
+lang: ""
 updated: 2025-10-07 11:00:00
 ---
+
 # 前提条件
-1. 需要一份准备好的ics文件（通用日历格式）
-2. 需要企业微信机器人WebHook地址 
-3. 需要安装NodeJS
+
+1. 需要一份准备好的 ics 文件（通用日历格式）
+2. 需要企业微信机器人 WebHook 地址
+3. 需要安装 NodeJS
 4. 一个聪明的大脑
 
 # 先上脚本
+
 ```mjs title="Workers.mjs"  {9}
 // by 鈴奈咲桜
 import ical from "node-ical";
@@ -24,8 +27,7 @@ import axios from "axios";
 import fs from "fs";
 
 const icsPath = "./kebiao.ics"; // 你的课表文件
-const webhookUrl =
-  "https://your.wechat.webhook"; // webhook地址
+const webhookUrl = "https://your.wechat.webhook"; // webhook地址
 
 const data = fs.readFileSync(icsPath, "utf8");
 const events = ical.parseICS(data);
@@ -67,7 +69,9 @@ if (upcoming.length === 0) {
   // 最近的一次提醒
   const first = upcoming[0];
   console.log(
-    `最近提醒: ${first.ev.summary} | 上课时间: ${first.start.toLocaleString()} | 提醒时间: ${first.remindTime.toLocaleString()}`
+    `最近提醒: ${
+      first.ev.summary
+    } | 上课时间: ${first.start.toLocaleString()} | 提醒时间: ${first.remindTime.toLocaleString()}`,
   );
 
   // 启动时推送一次测试提醒
@@ -110,17 +114,19 @@ async function sendReminder(ev, start, isTest = false) {
     }
   }
 }
-
 ```
 
 # 使用方法
-1. 在一个空文件夹创建上述脚本，并修改webhook地址
-2. 准备你的ics文件将其改名为 **kebiao.ics** 放在 **Workers.mjs** 相同的文件夹下
+
+1. 在一个空文件夹创建上述脚本，并修改 webhook 地址
+2. 准备你的 ics 文件将其改名为 **kebiao.ics** 放在 **Workers.mjs** 相同的文件夹下
 3. 运行脚本
+
 ```bash
 node Workers.mjs
 ```
-就这么简单，可能从哪里搞ics文件比较有难度，不过直接把你的课表喂给ai生成即可
+
+就这么简单，可能从哪里搞 ics 文件比较有难度，不过直接把你的课表喂给 ai 生成即可
 
 ---
 
