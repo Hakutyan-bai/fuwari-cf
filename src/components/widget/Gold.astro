@@ -5,6 +5,7 @@ const API_ENDPOINT = "https://api.freejk.com/shuju/jinjia/";
 
 let priceText: string | null = null;
 let internationalPrice: string | null = null;
+let update_time: string | null = null;
 
 try {
 	const response = await fetch(API_ENDPOINT, {
@@ -23,10 +24,12 @@ try {
 		} else if (typeof intlRaw === "string") {
 			internationalPrice = intlRaw;
 		}
+		update_time = typeof data.update_time === "string" ? data.update_time : null;
 	}
 } catch (_error) {
 	priceText = null;
 	internationalPrice = null;
+	update_time = null;
 }
 
 const internationalDisplay = internationalPrice ? `${internationalPrice} USD/oz` : null;
@@ -42,4 +45,5 @@ const internationalDisplay = internationalPrice ? `${internationalPrice} USD/oz`
 			<dd class="text-right">{internationalDisplay ?? "暂无数据"}</dd>
 		</div>
 	</dl>
+	{update_time && <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2">更新时间: {update_time}</p>}
 </WidgetLayout>
