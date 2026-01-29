@@ -1,49 +1,83 @@
 ---
 import WidgetLayout from "./WidgetLayout.astro";
-
-const API_ENDPOINT = "https://api.freejk.com/shuju/jinjia/";
-
-let priceText: string | null = null;
-let internationalPrice: string | null = null;
-let update_time: string | null = null;
-
-try {
-	const response = await fetch(API_ENDPOINT, {
-		headers: {
-			accept: "application/json",
-		},
-	});
-
-	if (response.ok) {
-		const payload = await response.json();
-		const data = payload?.data ?? {};
-		priceText = typeof data.price_text === "string" ? data.price_text : null;
-		const intlRaw = data?.international_price;
-		if (typeof intlRaw === "number") {
-			internationalPrice = intlRaw.toString();
-		} else if (typeof intlRaw === "string") {
-			internationalPrice = intlRaw;
-		}
-		update_time = typeof data.update_time === "string" ? data.update_time : null;
-	}
-} catch (_error) {
-	priceText = null;
-	internationalPrice = null;
-	update_time = null;
-}
-
-const internationalDisplay = internationalPrice ? `${internationalPrice} USD/oz` : null;
 ---
 <WidgetLayout id="gold-price" name="今日金价">
 	<dl class="text-sm leading-6 text-neutral-700 dark:text-neutral-300 min-h-[2.25rem] flex flex-col gap-2">
 		<div class="flex items-center justify-between gap-4">
 			<dt>国内金价</dt>
-			<dd class="text-right">{priceText ?? "暂无数据"}</dd>
+			<dd class="text-right" data-gold-domestic>加载中...</dd>
 		</div>
 		<div class="flex items-center justify-between gap-4">
 			<dt>国际金价</dt>
-			<dd class="text-right">{internationalDisplay ?? "暂无数据"}</dd>
+			<dd class="text-right" data-gold-international>加载中...</dd>
 		</div>
 	</dl>
-	{update_time && <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2">更新时间: {update_time}</p>}
+	<p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 hidden" data-gold-update></p>
 </WidgetLayout>
+
+<script is:inline>
+	const API_ENDPOINT = "/api/gold.json";
+	const run = () => {
+		const layout = document.querySelector(
+			'widget-layout[data-id="gold-price"]',
+		);
+		if (!layout) return;
+		const domestic = layout.querySelector('[data-gold-domestic]');
+		const international = layout.querySelector('[data-gold-international]');
+		const updateTime = layout.querySelector('[data-gold-update]');
+
+		const updateDisplay = (target, value, fallback) => {
+			if (!target) return;
+			target.textContent = value ?? fallback;
+		};
+
+		fetch(`${API_ENDPOINT}?t=${Date.now()}`, {
+			headers: { accept: "application/json" },
+			cache: "no-store",
+		})
+			.then((response) => (response.ok ? response.json() : null))
+			.then((payload) => {
+				if (!payload || payload?.error) {
+					updateDisplay(domestic, null, "暂无数据");
+					updateDisplay(international, null, "暂无数据");
+					if (updateTime) updateTime.classList.add("hidden");
+					return;
+				}
+
+				const data = payload ?? {};
+				const domesticText =
+					typeof data.price_text === "string" ? data.price_text : null;
+				const intlRaw = data?.international_price;
+				let internationalText = null;
+				if (typeof intlRaw === "number") {
+					internationalText = `${intlRaw} USD/oz`;
+				} else if (typeof intlRaw === "string" && intlRaw.trim().length > 0) {
+					internationalText = `${intlRaw} USD/oz`;
+				}
+				const updated =
+					typeof data.update_time === "string" ? data.update_time : null;
+
+				updateDisplay(domestic, domesticText, "暂无数据");
+				updateDisplay(international, internationalText, "暂无数据");
+				if (updateTime) {
+					if (updated) {
+						updateTime.textContent = `更新时间: ${updated}`;
+						updateTime.classList.remove("hidden");
+					} else {
+						updateTime.classList.add("hidden");
+					}
+				}
+			})
+			.catch(() => {
+				updateDisplay(domestic, null, "暂无数据");
+				updateDisplay(international, null, "暂无数据");
+				if (updateTime) updateTime.classList.add("hidden");
+			});
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", run, { once: true });
+	} else {
+		run();
+	}
+</script>
