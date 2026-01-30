@@ -16,7 +16,7 @@ import WidgetLayout from "./WidgetLayout.astro";
 </WidgetLayout>
 
 <script is:inline>
-	const API_ENDPOINT = "/api/gold.json";
+	const API_ENDPOINT = "https://api.freejk.com/shuju/jinjia/";
 	const run = () => {
 		const layout = document.querySelector(
 			'widget-layout[data-id="gold-price"]',
@@ -31,9 +31,8 @@ import WidgetLayout from "./WidgetLayout.astro";
 			target.textContent = value ?? fallback;
 		};
 
-		fetch(`${API_ENDPOINT}?t=${Date.now()}`, {
+		fetch(API_ENDPOINT, {
 			headers: { accept: "application/json" },
-			cache: "no-store",
 		})
 			.then((response) => (response.ok ? response.json() : null))
 			.then((payload) => {
@@ -44,7 +43,7 @@ import WidgetLayout from "./WidgetLayout.astro";
 					return;
 				}
 
-				const data = payload ?? {};
+				const data = payload?.data ?? {};
 				const domesticText =
 					typeof data.price_text === "string" ? data.price_text : null;
 				const intlRaw = data?.international_price;
