@@ -1,5 +1,8 @@
 import type { APIRoute } from "astro";
 
+// 防止预渲染，确保每次请求都是动态的
+export const prerender = false;
+
 const API_ENDPOINT = "https://api.freejk.com/shuju/jinjia/";
 
 export const GET: APIRoute = async () => {
