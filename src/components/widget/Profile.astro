@@ -72,12 +72,8 @@ const config = profileConfig;
               const token = shareData.token;
               
               const params = {
-                startAt: '0',
-                endAt: Date.now().toString(),
-                unit: 'day',
-                timezone: 'Asia/Shanghai',
-                url: '/',
-                compare: 'false',
+                startAt: new Date('2025-01-01').getTime(),
+                endAt: Date.now(),
               };
               
               const data = await window.fetchWebsiteStats(
@@ -86,11 +82,12 @@ const config = profileConfig;
                 params
               );
               
-              const pageviews = data?.pageviews ?? 'N/A';
-              const visits = data?.visits ?? 'N/A';
+              const pageviews = data?.pageviews?.value ?? data?.pageviews ?? 'N/A';
+              const visits = data?.visits?.value ?? data?.visits ?? 'N/A';
               document.getElementById('umami-pageviews').textContent = pageviews;
               document.getElementById('umami-visits').textContent = visits;
             } catch (err) {
+              console.error('[Umami] Error:', err);
               document.getElementById('umami-pageviews').textContent = 'N/A';
               document.getElementById('umami-visits').textContent = 'N/A';
             }
