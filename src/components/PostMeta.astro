@@ -150,14 +150,12 @@ let visits = "加载中...";
                   const token = shareData.token;
                   
                   const slug = pathname.split('/').filter(Boolean).pop() || '';
+                  const targetPath = `/posts/${slug}/`;
                   
                   const params = {
-                    startAt: '0',
-                    endAt: Date.now().toString(),
-                    unit: 'hour',
-                    timezone: 'Asia/Shanghai',
-                    path: `eq./posts/${slug}/`,
-                    compare: 'false',
+                    startAt: new Date('2025-01-01').getTime(),
+                    endAt: Date.now(),
+                    path: targetPath,
                   };
                     
                   const data = await window.fetchWebsiteStats(
@@ -170,8 +168,8 @@ let visits = "加载中...";
                   const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
                   
                   if (pageviewsElement && visitsElement) {
-                    pageviewsElement.textContent = data.pageviews ?? 'N/A';
-                    visitsElement.textContent = data.visits ?? 'N/A';
+                    pageviewsElement.textContent = data?.pageviews ?? 'N/A';
+                    visitsElement.textContent = data?.visits ?? 'N/A';
                   }
                 } catch (error) {
                   console.error('Umami stats error:', error);
