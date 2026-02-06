@@ -50,79 +50,57 @@ function clearUmamiCache() {
 }
 
 async function fetchShareData(shareId) {
-	const cacheKey = `${CACHE_CONFIG.shareData.keyPrefix}${shareId}`;
+	const cacheKey = CACHE_CONFIG.shareData.keyPrefix + shareId;
 	const cachedData = getCache(cacheKey);
 	if (cachedData) {
 		return cachedData;
 	}
-		const response = await fetch(
-			`https://cloud.umami.is/analytics/eu/api/share/${shareId}`,
-		);
-		if (!response.ok) {
-			throw new Error(`Failed to fetch share data: ${response.status}`);
-		}
 
-		const data = await response.json();
-		setCache(cacheKey, data, CACHE_CONFIG.shareData.ttl);
-		return data;
+	const response = await fetch(
+		`https://cloud.umami.is/analytics/eu/api/share/${shareId}`,
+	);
+	if (!response.ok) {
+		throw new Error(`Failed to fetch share data: ${response.status}`);
+	}
+
+	const data = await response.json();
+	setCache(cacheKey, data, CACHE_CONFIG.shareData.ttl);
+	return data;
 }
 
 async function fetchWebsiteStats(websiteId, token, params) {
-	const cacheKey = `${CACHE_CONFIG.websiteStats.keyPrefix}${websiteId}_${JSON.stringify(params)}`;
+	const cacheKey =
+		CACHE_CONFIG.websiteStats.keyPrefix +
+		websiteId +
+		"_" +
+		JSON.stringify(params);
 	const cachedData = getCache(cacheKey);
 	if (cachedData) {
 		return cachedData;
 	}
 
-	try {
-		const url =
-			`https://cloud.umami.is/analytics/eu/api/websites/${websiteId}/stats?` +
-			new URLSearchParams(params);
-			method: "GET",
-			headers: {
-				"x-umami-share-token": token,
-			},
-		});
+	const url =
+		"https://cloud.umami.is/analytics/eu/api/websites/" +
+		websiteId +
+		"/stats?" +
+		new URLSearchParams(params);
 
-		if (!response.ok) {
-			throw new Error(`Failed to fetch stats: ${response.status}`);
-		}
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			"x-umami-share-token": token,
+		},
+	});
 
-		const data = await response.json();
-		setCache(cacheKey, data, CACHE_CONFIG.websiteStats.ttl);
-		return data;
-	} catch (error) {
-		throw error;
-	}
-}
-onst cachedData = getCache(cacheKey);
-	if (cachedData) {
-		return cachedData;
+	if (!response.ok) {
+		throw new Error(`Failed to fetch stats: ${response.status}`);
 	}
 
-	try {
-		const url =
-			`https://cloud.umami.is/analytics/eu/api/websites/${websiteId}/metrics?` +
-			new URLSearchParams(params);
-
-		const response = await fetch(url, {
-			method: "GET",
-			headers: {
-				"x-umami-share-token": token,
-	
-		if (!response.ok) {
-			throw new Error(`Failed to fetch metrics: ${response.status}`);
-		}
-
-		const data = await response.json();
-		setCache(cacheKey, data, CACHE_CONFIG.websiteStats.ttl);
-		return data;
-	} catch (error) {
-		throw error;
-	}
+	const data = await response.json();
+	setCache(cacheKey, data, CACHE_CONFIG.websiteStats.ttl);
+	return data;
 }
 
 window.fetchShareData = fetchShareData;
 window.fetchWebsiteStats = fetchWebsiteStats;
-window.fetchPageMetrics = fetchPageMetrics;
 window.clearUmamiCache = clearUmamiCache;
