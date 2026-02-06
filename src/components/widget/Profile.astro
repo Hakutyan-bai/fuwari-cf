@@ -42,62 +42,51 @@ const config = profileConfig;
         </div>
 
         <script is:inline>
-          let scriptLoading = null;
-          
-          const loadUmamiScript = () => {
-            if (window.fetchShareData && window.fetchWebsiteStats) {
-              return Promise.resolve();
+          (function() {
+            // 加载 umami-share.js（全局只加载一次）
+            function loadUmamiScript() {
+              if (window.fetchShareData && window.fetchWebsiteStats) {
+                return Promise.resolve();
+              }
+              if (window._umamiLoading) return window._umamiLoading;
+              window._umamiLoading = new Promise(function(resolve, reject) {
+                var s = document.createElement('script');
+                s.src = '/js/umami-share.js';
+                s.onload = resolve;
+                s.onerror = reject;
+                document.head.appendChild(s);
+              });
+              return window._umamiLoading;
             }
-            
-            if (scriptLoading) {
-              return scriptLoading;
+
+            function run() {
+              var pvEl = document.getElementById('umami-pageviews');
+              var vsEl = document.getElementById('umami-visits');
+              if (!pvEl || !vsEl) return;
+
+              loadUmamiScript().then(function() {
+                return window.fetchShareData('2dKQ5T0WrUn6AYtr');
+              }).then(function(shareData) {
+                return window.fetchWebsiteStats(
+                  'f7b1324b-9b51-4b00-bc8d-726cbed5168d',
+                  shareData.token,
+                  { startAt: new Date('2025-01-01').getTime(), endAt: Date.now() }
+                );
+              }).then(function(data) {
+                pvEl.textContent = data.pageviews != null ? data.pageviews : 'N/A';
+                vsEl.textContent = data.visits != null ? data.visits : 'N/A';
+              }).catch(function() {
+                pvEl.textContent = 'N/A';
+                vsEl.textContent = 'N/A';
+              });
             }
-            
-            scriptLoading = new Promise((resolve, reject) => {
-              const script = document.createElement('script');
-              script.src = '/js/umami-share.js';
-              script.onload = resolve;
-              script.onerror = reject;
-              document.head.appendChild(script);
-            });
-            
-            return scriptLoading;
-          };
-          
-          const fetchUmamiStats = async () => {
-            try {
-              await loadUmamiScript();
-              
-              const shareData = await window.fetchShareData('2dKQ5T0WrUn6AYtr');
-              const token = shareData.token;
-              
-              const params = {
-                startAt: new Date('2025-01-01').getTime(),
-                endAt: Date.now(),
-              };
-              
-              const data = await window.fetchWebsiteStats(
-                'f7b1324b-9b51-4b00-bc8d-726cbed5168d', 
-                token, 
-                params
-              );
-              
-              const pageviews = data?.pageviews?.value ?? data?.pageviews ?? 'N/A';
-              const visits = data?.visits?.value ?? data?.visits ?? 'N/A';
-              document.getElementById('umami-pageviews').textContent = pageviews;
-              document.getElementById('umami-visits').textContent = visits;
-            } catch (err) {
-              console.error('[Umami] Error:', err);
-              document.getElementById('umami-pageviews').textContent = 'N/A';
-              document.getElementById('umami-visits').textContent = 'N/A';
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', run, { once: true });
+            } else {
+              run();
             }
-          };
-          
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fetchUmamiStats);
-          } else {
-            fetchUmamiStats();
-          }
+          })();
         </script>
     </div>
 </div>

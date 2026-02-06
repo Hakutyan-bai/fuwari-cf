@@ -120,74 +120,55 @@ let visits = "加载中...";
 
           <script define:vars={{ uniqueId, url }}>
             (function() {
-              const loadUmamiScript = () => {
+              function loadUmamiScript() {
                 if (window.fetchShareData && window.fetchWebsiteStats) {
                   return Promise.resolve();
                 }
-                
-                if (window.umamiScriptLoading) {
-                  return window.umamiScriptLoading;
-                }
-                
-                window.umamiScriptLoading = new Promise((resolve, reject) => {
-                  const script = document.createElement('script');
-                  script.src = '/js/umami-share.js';
-                  script.onload = resolve;
-                  script.onerror = reject;
-                  document.head.appendChild(script);
+                if (window._umamiLoading) return window._umamiLoading;
+                window._umamiLoading = new Promise(function(resolve, reject) {
+                  var s = document.createElement('script');
+                  s.src = '/js/umami-share.js';
+                  s.onload = resolve;
+                  s.onerror = reject;
+                  document.head.appendChild(s);
                 });
-                
-                return window.umamiScriptLoading;
-              };
-              
-              const fetchUmamiStats = async () => {
-                const pathname = url;
-                
-                try {
-                  await loadUmamiScript();
-                  
-                  const shareData = await window.fetchShareData('2dKQ5T0WrUn6AYtr');
-                  const token = shareData.token;
-                  
-                  const slug = pathname.split('/').filter(Boolean).pop() || '';
-                  const targetPath = `/posts/${slug}/`;
-                  
-                  const params = {
-                    startAt: new Date('2025-01-01').getTime(),
-                    endAt: Date.now(),
-                    path: targetPath,
-                  };
-                    
-                  const data = await window.fetchWebsiteStats(
-                    'f7b1324b-9b51-4b00-bc8d-726cbed5168d', 
-                    token, 
-                    params
-                  );
-                  
-                  const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
-                  const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
-                  
-                  if (pageviewsElement && visitsElement) {
-                    pageviewsElement.textContent = data?.pageviews ?? 'N/A';
-                    visitsElement.textContent = data?.visits ?? 'N/A';
-                  }
-                } catch (error) {
-                  console.error('Umami stats error:', error);
-                  const pageviewsElement = document.getElementById(`post-umami-pageviews-meta-${uniqueId}`);
-                  const visitsElement = document.getElementById(`post-umami-visits-meta-${uniqueId}`);
-                  
-                  if (pageviewsElement) pageviewsElement.textContent = 'N/A';
-                  if (visitsElement) visitsElement.textContent = 'N/A';
-                }
-              };
-              
-              if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', fetchUmamiStats);
-              } else {
-                fetchUmamiStats();
+                return window._umamiLoading;
               }
-              
-              setInterval(fetchUmamiStats, 5000);
+
+              function run() {
+                var pvEl = document.getElementById('post-umami-pageviews-meta-' + uniqueId);
+                var vsEl = document.getElementById('post-umami-visits-meta-' + uniqueId);
+                if (!pvEl || !vsEl) return;
+
+                var slug = url ? url.split('/').filter(Boolean).pop() : '';
+                if (!slug) return;
+
+                loadUmamiScript().then(function() {
+                  return window.fetchShareData('2dKQ5T0WrUn6AYtr');
+                }).then(function(shareData) {
+                  return window.fetchWebsiteStats(
+                    'f7b1324b-9b51-4b00-bc8d-726cbed5168d',
+                    shareData.token,
+                    {
+                      startAt: new Date('2025-01-01').getTime(),
+                      endAt: Date.now(),
+                      path: '/posts/' + slug + '/'
+                    }
+                  );
+                }).then(function(data) {
+                  pvEl.textContent = data.pageviews != null ? data.pageviews : 'N/A';
+                  vsEl.textContent = data.visits != null ? data.visits : 'N/A';
+                }).catch(function() {
+                  pvEl.textContent = 'N/A';
+                  vsEl.textContent = 'N/A';
+                });
+              }
+
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', run, { once: true });
+              } else {
+                run();
+              }
             })();
           </script>
         </>
